@@ -38,7 +38,7 @@ $(function() {
 					image = shuffleTiles(tileOptions);
 					tileHistory.push(image);			
 
-					newCol.html($("<img />").attr({"src":imagePath+image+".png", "id":image}));
+					newCol.html($("<img />").attr({"src":imagePath+image+".png", "class":image}));
 					newRow.append(newCol);					
 					col++;
 				}
