@@ -5,19 +5,21 @@ $(function() {
 *
 */	
     function generateDungeon() {
+    	console.clear();
 		$("#dungeonGrid").html("");
 		totRows = $("#dungeonHeight").val();
 		totCols = $("#dungeonWidth").val();
 		var dungeonGrid = $("#dungeonGrid");
 		var newDungeonCol = $("<td>");
-		var newDungeonRow = $("<tr>");			
+		var newDungeonRow = $("<tr>");	
+		sessionStorage.setItem("bigRoomInProgress", 0);		
 		var row = 0;
 		var col = 0;
-		startFlag = true;
+		var startFlag = true;
 		var tileHistory = [];
-		tilePref = {include:"",
-					exclude:""};
-		image = "";
+		var tilePref = {include:"",
+					    exclude:""};
+		var image = "";
 	//generate dungeon layout	
 		while(row <= totRows) {	
 				var newRow = $(newDungeonRow).clone();
@@ -38,7 +40,7 @@ $(function() {
 					image = shuffleTiles(tileOptions);
 					tileHistory.push(image);			
 
-					newCol.html($("<img />").attr({"src":imagePath+image+".png", "class":image}));
+					newCol.html($("<img />").attr({"src":imagePath+image+".png", "class":image, "id": row+","+col}));
 					newRow.append(newCol);					
 					col++;
 				}

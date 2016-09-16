@@ -6,17 +6,17 @@ tileSource = ["bottom,start",
 			 "bottom,room1",
 			 "bottom,altar",
 			 "bottom,room",
-			 "left,room",
-			 "left,altar",
-			 "left,hall",
-			 "left,coffins",
-			 "left,deadend1",			 
-			 "left,room1",					 
-			 "right,altar",
-			 "top,altar",
-			 "top,deadend1",
-			 "top,room",
-			 "top,hall",	 
+			 
+			 "bottom,right,crooked,passage1",
+			 "bottom,right,statue",
+			 "bottom,right,pool",
+			 "bottom,right,passage",
+			 "bottom,right,passage1",
+			 "bottom,right,passage2",
+			 "bottom,right,passage3",
+			 "bottom,right,passage4",
+			 "bottom,right,ornate",				 
+			 
 			 "bottom,right,top,left,crossroad",
 			 "bottom,right,top,left,crossroad1",
 			 "bottom,right,top,left,crossroad2",
@@ -34,14 +34,18 @@ tileSource = ["bottom,start",
 			 "bottom,right,top,left,crooked,crossroad4",
 			 "bottom,right,top,left,crooked,crossroad5",
 			 "bottom,right,top,left,crooked,crossroad6",
+			 
 			 "bottom,right,top,passage",
 			 "bottom,right,top,fire",
-			 "bottom,top,left,fire",
 			 "bottom,right,top,lava",
-			 "bottom,top,left,room",
-			 "bottom,top,left,lava",
-			 "bottom,top,left,passage",
-			 "bottom,top,left,passage1",
+			 
+			 "bottom,right,left,passage",
+			 "bottom,right,left,passage1",
+			 "bottom,right,left,fire",
+			 "bottom,right,left,lava",
+			 "bottom,right,left,stairs",	
+			 
+			 "bottom,top,pipes",
 			 "bottom,top,trap1",
 			 "bottom,top,trap2",
 			 "bottom,top,items",
@@ -57,32 +61,12 @@ tileSource = ["bottom,start",
 			 "bottom,top,passage2",
 			 "bottom,top,passage4",
 			 "bottom,top,passage",
-			 "bottom,right,crooked,passage1",
-			 "bottom,right,statue",
-			 "bottom,right,pool",
 			 
-			 "bottom,right,bigroom",
-			 "bottom,left,bigroom",
-			 "top,left,bigroom",
-			 "right,top,bigroom",
-			 "top,entrance,bigroom",
-			 "right,entrance,bigroom",
-			 "bottom,entrance,bigroom",			 
-			 "left,entrance,bigroom",			 
-			 "bottom,right,top,left,stairs,bigroom",
-			 "bottom,right,top,left,bigroom",
-			 
-			 "bottom,right,left,passage",
-			 "bottom,right,left,passage1",
-			 "right,left,crooked,passage3",
-			 "bottom,right,left,fire",
-			 "bottom,right,left,lava",
-			 "bottom,right,left,stairs",
-			 "bottom,right,passage",
-			 "bottom,right,passage1",
-			 "bottom,right,passage3",
-			 "bottom,right,passage4",
-			 "bottom,right,ornate",
+			 "bottom,top,left,room",			 
+			 "bottom,top,left,fire",
+			 "bottom,top,left,lava",
+			 "bottom,top,left,passage",
+			 "bottom,top,left,passage1",	 
 	
 			 "bottom,left,passage",
 			 "bottom,left,statue",
@@ -91,13 +75,21 @@ tileSource = ["bottom,start",
 			 "bottom,left,stairs",
 			 "bottom,left,stairs1",
 			 "bottom,left,tower,stairs",
+			 "bottom,left,passage5",
+
+			 "right,top,passage",	
+			 "right,top,passage1",
+			 "right,top,passage4",
+			 
 			 "right,top,left,passage",
 			 "right,top,left,fire",
 			 "right,top,left,lava",
-			 "bottom,left,passage5",
 			 "right,top,left,crooked,stairs",
-			 "right,top,passage",	
-			 "right,top,passage4",
+
+			 "right,coffins",
+			 "right,room",
+			 "right,altar",	 
+			 "right,top,ornate",
 			 "right,top,statue", 
 			 "right,left,trap2",
 			 "right,left,trap3",
@@ -105,36 +97,71 @@ tileSource = ["bottom,start",
 			 "right,left,pit",
 			 "right,left,pit1",
 			 "right,left,pit2",
+			 "right,left,pipes",
 			 "right,left,items",
-			 "right,left,passage1",
 			 "right,left,passage",
+			 "right,left,passage1",
 			 "right,left,passage2",
 			 "right,left,passage3",
 			 "right,left,passage4",
 			 "right,left,trophies",
-			 "right,top,ornate",
-			 "right,room",
-			 "right,coffins",
+			 "right,left,crooked,passage3",
+
+			 "top,altar",
+			 "top,deadend1",
+			 "top,room",
+			 "top,hall",			 
 			 "top,left,passage",
+			 "top,left,passage1",
 			 "top,left,ornate",
 			 "top,left,stairs",
 			 "top,left,tower,stairs",
 			 "top,left,statue",
 			 "top,right,crooked,stairs",
+			 
+			 "left,room",
+			 "left,altar",
+			 "left,hall",
+			 "left,coffins",
+			 "left,deadend1",			 
+			 "left,room1",
+			 
 			 "filler", 
-			 "filler1"
+			 "filler1",
+			 "filler,water",
+
+			 "bottom,entrance,bigroom",				 
+			 "bottom,right,corner,bigroom",
+			 "bottom,left,corner,bigroom",
+			 "bottom,right,corner,bigroom,crooked",
+			 "bottom,left,corner,bigroom,crooked1",
+			 "bottom,left,right,corner,bigroom,open",
+			 "center,bigroom,stairs",
+			 "center,bigroom,lava",
+			 "center,bigroom",
+			 "right,top,corner,bigroom,deadend",
+			 "right,top,corner,bigroom,open",
+
+			 "right,entrance,bigroom",
+			 "top,entrance,bigroom",
+			 "top,entrance,bigroom,ornate",
+			 "left,entrance,bigroom,open",				 
+			 "left,entrance,bigroom,deadend,ornate",
+			 "top,left,corner,bigroom",
 			 ];
 /*
 *
 *
 */
 function checkSurroundingTiles (tilePref, tileHistory, previousImage, row, col) {	
+	//SPECIFIC ROW-LOCATION-BASED EXCLUSIONS
 	if (row == 0) {
-		tilePref.exclude = "top,filler,bigroom,deadend,room,";
+		tilePref.exclude = "top,filler,bigroom,deadend,";
 		tilePref.include = ",";			
 //EVERYTHING EXCEPT THE TOP ROW
 	} else {
-		tilePref.exclude = "start,filler,bigroom,";
+		//exclusion of bigroom may be overridden later in the buildBigRoom function
+		tilePref.exclude = "start,bigroom,";
 		tilePref.include = ",";
 	//CHECK TILE ABOVE
 		tileAbove = tileHistory[(tileHistory.length-totCols)-1];
@@ -145,6 +172,7 @@ function checkSurroundingTiles (tilePref, tileHistory, previousImage, row, col) 
 		}
 		tilePref.include += ",";
 	}
+
 	//CHECK AGAINST PREVIOUS TILE...
 	if (tileHistory.length > 0 ) {
 	//EXIT RIGHT -- CONNECT LEFT
@@ -154,7 +182,8 @@ function checkSurroundingTiles (tilePref, tileHistory, previousImage, row, col) 
 		} else {
 			tilePref.exclude += "left,";
 		}
-	}
+	}				
+//SPECIFIC COLUMN-LOCATION-BASED EXCLUSIONS	
 	if (col == 0) {
 		tilePref.exclude += "left,";
 	} else tilePref.include += "";
@@ -164,10 +193,12 @@ function checkSurroundingTiles (tilePref, tileHistory, previousImage, row, col) 
 	if (row == totRows) {
 		tilePref.exclude += "bottom,";
 	}
-	
+	if (row > 0) {
+		tilePref = buildBigRoom (tileHistory, tilePref, row, col);	
+	} 
 	return tilePref;
 
-}			 
+}	
 /*
 *
 *
@@ -193,14 +224,16 @@ function refineShortlist(tileList, searchItem, returnType) {
 function getSelectedTiles(tilePref) {
 	var tileList = tileSource.slice(0);
 	var tempTileSource = [];
-	includeThis = tilePref.include.substring(0, tilePref.include.length-1).split(",");
-	excludeThis = tilePref.exclude.substring(0, tilePref.exclude.length-1).split(",");	
+	includeThis = cleanArray(tilePref.include.substring(0, tilePref.include.length-1).split(","));
+	excludeThis = cleanArray(tilePref.exclude.substring(0, tilePref.exclude.length-1).split(","));	
+	$(includeThis).each(function(searchIndex) {
+		tileList = refineShortlist(tileList, includeThis[searchIndex], "include");	
+	});	
 	$(excludeThis).each(function(searchIndex) {
 		tileList = refineShortlist(tileList, excludeThis[searchIndex], "exclude");	
 	});
-	$(includeThis).each(function(searchIndex) {
-		tileList = refineShortlist(tileList, includeThis[searchIndex], "include");	
-	});
+
+
 	return tileList;
 }
 /*
@@ -213,4 +246,10 @@ function shuffleTiles(arr) {
 	  arr = ["filler"];
   }
   return arr[0];
+}
+/*
+*
+*/
+function cleanArray(thisArray) {
+	return $.grep(thisArray,function(n){ return n == " " || n })	
 }
