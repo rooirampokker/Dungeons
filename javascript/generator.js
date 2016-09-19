@@ -28,8 +28,8 @@ $(function() {
 					tilePref.exclude = "filler,";
 					tilePref.include = ",";
 					tilePref = checkSurroundingTiles (tilePref, tileHistory, image, row, col);			
-					//DROP THE STARTER IN - ANYWHERE (JUST ONCE!) ON THE FIRST ROW, AFTER THE FIRST COL, AT THE FIRST SPOT WHERE THERE IS NO JOINING CORRIDOR COMING IN FROM THE RIGHT
-					if ((image.indexOf("right") == -1) && startFlag && (col > 0 && row == 0)) {		
+					//DROP THE STARTER IN - ANYWHERE (JUST ONCE!) ON THE FIRST ROW, AFTER THE FIRST COL, AT THE FIRST SPOT WHERE THERE IS NO JOINING CORRIDOR COMING IN FROM THE WEST
+					if (!(image['east']) && startFlag && (col > 0 && row == 0)) {		
 						tilePref.include += "start,";
 						startFlag = false;				
 					} else {
@@ -37,10 +37,10 @@ $(function() {
 						tilePref.include += ",";
 					}				
 					var tileOptions = getSelectedTiles(tilePref);
-					image = shuffleTiles(tileOptions);
+					image = shuffleTiles(tileOptions, row, col);
 					tileHistory.push(image);			
 
-					newCol.html($("<img />").attr({"src":imagePath+image+".png", "class":image, "id": row+","+col}));
+					newCol.html($("<img />").attr({"src":imagePath+image.fileName+".png", "class":image.fileName, "id": row+","+col}));
 					newRow.append(newCol);					
 					col++;
 				}
