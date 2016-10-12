@@ -1,6 +1,3 @@
-//var imagePath = "tiles\\140\\";
-var imagePath = "tiles\\";
-
 tileSource = {
     "bottom,start": {
         "fileName": "bottom,start",
@@ -813,7 +810,7 @@ tileSource = {
         "others": "corner,bigroom,deadend"
     },
     "right,top,left,corner,bigroom,open": {
-        "fileName": "right,top,left,corner,bigroom,open",
+        "fileName": "right,top,corner,bigroom,open",
         "north": true,
         "east": true,
         "south": false,

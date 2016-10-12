@@ -9,6 +9,8 @@ $(function() {
 		$("#dungeonGrid").html("");
 		totRows = $("#dungeonHeight").val();
 		totCols = $("#dungeonWidth").val();
+		tileSize = $("#tileSize").val();
+		
 		var dungeonGrid = $("#dungeonGrid");
 		var newDungeonCol = $("<td>");
 		var newDungeonRow = $("<tr>");	
@@ -40,7 +42,9 @@ $(function() {
 					image = shuffleTiles(tileOptions, row, col);
 					flip = applyFlip(image, tilePref, row, col);
 					tileHistory.push(image);			
-
+					if (tileSize==2) {
+						imagePath = "tiles\\140\\";
+					} else imagePath = "tiles\\";
 					newCol.html($("<img />").attr({"src":imagePath+image.fileName+".png", "class":image.fileName+flip, "id": row+","+col}));
 					newRow.append(newCol);					
 					col++;
