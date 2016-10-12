@@ -36,11 +36,12 @@ $(function() {
 						tilePref.exclude += "start,";
 						tilePref.include += ",";
 					}				
-					var tileOptions = getSelectedTiles(tilePref);
+					var tileOptions = getSelectedTiles(tilePref, row, col);
 					image = shuffleTiles(tileOptions, row, col);
+					flip = applyFlip(image, tilePref, row, col);
 					tileHistory.push(image);			
 
-					newCol.html($("<img />").attr({"src":imagePath+image.fileName+".png", "class":image.fileName, "id": row+","+col}));
+					newCol.html($("<img />").attr({"src":imagePath+image.fileName+".png", "class":image.fileName+flip, "id": row+","+col}));
 					newRow.append(newCol);					
 					col++;
 				}

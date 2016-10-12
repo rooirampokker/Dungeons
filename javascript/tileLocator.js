@@ -52,49 +52,127 @@ function checkSurroundingTiles (tilePref, tileHistory, previousImage, row, col) 
 *
 *
 */			 
-function refineShortlist(tileList, searchItem, returnType) {	
+function refineShortlist(tileList, searchItem, returnType, row, col) {	
 	 var tempTileExclude = [];
 	 var tempTileInclude = [];
+	 if (returnType == "include") {
+	 	var tempTileArray = new Object();
+	 } else {
+	 	tempTileArray = $.extend(true, {}, tileList);
+	 }
 	 $.each(tileList, function(key, tileAttr) {
 	 	if ((tileAttr[searchItem] !== undefined && tileAttr[searchItem] === true) || tileAttr['others'].indexOf(searchItem) > -1) {
-	 		 tempTileInclude.push(tileList[key]);
-	 		} else {
-	 		 tempTileExclude.push(tileList[key]);	 
+	 		 if (returnType == "include") {	 		 	
+	 		 	tempTileArray[key] = tileList[key];
+	 		 } else {	 		
+	 		 	delete tempTileArray[key];
+	 		 }
+	 	} else {
+			if (searchItem === "west" &&
+	 		 		!tileAttr[searchItem] && 
+	 		 		tileAttr["east"] &&
+	 		 		returnType == "include" &&
+	 		 		tileAttr['others'].indexOf("bigroom") < 0) {
+		 		 		tileList[key].west = true;
+		 		 		tileList[key].east = false;
+		 		 		tileList[key].flipHor = true;
+		 		 		tempTileArray[key] = tileList[key];
 	 		}
+	 		if (searchItem === "north" &&
+ 				   !tileAttr[searchItem] && 
+ 		 		   tileAttr["south"] &&
+ 		 		   returnType == "include" &&
+ 		 		   tileAttr['others'].indexOf("bigroom") < 0) {
+		 		 		tileList[key].north = true;
+		 		 		tileList[key].south = false;
+		 		 		tileList[key].flipVert = true;
+		 		 		tempTileArray[key] = tileList[key];
+	 	}	 		
+	 	}
 	 });
-	 if (returnType == "include") { 
-		return tempTileInclude;
- 	} else return tempTileExclude;
+	return tempTileArray;
 }
 /*
 *
 *
 */	
-function getSelectedTiles(tilePref) {
-	var tileList = tileSource;
+function getSelectedTiles(tilePref, row, col) {
+	var tileList = $.extend(true, {}, tileSource);
 	includeThis = cleanArray(tilePref.include.substring(0, tilePref.include.length-1).split(","));
 	excludeThis = cleanArray(tilePref.exclude.substring(0, tilePref.exclude.length-1).split(","));	
+
 	$(includeThis).each(function(searchIndex) {
-		tileList = refineShortlist(tileList, includeThis[searchIndex], "include");	
+//exclude everything that IS NOT in this array
+		tileList = refineShortlist(tileList, includeThis[searchIndex], "include", row, col);	
 	});	
+	
 	$(excludeThis).each(function(searchIndex) {
-		tileList = refineShortlist(tileList, excludeThis[searchIndex], "exclude");	
+//exclude everything that IS in this array		
+		tileList = refineShortlist(tileList, excludeThis[searchIndex], "exclude", row, col);	
 	});
 	return tileList;
 }
 /*
-*	thank you interwebs for this shuffler :-D
-*   Just takes an array as input parameter, shuffles it about and returns the new array
+*	
+*   
 */
 function shuffleTiles(arr, row, col) {
-  for(var j, x, i = arr.length; i; j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
-  if (arr[0] === undefined) {
-	 arr = ["filler"];
+	var keys = Object.keys(arr);
+  	if (keys.length === 0) {
+  		console.log("ADD FILLER");
+	 	arr = ["filler"];
+  	} else {
+  		arr = arr[keys[Math.floor(keys.length*Math.random())]];
+  	}
 
-  }
-
-  return arr[0];
+  return arr;
 }
+/*
+*
+*/
+function applyFlip(image, tilePref, row, col) {
+//IF WE HAVE AN EXPLICIT INSTRUCTION TO FLIP THE TILE - THIS WILL BE USED LATER TO REDUCE THE ISSUE WHERE A SINGLE TILE IS COPIED MULTIPLE TIMES TO CHANGE EXIT DIRECTIONS			
+ var style = "";
+ if (image.flipHor) {
+ 		console.log("FLIPPING HOR: "+row+","+col);
+		style += " flip-hor";
+	} 
+	if (image.flipVert) {
+		console.log("FLIPPING VERT: "+row+","+col);	 		
+		style += " flip-vert";
+//IF WE HAVE PASSAGES WITH EITHER A NORTH/SOUTH OR EAST/WEST ENTRANCE			
+	}
+	if (((image.north == image.south) && 
+		(image.east == image.west) && 
+		Math.random() > 0.5) ||
+		style == " flip-hor flip-vert") {
+		style = " flip-hor-vert";
+//IF WE HAVE PASSAGES WITH ETHER A SINGLE EAST OR WEST ENTRANCE			
+	} else if (((image.east && 
+					!image.north && 
+					!image.south && 
+					!image.west) || 
+				(image.west && 
+					!image.north && 
+					!image.south && 
+					!image.east)) &&
+					!image.flipHor &&
+				Math.random() > 0.5) {
+		style +=  " flip-vert";
+//IF WE HAVE PASSAGES WITH ETHER A SINGLE NORTH OR SOUTH ENTRANCE					
+	} else if (((image.north && 
+					!image.east && 
+					!image.south && 
+					!image.west) || 
+				(image.south && 
+					!image.north && 
+					!image.west && 
+					!image.east)) &&
+				Math.random() > 0.5)  {
+		style +=  " flip-hor";
+	} 
+	return style;
+} 
 /*
 *
 */
