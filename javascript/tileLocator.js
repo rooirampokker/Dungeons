@@ -134,11 +134,11 @@ function applyFlip(image, tilePref, row, col) {
 //IF WE HAVE AN EXPLICIT INSTRUCTION TO FLIP THE TILE - THIS WILL BE USED LATER TO REDUCE THE ISSUE WHERE A SINGLE TILE IS COPIED MULTIPLE TIMES TO CHANGE EXIT DIRECTIONS			
  var style = "";
  if (image.flipHor) {
- 		console.log("FLIPPING HOR: "+row+","+col);
+ 		//console.log("FLIPPING HOR: "+row+","+col);
 		style += " flip-hor";
 	} 
 	if (image.flipVert) {
-		console.log("FLIPPING VERT: "+row+","+col);	 		
+		//console.log("FLIPPING VERT: "+row+","+col);	 		
 		style += " flip-vert";
 //IF WE HAVE PASSAGES WITH EITHER A NORTH/SOUTH OR EAST/WEST ENTRANCE			
 	}

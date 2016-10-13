@@ -12,9 +12,10 @@ $(function() {
 		tileSize = $("#tileSize").val();
 		
 		var dungeonGrid = $("#dungeonGrid");
-		var newDungeonCol = $("<td>");
-		var newDungeonRow = $("<tr>");	
-		sessionStorage.setItem("bigRoomInProgress", 0);		
+		var newDungeonCol = $("<span class='col'>");
+		var newDungeonRow = $("<div class='row'>");	
+
+		$("#bigRoomFlag").val("false");
 		var row = 0;
 		var col = 0;
 		var startFlag = true;

@@ -2,7 +2,7 @@
 *
 *
 */
-function buildBigRoom (tileHistory, tilePref, row, col,startBigroom = false) {
+function buildBigRoom (tileHistory, tilePref, row, col,startBigroom) {
 	finalResult = getNextBigroomTile(tileHistory, totCols);
 	if (!finalResult) {
 		//console.log("bigroom finished at row: "+row+" col: "+col);
@@ -23,13 +23,13 @@ function buildBigRoom (tileHistory, tilePref, row, col,startBigroom = false) {
 		    col > 3 &&
 		    row	< totRows-3 &&
 		    tilePref.exclude.includes("west") &&
-		    sessionStorage.getItem("bigRoomInProgress") == 0) {
+		    $("#bigRoomFlag").val() == "false") {
 	    //WE DON'T HAVE A BIGROOM YET AND CONDITIONS ARE CONDUCIVE - ROLL THE DICE...
-			if (Math.random() > 0.4) {
+			if (Math.random() > 0.1) {
 				console.log('------------------->start bigroom at row: '+row+', col: '+col+"<----------------------");
 				tilePref.include = finalResult[0];
 				tilePref.exclude = tilePref.exclude.replace("bigroom", "");
-				sessionStorage.setItem("bigRoomInProgress",1);
+				$("#bigRoomFlag").val(true);
 			} else {
 			//CONDITIONS MAY BE CONDUCIVE FOR A BIGROOM, BUT CHANCE DECIDED AGAINST IT
 			}
@@ -40,7 +40,6 @@ function buildBigRoom (tileHistory, tilePref, row, col,startBigroom = false) {
 		tilePref.include = finalResult[0];
 		tilePref.exclude = ",";
 	}
-	//console.log(" row: "+row+" col: "+col+" Result: "+finalResult);
 	return tilePref;		
 }
 /*
@@ -96,9 +95,9 @@ if ((tileHistory[tileHistory.length-3] !== undefined &&
 	}
 	finalResult = _.intersection(includeRow, includeCol);
 
-//are we at the last tile of this room - can we unset our "room in progress" session?
+//are we at the last tile of this room - can we unset our "room in progress" flag?
 	if (finalResult[0].includes("north,west,corner")) {
-		sessionStorage.setItem("bigRoomInProgress", 0);
+		$("#bigRoomFlag").val(false);
 	//ok fine, room is still being built - check the west walls so we can connect corridors and close off if there are nothing incomming
 	} else if (finalResult[0].includes("west,entrance,") || finalResult[0].includes("east,north,")) {
 		if (!tileHistory[(tileHistory.length-1)]["east"]) {
