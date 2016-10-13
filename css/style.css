@@ -1,12 +1,3 @@
-#dungeonGrid , td, tr{
- margin: 0;
- padding: 0;
- border: 0;
- border-spacing: 0;
- cellspacing: 0;
- border-collapse: collapse;
-}
-
 /*flips image horizontally and vertically*/
 .flip-hor-vert {
     -moz-transform: scale(-1, -1);
@@ -33,4 +24,26 @@
         filter: FlipV;
         -ms-filter: "FlipV";
         border: 0px solid black;
+}
+/* table management */
+.table {
+    width: 99%
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+}
+.row {
+    display: block;
+    padding: 0px;
+    margin: 0px;    
+    clear:both;
+}
+.col {
+    vertical-align: top;
+    display: inline-block;
+    height: 100%;
+}
+
+.col img {
+       vertical-align:top;
 }

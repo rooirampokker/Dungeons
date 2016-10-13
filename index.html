@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Browser Dungeons</title>
@@ -10,9 +11,6 @@
 		<script src="javascript/buildBigRoom.js"></script>
 		
 		<script src="javascript/jsonTileDefs.js"></script>
-
-		
-		
 	</head>
 
 	<body>
@@ -33,15 +31,16 @@
 					</select>
 					
 					<input type="button" id="submit" value="submit">					
+					<input type="hidden" id="bigRoomFlag" value=false>					
 				</fieldset>
 			</form>
 		</div>
 		
-		<span id="dungeonContainer">
-			<table id="dungeonGrid" border=1>
-				
-			</table>		
-		</span>
+		<div id="dungeonContainer">
+			<div id="dungeonGrid" class="table">
+			
+			</div>
+		</div>
 		
 	</body>
 </html>
