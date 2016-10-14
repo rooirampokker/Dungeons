@@ -23,6 +23,7 @@ $(function() {
 		var tilePref = {include:"",
 					    exclude:""};
 		var image = "";
+		var overlayImage = "";
 	//generate dungeon layout	
 		while(row <= totRows) {	
 				var newRow = $(newDungeonRow).clone();
@@ -45,8 +46,10 @@ $(function() {
 					tileHistory.push(image);			
 					if (tileSize==2) {
 						imagePath = "tiles\\140\\";
+						overlayImage = applyOverlay(image, imagePath, row, col);						
 					} else imagePath = "tiles\\";
-					newCol.html($("<img />").attr({"src":imagePath+image.fileName+".png", "class":image.fileName+flip, "id": row+","+col}));
+					var baseImage = $("<img />").attr({"src":imagePath+image.fileName+".png", "class":image.fileName+flip+" base", "id": row+","+col});
+					newCol.html(baseImage).append(overlayImage);
 					newRow.append(newCol);					
 					col++;
 				}

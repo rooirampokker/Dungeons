@@ -141,7 +141,7 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "passage"
+        "others": "passage,empty"
     },
     "bottom,right,passage4": {
         "fileName": "bottom,right,passage4",
@@ -301,7 +301,7 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "passage"
+        "others": "passage,empty"
     }, 
    "bottom,right,top,stairs": {
         "fileName": "bottom,right,top,stairs",
@@ -374,7 +374,7 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "passage"
+        "others": "passage,empty"
     },    
     "bottom,right,left,fire": {
         "fileName": "bottom,right,left,fire",
@@ -647,7 +647,7 @@ tileSource = {
         "east": true,
         "south": false,
         "west": true,
-        "others": "passage"
+        "others": "passage,empty"
     },
     "right,left,passage1": {
         "fileName": "right,left,passage1",
@@ -791,7 +791,7 @@ tileSource = {
         "east": false,
         "south": false,
         "west": false,
-        "others": "center,bigroom"
+        "others": "center,bigroom, empty"
     },
     "center,bigroom, dias": {
         "fileName": "center,bigroom,dias",
@@ -872,5 +872,63 @@ tileSource = {
         "south": false,
         "west": true,
         "others": "corner,bigroom"
+    },
+    "overlay,chests" : {
+        "fileName": "overlay,chests",
+        "north": false,
+        "east": false,
+        "south": false,
+        "west": false,
+        "others": "overlay,chests"        
     }
+}
+
+overlayTiles = {
+    "overlay,trap,snakes" : {
+        "fileName": "overlay,trap,snakes",
+        "north": false,
+        "east": false,
+        "south": false,
+        "west": false,
+        "class": "snakePit",
+        "others": "overlay,trap,snakes"        
+    },
+    "overlay,trap,snakes2" : {
+        "fileName": "overlay,trap,snakes2",
+        "north": false,
+        "east": false,
+        "south": false,
+        "west": false,
+        "class": "snakePit",
+        "others": "overlay,trap,snakes"        
+    },    
+    "overlay,chests" : {
+        "fileName": "overlay,chests",
+        "north": false,
+        "east": false,
+        "south": false,
+        "west": false,
+        "class": "chests1",
+        "others": "overlay,chests"        
+    },  
+    "overlay,passage" : {
+        "fileName": "overlay,passage",
+        "north": false,
+        "east": false,
+        "south": false,
+        "west": false,
+        "class": "passage",
+        "others": "overlay,passage"        
+    },
+    "overlay,corner,statue" : {
+    "fileName": "overlay,corner,statue",
+    "north": false,
+    "east": false,
+    "south": false,
+    "west": false,
+    "class": "cornerStatue",
+    "others": "overlay,corner,statue"        
+    }  
+    
+
 }

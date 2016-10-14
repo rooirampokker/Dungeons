@@ -5,12 +5,12 @@
 function checkSurroundingTiles (tilePref, tileHistory, previousImage, row, col) {	
 	//SPECIFIC ROW-LOCATION-BASED EXCLUSIONS
 	if (row == 0) {
-		tilePref.exclude = "north,filler,bigroom,deadend,";
+		tilePref.exclude = "north,filler,bigroom,deadend,overlay,";
 		tilePref.include = ",";			
 //EVERYTHING EXCEPT THE north ROW
 	} else {
 		//exclusion of bigroom may be overridden later in the buildBigRoom function
-		tilePref.exclude = "start,bigroom,";
+		tilePref.exclude = "start,bigroom,overlay,";
 		tilePref.include = ",";
 	//CHECK TILE ABOVE
 		tileAbove = tileHistory[(tileHistory.length-totCols)-1];
@@ -173,6 +173,27 @@ function applyFlip(image, tilePref, row, col) {
 	} 
 	return style;
 } 
+/*
+*
+* THIS OVERLAY FUNCTION NEEDS A CLEANUP
+*
+*/
+function applyOverlay(image, imagePath, row, col) {
+	if (image.others.indexOf("empty") > -1 && Math.random() > 0.1) {
+		var overlayKeys = _.without(Object.keys(overlayTiles), "overlay,passage", "overlay,corner,statue");
+		if (image.west === true && image.east === true && image.south === false && image.north === false) {
+			var randomKey = "overlay,passage";
+		} else if (image.north === false && image.east === false && image.south === true && image.west === false) {
+			console.log("inserting overlay: "+row+","+col);
+			var randomKey = "overlay,corner,statue";
+		} else {
+			var randomKey = overlayKeys[Math.floor(Math.random()*overlayKeys.length)];
+		}
+		var tileStyle = overlayTiles[randomKey].style;
+		var overlayImage = $("<img />").attr({"src":imagePath+randomKey+".png", "class": "overlay "+overlayTiles[randomKey].class});
+	} else var overlayImage = "";	
+	return overlayImage;
+}
 /*
 *
 */
