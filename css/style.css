@@ -1,4 +1,12 @@
 /*flips image horizontally and vertically*/
+#hero {
+  height: 22px;
+  width: 22px;
+  top: 94px;
+  left: 47px;
+  outline: none;
+  z-index: 3;
+}
 .flip-hor-vert {
     -moz-transform: scale(-1, -1);
     -o-transform: scale(-1, -1);
@@ -35,7 +43,7 @@
 .row {
     display: block;
     padding: 0px;
-    margin: 0px;    
+    margin: 0px;
     clear:both;
 }
 .col {
@@ -83,5 +91,5 @@
 
 .overlay.cornerStatue {
     margin-left: 69px;
-    margin-top: 24px;    
+    margin-top: 24px;
 }

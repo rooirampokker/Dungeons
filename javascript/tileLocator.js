@@ -2,11 +2,11 @@
 *
 *
 */
-function checkSurroundingTiles (tilePref, tileHistory, previousImage, row, col) {	
+function checkSurroundingTiles (tilePref, tileHistory, previousImage, row, col) {
 	//SPECIFIC ROW-LOCATION-BASED EXCLUSIONS
 	if (row == 0) {
 		tilePref.exclude = "north,filler,bigroom,deadend,overlay,";
-		tilePref.include = ",";			
+		tilePref.include = ",";
 //EVERYTHING EXCEPT THE north ROW
 	} else {
 		//exclusion of bigroom may be overridden later in the buildBigRoom function
@@ -31,28 +31,28 @@ function checkSurroundingTiles (tilePref, tileHistory, previousImage, row, col) 
 		} else {
 			tilePref.exclude += "west,";
 		}
-	}				
-//SPECIFIC COLUMN-LOCATION-BASED EXCLUSIONS	
+	}
+//SPECIFIC COLUMN-LOCATION-BASED EXCLUSIONS
 	if (col == 0) {
 		tilePref.exclude += "west,";
 	} else tilePref.include += ",";
 	if (col == totCols) {
 		tilePref.exclude += "east,";
-	} 
+	}
 	if (row == totRows) {
 		tilePref.exclude += "south,";
 	}
 	if (row > 0) {
-		tilePref = buildBigRoom (tileHistory, tilePref, row, col);	
-	} 
+		tilePref = buildBigRoom (tileHistory, tilePref, row, col);
+	}
 	return tilePref;
 
-}	
+}
 /*
 *
 *
-*/			 
-function refineShortlist(tileList, searchItem, returnType, row, col) {	
+*/
+function refineShortlist(tileList, searchItem, returnType, row, col) {
 	 var tempTileExclude = [];
 	 var tempTileInclude = [];
 	 if (returnType == "include") {
@@ -62,14 +62,14 @@ function refineShortlist(tileList, searchItem, returnType, row, col) {
 	 }
 	 $.each(tileList, function(key, tileAttr) {
 	 	if ((tileAttr[searchItem] !== undefined && tileAttr[searchItem] === true) || tileAttr['others'].indexOf(searchItem) > -1) {
-	 		 if (returnType == "include") {	 		 	
+	 		 if (returnType == "include") {
 	 		 	tempTileArray[key] = tileList[key];
-	 		 } else {	 		
+	 		 } else {
 	 		 	delete tempTileArray[key];
 	 		 }
 	 	} else {
 			if (searchItem === "west" &&
-	 		 		!tileAttr[searchItem] && 
+	 		 		!tileAttr[searchItem] &&
 	 		 		tileAttr["east"] &&
 	 		 		returnType == "include" &&
 	 		 		tileAttr['others'].indexOf("bigroom") < 0) {
@@ -79,7 +79,7 @@ function refineShortlist(tileList, searchItem, returnType, row, col) {
 		 		 		tempTileArray[key] = tileList[key];
 	 		}
 	 		if (searchItem === "north" &&
- 				   !tileAttr[searchItem] && 
+ 				   !tileAttr[searchItem] &&
  		 		   tileAttr["south"] &&
  		 		   returnType == "include" &&
  		 		   tileAttr['others'].indexOf("bigroom") < 0) {
@@ -87,7 +87,7 @@ function refineShortlist(tileList, searchItem, returnType, row, col) {
 		 		 		tileList[key].south = false;
 		 		 		tileList[key].flipVert = true;
 		 		 		tempTileArray[key] = tileList[key];
-	 	}	 		
+	 	}
 	 	}
 	 });
 	return tempTileArray;
@@ -95,26 +95,26 @@ function refineShortlist(tileList, searchItem, returnType, row, col) {
 /*
 *
 *
-*/	
+*/
 function getSelectedTiles(tilePref, row, col) {
 	var tileList = $.extend(true, {}, tileSource);
 	includeThis = cleanArray(tilePref.include.substring(0, tilePref.include.length-1).split(","));
-	excludeThis = cleanArray(tilePref.exclude.substring(0, tilePref.exclude.length-1).split(","));	
+	excludeThis = cleanArray(tilePref.exclude.substring(0, tilePref.exclude.length-1).split(","));
 
 	$(includeThis).each(function(searchIndex) {
 //exclude everything that IS NOT in this array
-		tileList = refineShortlist(tileList, includeThis[searchIndex], "include", row, col);	
-	});	
-	
+		tileList = refineShortlist(tileList, includeThis[searchIndex], "include", row, col);
+	});
+
 	$(excludeThis).each(function(searchIndex) {
-//exclude everything that IS in this array		
-		tileList = refineShortlist(tileList, excludeThis[searchIndex], "exclude", row, col);	
+//exclude everything that IS in this array
+		tileList = refineShortlist(tileList, excludeThis[searchIndex], "exclude", row, col);
 	});
 	return tileList;
 }
 /*
-*	
-*   
+*
+*
 */
 function shuffleTiles(arr, row, col) {
 	var keys = Object.keys(arr);
@@ -131,48 +131,48 @@ function shuffleTiles(arr, row, col) {
 *
 */
 function applyFlip(image, tilePref, row, col) {
-//IF WE HAVE AN EXPLICIT INSTRUCTION TO FLIP THE TILE - THIS WILL BE USED LATER TO REDUCE THE ISSUE WHERE A SINGLE TILE IS COPIED MULTIPLE TIMES TO CHANGE EXIT DIRECTIONS			
+//IF WE HAVE AN EXPLICIT INSTRUCTION TO FLIP THE TILE - THIS WILL BE USED LATER TO REDUCE THE ISSUE WHERE A SINGLE TILE IS COPIED MULTIPLE TIMES TO CHANGE EXIT DIRECTIONS
  var style = "";
  if (image.flipHor) {
  		//console.log("FLIPPING HOR: "+row+","+col);
 		style += " flip-hor";
-	} 
-	if (image.flipVert) {
-		//console.log("FLIPPING VERT: "+row+","+col);	 		
-		style += " flip-vert";
-//IF WE HAVE PASSAGES WITH EITHER A NORTH/SOUTH OR EAST/WEST ENTRANCE			
 	}
-	if (((image.north == image.south) && 
-		(image.east == image.west) && 
+	if (image.flipVert) {
+		//console.log("FLIPPING VERT: "+row+","+col);
+		style += " flip-vert";
+//IF WE HAVE PASSAGES WITH EITHER A NORTH/SOUTH OR EAST/WEST ENTRANCE
+	}
+	if (((image.north == image.south) &&
+		(image.east == image.west) &&
 		Math.random() > 0.5) ||
 		style == " flip-hor flip-vert") {
 		style = " flip-hor-vert";
-//IF WE HAVE PASSAGES WITH ETHER A SINGLE EAST OR WEST ENTRANCE			
-	} else if (((image.east && 
-					!image.north && 
-					!image.south && 
-					!image.west) || 
-				(image.west && 
-					!image.north && 
-					!image.south && 
+//IF WE HAVE PASSAGES WITH ETHER A SINGLE EAST OR WEST ENTRANCE
+	} else if (((image.east &&
+					!image.north &&
+					!image.south &&
+					!image.west) ||
+				(image.west &&
+					!image.north &&
+					!image.south &&
 					!image.east)) &&
 					!image.flipHor &&
 				Math.random() > 0.5) {
 		style +=  " flip-vert";
-//IF WE HAVE PASSAGES WITH ETHER A SINGLE NORTH OR SOUTH ENTRANCE					
-	} else if (((image.north && 
-					!image.east && 
-					!image.south && 
-					!image.west) || 
-				(image.south && 
-					!image.north && 
-					!image.west && 
+//IF WE HAVE PASSAGES WITH ETHER A SINGLE NORTH OR SOUTH ENTRANCE
+	} else if (((image.north &&
+					!image.east &&
+					!image.south &&
+					!image.west) ||
+				(image.south &&
+					!image.north &&
+					!image.west &&
 					!image.east)) &&
 				Math.random() > 0.5)  {
 		style +=  " flip-hor";
-	} 
+	}
 	return style;
-} 
+}
 /*
 *
 * THIS OVERLAY FUNCTION NEEDS A CLEANUP
@@ -191,12 +191,15 @@ function applyOverlay(image, imagePath, row, col) {
 		}
 		var tileStyle = overlayTiles[randomKey].style;
 		var overlayImage = $("<img />").attr({"src":imagePath+randomKey+".png", "class": "overlay "+overlayTiles[randomKey].class});
-	} else var overlayImage = "";	
+	//START TILE - INCLUDE HERO AS OVERLAY
+	} else if (image.others.indexOf("start") > -1) {
+		var overlayImage = $("<img />").attr({"src":imagePath+"hero.png", "class": "overlay hero", "id": "hero"});
+	} else var overlayImage = "";
 	return overlayImage;
 }
 /*
 *
 */
 function cleanArray(thisArray) {
-	return $.grep(thisArray,function(n){ return n == " " || n })	
+	return $.grep(thisArray,function(n){ return n == " " || n })
 }
