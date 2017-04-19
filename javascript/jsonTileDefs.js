@@ -25,7 +25,9 @@ tileSource = {
         "south": true,
         "west": false,
         "others": "empty",
-        "walkable": {}
+        "map": {
+
+        }
     },
     "bottom,hall": {
         "fileName": "bottom,hall",
@@ -33,7 +35,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "hall"
+        "others": "hall",
+        "map": {
+
+        }
     },
     "bottom,deadend": {
         "fileName": "bottom,deadend",
@@ -41,7 +46,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "deadend"
+        "others": "deadend",
+        "map": {
+
+        }
     },
     "bottom,room": {
         "fileName": "bottom,room",
@@ -49,7 +57,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "room"
+        "others": "room",
+        "map": {
+
+        }
     },
     "bottom,room1": {
         "fileName": "bottom,room1",
@@ -57,7 +68,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "room"
+        "others": "room",
+        "map": {
+
+        }
     },
     "bottom,room2": {
         "fileName": "bottom,room2",
@@ -65,7 +79,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "room"
+        "others": "room",
+        "map": {
+
+        }
     },
     "bottom,altar": {
         "fileName": "bottom,altar",
@@ -73,7 +90,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "altar"
+        "others": "altar",
+        "map": {
+
+        }
     },
     "bottom,right,crooked,passage1": {
         "fileName": "bottom,right,crooked,passage1",
@@ -81,7 +101,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "crooked,passage"
+        "others": "crooked,passage",
+        "map": {
+
+        }
     },
     "bottom,right,statue": {
         "fileName": "bottom,right,statue",
@@ -89,7 +112,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "statue"
+        "others": "statue",
+        "map": {
+
+        }
     },
     "bottom,right,stairs": {
         "fileName": "bottom,right,stairs",
@@ -97,7 +123,20 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "stairs"
+        "others": "stairs",
+        "map": {
+          "1,1": "east,south",
+          "1,2": "east,west",
+          "1,3": "west",
+          "2,1": "north,south",
+          "3,1": "north,south",
+          "4,1": "north,east",
+          "4,2": "east,south,west",
+          "4,3": "north,east,south,west",
+          "4,4": "north,west",
+          "5,2": "north,east,south",
+          "5,3": "north,south,west",
+        }
     },
     "bottom,right,stairs1": {
         "fileName": "bottom,right,stairs1",
@@ -105,7 +144,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "stairs"
+        "others": "stairs",
+        "map": {
+
+        }
     },
     "bottom,right,tower,stairs": {
         "fileName": "bottom,right,tower,stairs",
@@ -113,7 +155,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "tower,stairs"
+        "others": "tower,stairs",
+        "map": {
+
+        }
     },
     "bottom,right,pool": {
         "fileName": "bottom,right,pool",
@@ -121,7 +166,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "pool"
+        "others": "pool",
+        "map": {
+
+        }
     },
     "bottom,right,passage": {
         "fileName": "bottom,right,passage",
@@ -129,7 +177,19 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+          "2,2": "east,south",
+          "2,3": "east,south,west",
+          "2,4": "east,south,west",
+          "2,5": "east,south,west",
+          "3,2": "north,east,south",
+          "3,3": "north,east,south,west",
+          "4,2": "north,east,south",
+          "4,3": "north,south,west",
+          "5,2": "north,east,south",
+          "5,3": "north,south,west",
+        }
     },
     "bottom,right,passage1": {
         "fileName": "bottom,right,passage1",
@@ -137,7 +197,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+
+        }
     },
     "bottom,right,passage2": {
         "fileName": "bottom,right,passage2",
@@ -145,7 +208,19 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+          "2,2": "east,south",
+          "2,3": "east,south,west",
+          "2,4": "east,south,west",
+          "2,5": "east,south,west",
+          "3,2": "north,east,south",
+          "3,3": "north,east,south,west",
+          "4,2": "north,east,south",
+          "4,3": "north,south,west",
+          "5,2": "north,east,south",
+          "5,3": "north,south,west",
+        }
     },
     "bottom,right,passage3": {
         "fileName": "bottom,right,passage3",
@@ -153,7 +228,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "passage,empty"
+        "others": "passage,empty",
+        "map": {
+
+        }
     },
     "bottom,right,passage4": {
         "fileName": "bottom,right,passage4",
@@ -161,7 +239,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+
+        }
     },
     "bottom,right,passage5": {
         "fileName": "bottom,right,passage5",
@@ -169,7 +250,24 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+          "1,1": "east,south",
+          "1,2": "east,west",
+          "1,3": "east,west",
+          "1,4": "south,west",
+          "2,1": "north,south",
+          "2,4": "north,south",
+          "2,5": "east,south",
+          "3,1": "north,south",
+          "3,4": "north,east",
+          "3,5": "north,east,west",
+          "4,1": "north,east",
+          "4,2": "east,west",
+          "4,3": "south,west",
+          "5,2": "east,south",
+          "5,3": "north,south,west",
+        }
     },
     "bottom,right,ornate": {
         "fileName": "bottom,right,ornate",
@@ -177,7 +275,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "ornate"
+        "others": "ornate",
+        "map": {
+
+        }
     },
     "bottom,right,top,left,crossroad": {
         "fileName": "bottom,right,top,left,crossroad",
@@ -185,7 +286,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "crossroad"
+        "others": "crossroad",
+        "map": {
+
+        }
     },
     "bottom,right,top,left,crossroad1": {
         "fileName": "bottom,right,top,left,crossroad1",
@@ -193,7 +297,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "crossroad"
+        "others": "crossroad",
+        "map": {
+
+        }
     },
     "bottom,right,top,left,crossroad5": {
         "fileName": "bottom,right,top,left,crossroad5",
@@ -201,7 +308,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "crossroad"
+        "others": "crossroad",
+        "map": {
+
+        }
     },
     "bottom,right,top,left,crossroad6": {
         "fileName": "bottom,right,top,left,crossroad6",
@@ -209,7 +319,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "crossroad"
+        "others": "crossroad",
+        "map": {
+
+        }
     },
     "bottom,right,top,left,statue,crossroad": {
         "fileName": "bottom,right,top,left,statue,crossroad",
@@ -217,7 +330,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "statue,crossroad"
+        "others": "statue,crossroad",
+        "map": {
+
+        }
     },
     "bottom,right,top,left,crooked,crossroad2": {
         "fileName": "bottom,right,top,left,crooked,crossroad2",
@@ -225,7 +341,27 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "crooked,crossroad"
+        "others": "crooked,crossroad",
+        "map": {
+          "0,2": "north,east,south",
+          "0,3": "north,south,west",
+          "1,1": "east,south",
+          "1,2": "north,east,west",
+          "1,3": "north,east,west",
+          "1,4": "south,west",
+          "2,0": "east,south,west",
+          "2,1": "north,south,west",
+          "2,4": "north,east",
+          "2,5": "east,south,west",
+          "3,0": "north,east,west",
+          "3,1": "north,east,west",
+          "3,2": "south,west",
+          "3,5": "north,east",
+          "4,2": "north,east,south",
+          "4,3": "south,west",
+          "5,2": "north,east,south",
+          "5,3": "north,south,west",
+        }
     },
     "bottom,right,top,left,deadend,crossroad": {
         "fileName": "bottom,right,top,left,deadend,crossroad",
@@ -233,7 +369,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "deadend,crossroad"
+        "others": "deadend,crossroad",
+        "map": {
+
+        }
     },
     "bottom,right,top,left,maze,crossroad": {
         "fileName": "bottom,right,top,left,maze,crossroad",
@@ -241,7 +380,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "maze,crossroad"
+        "others": "maze,crossroad",
+        "map": {
+
+        }
     },
     "bottom,right,top,left,stair,crossroad": {
         "fileName": "bottom,right,top,left,stair,crossroad",
@@ -249,7 +391,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "stair,crossroad"
+        "others": "stair,crossroad",
+        "map": {
+
+        }
     },
     "bottom,right,top,left,deadend": {
         "fileName": "bottom,right,top,left,deadend",
@@ -257,7 +402,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "deadend"
+        "others": "deadend",
+        "map": {
+
+        }
     },
     "bottom,right,top,left,stairs": {
         "fileName": "bottom,right,top,left,stairs",
@@ -265,7 +413,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "stairs,crossroad"
+        "others": "stairs,crossroad",
+        "map": {
+
+        }
     },
     "bottom,right,top,left,crooked,crossroad5": {
         "fileName": "bottom,right,top,left,crooked,crossroad5",
@@ -273,7 +424,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "crooked,crossroad"
+        "others": "crooked,crossroad",
+        "map": {
+
+        }
     },
     "bottom,right,top,left,crooked,crossroad6": {
         "fileName": "bottom,right,top,left,crooked,crossroad6",
@@ -281,7 +435,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "crooked,crossroad"
+        "others": "crooked,crossroad",
+        "map": {
+
+        }
     },
     "bottom,right,top,passage": {
         "fileName": "bottom,right,top,passage",
@@ -289,7 +446,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+
+        }
     },
     "bottom,right,top,stairs1": {
         "fileName": "bottom,right,top,stairs1",
@@ -297,7 +457,25 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "stairs"
+        "others": "stairs",
+        "map": {
+          "0,2": "north,east,south",
+          "0,3": "north,south,west",
+          "1,2": "north,east,south",
+          "1,3": "north,south,west",
+          "2,2": "north,east,south",
+          "2,3": "north,east,south,west",
+          "2,4": "east,south,west",
+          "2,5": "east,south,west",
+          "3,2": "north,east,south",
+          "3,3": "north,east,south,west",
+          "3,4": "north,east,west",
+          "3,5": "north,east,west",
+          "4,2": "north,east,south",
+          "4,3": "north,south,west",
+          "5,2": "north,east,south",
+          "5,3": "north,south,west"
+        }
     },
    "bottom,right,top,passage1": {
         "fileName": "bottom,right,top,passage1",
@@ -305,7 +483,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+
+        }
     },
    "bottom,right,top,passage2": {
         "fileName": "bottom,right,top,passage2",
@@ -313,7 +494,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "passage,empty"
+        "others": "passage,empty",
+        "map": {
+
+        }
     },
    "bottom,right,top,stairs": {
         "fileName": "bottom,right,top,stairs",
@@ -321,7 +505,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "stairs"
+        "others": "stairs",
+        "map": {
+
+        }
     },
     "bottom,right,top,fire": {
         "fileName": "bottom,right,top,fire",
@@ -329,7 +516,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "fire"
+        "others": "fire",
+        "map": {
+
+        }
     },
     "bottom,right,top,lava": {
         "fileName": "bottom,right,top,lava",
@@ -337,7 +527,29 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "lava"
+        "others": "lava",
+        "map": {
+            "0,2": "north,east,south",
+            "0,3": "north,south,west",
+            "1,2": "north,east,south",
+            "1,3": "north,east,south,west",
+            "1,4": "south,west",
+            "2,1": "east,south",
+            "2,2": "north,east,south,west",
+            "2,3": "north,east,south,west",
+            "2,4": "north,east,south,west",
+            "2,5": "east,south,west",
+            "3,1": "north,east",
+            "3,2": "north,east,south,west",
+            "3,3": "north,east,south,west",
+            "3,4": "north,east,south,west",
+            "3,5": "north,east,west",
+            "4,2": "north,east,south",
+            "4,3": "north,east,south,west",
+            "4,4": "north,west",
+            "5,2": "north,east,south",
+            "5,3": "north,south,west",
+        }
     },
     "bottom,right,top,maze": {
         "fileName": "bottom,right,top,maze",
@@ -345,7 +557,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "maze"
+        "others": "maze",
+        "map": {
+
+        }
     },
     "bottom,right,top,room": {
         "fileName": "bottom,right,top,room",
@@ -353,7 +568,35 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "room"
+        "others": "room",
+        "map": {
+            "0,2": "north,east,south", //exit - right
+            "0,3": "north,south,west", //Exit - left
+            "1,0": "east,south",
+            "1,1": "east,south,west",
+            "1,2": "north,east,south,west",
+            "1,3": "north,east,south,west",
+            "1,4": "south,west",
+            "2,0": "north,east,south",
+            "2,1": "north,east,south,west",
+            "2,2": "north,east,south,west",
+            "2,3": "north,east,south,west",
+            "2,4": "north,east,south,west",
+            "2,5": "east,south,west",
+            "3,0": "north,east,south",
+            "3,1": "north,east,south,west",
+            "3,2": "north,east,south,west",
+            "3,3": "north,east,south,west",
+            "3,4": "north,east,south,west",
+            "3,5": "north,east,west",
+            "4,0": "north,east",
+            "4,1": "north,east,west",
+            "4,2": "north,east,south,west",
+            "4,3": "north,east,south,west",
+            "4,4": "north,west",
+            "5,2": "north,east,south",
+            "5,3": "north,south,west"
+        }
     },
 
     "bottom,right,left,room": {
@@ -362,7 +605,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "room"
+        "others": "room",
+        "map": {
+
+        }
     },
     "bottom,right,left,passage": {
         "fileName": "bottom,right,left,passage",
@@ -370,7 +616,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+
+        }
     },
     "bottom,right,left,passage1": {
         "fileName": "bottom,right,left,passage1",
@@ -378,7 +627,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+
+        }
     },
     "bottom,right,left,passage2": {
         "fileName": "bottom,right,left,passage2",
@@ -386,7 +638,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "passage,empty"
+        "others": "passage,empty",
+        "map": {
+
+        }
     },
     "bottom,right,left,fire": {
         "fileName": "bottom,right,left,fire",
@@ -394,9 +649,12 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "fire"
+        "others": "fire",
+        "map": {
+
+        }
     },
-    "bottom,right,left,lava": {
+/*    "bottom,right,left,lava": {
         "fileName": "bottom,right,left,lava",
         "north": false,
         "east": true,
@@ -404,13 +662,17 @@ tileSource = {
         "west": true,
         "others": "lava"
     },
+*/
     "bottom,right,left,maze": {
         "fileName": "bottom,right,left,maze",
         "north": false,
         "east": true,
         "south": true,
         "west": true,
-        "others": "maze"
+        "others": "maze",
+        "map": {
+
+        }
     },
 
     "bottom,right,left,stairs": {
@@ -419,7 +681,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "stairs"
+        "others": "stairs",
+        "map": {
+
+        }
     },
     "bottom,right,left,stairs1": {
         "fileName": "bottom,right,left,stairs1",
@@ -427,7 +692,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "stairs"
+        "others": "stairs",
+        "map": {
+
+        }
     },
     "bottom,top,pipes": {
         "fileName": "bottom,top,pipes",
@@ -435,7 +703,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "pipes"
+        "others": "pipes",
+        "map": {
+
+        }
     },
     "bottom,top,trap1": {
         "fileName": "bottom,top,trap1",
@@ -443,7 +714,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "trap"
+        "others": "trap",
+        "map": {
+
+        }
     },
     "bottom,top,trap2": {
         "fileName": "bottom,top,trap2",
@@ -451,7 +725,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "trap"
+        "others": "trap",
+        "map": {
+
+        }
     },
     "bottom,top,items": {
         "fileName": "bottom,top,items",
@@ -459,7 +736,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "items"
+        "others": "items",
+        "map": {
+
+        }
     },
     "bottom,top,pool": {
         "fileName": "bottom,top,pool",
@@ -467,7 +747,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "pool"
+        "others": "pool",
+        "map": {
+
+        }
     },
     "bottom,top,pit": {
         "fileName": "bottom,top,pit",
@@ -475,7 +758,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "pit"
+        "others": "pit",
+        "map": {
+
+        }
     },
     "bottom,top,pit1": {
         "fileName": "bottom,top,pit1",
@@ -483,7 +769,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "pit"
+        "others": "pit",
+        "map": {
+
+        }
     },
     "bottom,top,pit3": {
         "fileName": "bottom,top,pit3",
@@ -491,7 +780,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "pit"
+        "others": "pit",
+        "map": {
+
+        }
     },
     "bottom,top,trophies": {
         "fileName": "bottom,top,trophies",
@@ -499,7 +791,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "trophies"
+        "others": "trophies",
+        "map": {
+
+        }
     },
     "bottom,top,empty": {
         "fileName": "bottom,top,empty",
@@ -507,7 +802,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "empty"
+        "others": "empty",
+        "map": {
+
+        }
     },
     "bottom,top,crooked,passage3": {
         "fileName": "bottom,top,crooked,passage3",
@@ -515,7 +813,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "crooked,passage"
+        "others": "crooked,passage",
+        "map": {
+
+        }
     },
     "bottom,top,passage1": {
         "fileName": "bottom,top,passage1",
@@ -523,7 +824,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+
+        }
     },
     "bottom,top,passage2": {
         "fileName": "bottom,top,passage2",
@@ -531,7 +835,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+
+        }
     },
     "bottom,top,passage3": {
         "fileName": "bottom,top,passage3",
@@ -539,7 +846,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+
+        }
     },
     "bottom,top,passage": {
         "fileName": "bottom,top,passage",
@@ -547,7 +857,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+
+        }
     },
     "right,coffins": {
         "fileName": "right,coffins",
@@ -555,7 +868,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": false,
-        "others": "coffins"
+        "others": "coffins",
+        "map": {
+
+        }
     },
     "right,room": {
         "fileName": "right,room",
@@ -563,7 +879,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": false,
-        "others": "room"
+        "others": "room",
+        "map": {
+
+        }
     },
     "right,room1": {
         "fileName": "right,room1",
@@ -571,7 +890,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": false,
-        "others": "room"
+        "others": "room",
+        "map": {
+
+        }
     },
     "right,room2": {
         "fileName": "right,room2",
@@ -579,7 +901,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": false,
-        "others": "room"
+        "others": "room",
+        "map": {
+
+        }
     },
  	"right,deadend": {
         "fileName": "right,deadend",
@@ -587,7 +912,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": false,
-        "others": "deadend"
+        "others": "deadend",
+        "map": {
+
+        }
     },
     "right,altar": {
         "fileName": "right,altar",
@@ -595,7 +923,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": false,
-        "others": "altar"
+        "others": "altar",
+        "map": {
+
+        }
     },
     "right,left,trap2": {
         "fileName": "right,left,trap2",
@@ -603,7 +934,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": true,
-        "others": "trap"
+        "others": "trap",
+        "map": {
+
+        }
     },
     "right,left,trap3": {
         "fileName": "right,left,trap3",
@@ -611,7 +945,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": true,
-        "others": "trap"
+        "others": "trap",
+        "map": {
+
+        }
     },
     "right,left,pool": {
         "fileName": "right,left,pool",
@@ -619,7 +956,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": true,
-        "others": "pool"
+        "others": "pool",
+        "map": {
+
+        }
     },
     "right,left,pit1": {
         "fileName": "right,left,pit1",
@@ -627,7 +967,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": true,
-        "others": "pit"
+        "others": "pit",
+        "map": {
+
+        }
     },
     "right,left,pit2": {
         "fileName": "right,left,pit2",
@@ -635,7 +978,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": true,
-        "others": "pit"
+        "others": "pit",
+        "map": {
+
+        }
     },
     "right,left,pipes": {
         "fileName": "right,left,pipes",
@@ -643,7 +989,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": true,
-        "others": "pipes"
+        "others": "pipes",
+        "map": {
+
+        }
     },
     "right,left,items": {
         "fileName": "right,left,items",
@@ -651,7 +1000,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": true,
-        "others": "items"
+        "others": "items",
+        "map": {
+
+        }
     },
     "right,left,passage": {
         "fileName": "right,left,passage",
@@ -659,7 +1011,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": true,
-        "others": "passage,empty"
+        "others": "passage,empty",
+        "map": {
+
+        }
     },
     "right,left,passage1": {
         "fileName": "right,left,passage1",
@@ -667,7 +1022,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": true,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+
+        }
     },
     "right,left,passage2": {
         "fileName": "right,left,passage2",
@@ -675,7 +1033,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": true,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+
+        }
     },
     "right,left,passage3": {
         "fileName": "right,left,passage3",
@@ -683,7 +1044,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": true,
-        "others": "passage"
+        "others": "passage",
+        "map": {
+
+        }
     },
     "right,left,trophies": {
         "fileName": "right,left,trophies",
@@ -691,7 +1055,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": true,
-        "others": "trophies"
+        "others": "trophies",
+        "map": {
+
+        }
     },
     "right,left,crooked,passage3": {
         "fileName": "right,left,crooked,passage3",
@@ -699,7 +1066,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": true,
-        "others": "crooked,passage"
+        "others": "crooked,passage",
+        "map": {
+
+        }
     },
     "filler": {
         "fileName": "filler",
@@ -707,7 +1077,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": false,
-        "others": "filler"
+        "others": "filler",
+        "map": {
+
+        }
     },
     "filler1": {
         "fileName": "filler1",
@@ -715,7 +1088,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": false,
-        "others": "filler"
+        "others": "filler",
+        "map": {
+
+        }
     },
     "filler,water": {
         "fileName": "filler,water",
@@ -723,7 +1099,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": false,
-        "others": "filler,water"
+        "others": "filler,water",
+        "map": {
+
+        }
     },
     "bottom,entrance,bigroom": {
         "fileName": "bottom,entrance,bigroom",
@@ -731,7 +1110,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "entrance,bigroom"
+        "others": "entrance,bigroom",
+        "map": {
+
+        }
     },
     "bottom,right,corner,bigroom": {
         "fileName": "bottom,right,corner,bigroom",
@@ -739,7 +1121,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "corner,bigroom"
+        "others": "corner,bigroom",
+        "map": {
+
+        }
     },
     "bottom,left,corner,bigroom": {
         "fileName": "bottom,left,corner,bigroom",
@@ -747,7 +1132,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": true,
-        "others": "corner,bigroom"
+        "others": "corner,bigroom",
+        "map": {
+
+        }
     },
     "bottom,right,corner,bigroom,crooked": {
         "fileName": "bottom,right,corner,bigroom,crooked",
@@ -755,7 +1143,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": false,
-        "others": "corner,bigroom,crooked"
+        "others": "corner,bigroom,crooked",
+        "map": {
+
+        }
     },
     "bottom,left,corner,bigroom,crooked1": {
         "fileName": "bottom,left,corner,bigroom,crooked1",
@@ -763,7 +1154,10 @@ tileSource = {
         "east": false,
         "south": true,
         "west": true,
-        "others": "corner,bigroom,crooked"
+        "others": "corner,bigroom,crooked",
+        "map": {
+
+        }
     },
     "bottom,left,right,corner,bigroom,open": {
         "fileName": "bottom,left,right,corner,bigroom,open",
@@ -771,7 +1165,10 @@ tileSource = {
         "east": true,
         "south": true,
         "west": true,
-        "others": "corner,bigroom,open"
+        "others": "corner,bigroom,open",
+        "map": {
+
+        }
     },
     "center,bigroom,stairs": {
         "fileName": "center,bigroom,stairs",
@@ -779,7 +1176,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": false,
-        "others": "center,bigroom,stairs"
+        "others": "center,bigroom,stairs",
+        "map": {
+
+        }
     },
     "center,bigroom,lava": {
         "fileName": "center,bigroom,lava",
@@ -787,7 +1187,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": false,
-        "others": "center,bigroom,lava"
+        "others": "center,bigroom,lava",
+        "map": {
+
+        }
     },
     "center,bigroom,magic": {
         "fileName": "center,bigroom,magic",
@@ -795,7 +1198,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": false,
-        "others": "center,bigroom,magic"
+        "others": "center,bigroom,magic",
+        "map": {
+
+        }
     },
     "center,bigroom": {
         "fileName": "center,bigroom",
@@ -803,7 +1209,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": false,
-        "others": "center,bigroom, empty"
+        "others": "center,bigroom, empty",
+        "map": {
+
+        }
     },
     "center,bigroom, dias": {
         "fileName": "center,bigroom,dias",
@@ -811,7 +1220,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": false,
-        "others": "center,bigroom, dias"
+        "others": "center,bigroom, dias",
+        "map": {
+
+        }
     },
     "right,top,corner,bigroom,deadend": {
         "fileName": "right,top,corner,bigroom,deadend",
@@ -819,7 +1231,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": false,
-        "others": "corner,bigroom,deadend"
+        "others": "corner,bigroom,deadend",
+        "map": {
+
+        }
     },
     "right,top,left,corner,bigroom,open": {
         "fileName": "right,top,corner,bigroom,open",
@@ -827,7 +1242,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": false,
-        "others": "corner,bigroom,open"
+        "others": "corner,bigroom,open",
+        "map": {
+
+        }
     },
     "right,entrance,bigroom": {
         "fileName": "right,entrance,bigroom",
@@ -835,7 +1253,10 @@ tileSource = {
         "east": true,
         "south": false,
         "west": false,
-        "others": "entrance,bigroom"
+        "others": "entrance,bigroom",
+        "map": {
+
+        }
     },
     "top,entrance,bigroom": {
         "fileName": "top,entrance,bigroom",
@@ -843,7 +1264,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": false,
-        "others": "entrance,bigroom"
+        "others": "entrance,bigroom",
+        "map": {
+
+        }
     },
     "top,entrance,bigroom,ornate": {
         "fileName": "top,entrance,bigroom,ornate",
@@ -851,7 +1275,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": false,
-        "others": "entrance,bigroom,ornate"
+        "others": "entrance,bigroom,ornate",
+        "map": {
+
+        }
     },
     "left,entrance,bigroom,ornate": {
         "fileName": "left,entrance,bigroom,ornate",
@@ -859,7 +1286,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": true,
-        "others": "entrance,bigroom,open"
+        "others": "entrance,bigroom,open",
+        "map": {
+
+        }
     },
     "left,entrance,bigroom,open": {
         "fileName": "left,entrance,bigroom,open",
@@ -867,7 +1297,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": true,
-        "others": "entrance,bigroom,open"
+        "others": "entrance,bigroom,open",
+        "map": {
+
+        }
     },
     "left,entrance,bigroom,deadend,ornate": {
         "fileName": "left,entrance,bigroom,deadend,ornate",
@@ -875,7 +1308,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": true,
-        "others": "entrance,bigroom,deadend,ornate"
+        "others": "entrance,bigroom,deadend,ornate",
+        "map": {
+
+        }
     },
     "top,left,corner,bigroom": {
         "fileName": "top,left,corner,bigroom",
@@ -883,7 +1319,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": true,
-        "others": "corner,bigroom"
+        "others": "corner,bigroom",
+        "map": {
+
+        }
     },
     "overlay,chests" : {
         "fileName": "overlay,chests",
@@ -891,7 +1330,10 @@ tileSource = {
         "east": false,
         "south": false,
         "west": false,
-        "others": "overlay,chests"
+        "others": "overlay,chests",
+        "map": {
+
+        }
     }
 }
 
@@ -941,6 +1383,4 @@ overlayTiles = {
     "class": "cornerStatue",
     "others": "overlay,corner,statue"
     }
-
-
 }
