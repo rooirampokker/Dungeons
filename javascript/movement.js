@@ -20,6 +20,7 @@ function moveCharacter(charID) {
         return false;
       }
       locked = true;
+      console.log(legalMoves)
       switch(event.which) {
           case 37:
             if (legalMoves.indexOf("west") > -1) {
@@ -117,6 +118,17 @@ function flipTile(inverted, tileName) {
     $.each(tileMap, function(key, value) {
       if (value == 'east') { tileMap[key] = 'west';}
       if (value == 'west') { tileMap[key] = 'east';}
+    })
+    tileMap = tileMap.join()
+  } else if (inverted == 'flip-hor-vert') {
+    var tile_x = 5-x;
+    var tile_y = 5-y;
+    tileMap = tileSource[tileName].map[tile_y+','+tile_x].split(',')
+    $.each(tileMap, function(key, value) {
+      if (value == 'east') { tileMap[key] = 'west';}
+      if (value == 'west') { tileMap[key] = 'east';}
+      if (value == 'north') { tileMap[key] = 'south';}
+      if (value == 'south') { tileMap[key] = 'north';}
     })
     tileMap = tileMap.join()
   } else tileMap = tileSource[tileName].map[y+','+x]
