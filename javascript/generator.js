@@ -59,5 +59,5 @@ $(function() {
 		}
 	$(dungeonGrid).append(newRow);
 	}
- $("#submit").bind("click", function (){generateDungeon(); activateMove()});
+ $("#submit").bind("click", function (){generateDungeon(); activateMove("#hero", "bottom,start")});
 });

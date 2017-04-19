@@ -6,7 +6,17 @@ tileSource = {
         "south": true,
         "west": false,
         "others": "start",
-        "walkable": [[1,2],[1,1],[2,0],[3,0],[2,1],[2,2],[2,3],[3,1],[4,1]]
+        "map": {
+            "5,3": "south,west", //exit - right
+            "5,2": "north,east,south", //Exit - left
+            "4,4": "north,west", //rigth corner
+            "3,4": "south,west", //right wall
+            "2,3": "south", //jetty - tip
+            "3,3": "north,east,south", //jetty - middle
+            "4,3": "north,east,west", //jetty - bottom
+            "4,2": "east,south,west", //doorway
+            "4,1": "east",//corner
+        }
     },
     "bottom,empty": {
         "fileName": "bottom,empty",
