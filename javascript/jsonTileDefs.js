@@ -120,7 +120,22 @@ tileSource = {
         "west": false,
         "others": "crooked,passage",
         "map": {
-
+          "1,1": "east,south",
+          "1,2": "south,west",
+          "1,4": "south",
+          "2,1": "north,east",
+          "2,2": "north,south,west",
+          "2,4": "north,east,south",
+          "2,5": "east,south,west",
+          "3,2": "north,south",
+          "3,4": "north,east,south",
+          "3,5": "north,east,west",
+          "4,1": "east",
+          "4,2": "north,east,south,west",
+          "4,3": "east,south,west",
+          "4,4": "north,west",
+          "5,2": "north,east,south",
+          "5,3": "north,south,west"
         }
     },
     "bottom,right,statue": {
@@ -131,7 +146,26 @@ tileSource = {
         "west": false,
         "others": "statue",
         "map": {
-
+          "1,1": "east,south",
+          "1,2": "east,south,west",
+          "1,3": "east,south,west",
+          "1,4": "south,west",
+          "2,1": "north,east,south",
+          "2,2": "north,east,south,west",
+          "2,3": "north,east,south,west",
+          "2,4": "north,east,south,west",
+          "2,5": "east,south,west",
+          "3,1": "north,east,south",
+          "3,2": "north,east,south,west",
+          "3,3": "north,east,south,west",
+          "3,4": "north,east,south,west",
+          "3,5": "north,east,west",
+          "4,1": "north,east",
+          "4,2": "north,east,south,west",
+          "4,3": "north,east,south,west",
+          "4,4": "north,west",
+          "5,2": "north,east,south",
+          "5,3": "north,south,west",
         }
     },
     "bottom,right,stairs": {
@@ -262,7 +296,22 @@ tileSource = {
         "west": false,
         "others": "passage",
         "map": {
-
+          "1,1": "east,south",
+          "1,2": "south,west",
+          "1,4": "south",
+          "2,1": "north,east",
+          "2,2": "north,east,west",
+          "2,3": "east,west",
+          "2,4": "north,east,south,west",
+          "2,5": "east,south,west",
+          "3,4": "north,east,south",
+          "3,5": "north,east,west",
+          "4,1": "east",
+          "4,2": "east,south,west",
+          "4,3": "east,south,west",
+          "4,4": "north,west",
+          "5,2": "north,east,south",
+          "5,3": "north,south,west"
         }
     },
     "bottom,right,passage2": {
@@ -602,7 +651,29 @@ tileSource = {
         "west": true,
         "others": "stairs,crossroad",
         "map": {
-
+          "0,2": "north,east,south",
+          "0,3": "north,south,west",
+          "1,1": "east,south",
+          "1,2": "north,east,west",
+          "1,3": "north,east,west",
+          "1,4": "south,west",
+          "2,0": "east,south,west",
+          "2,1": "north,south,west",
+          "2,2": "east,south",
+          "2,3": "south,west",
+          "2,4": "north,east,south",
+          "3,0": "north,east,west",
+          "3,1": "north,south,west",
+          "3,2": "north",
+          "3,3": "north,south",
+          "3,4": "north,east,south",
+          "3,5": "north,east,west",
+          "4,1": "north,east",
+          "4,2": "east,south,west",
+          "4,3": "north,east,south,west",
+          "4,4": "north,west",
+          "5,2": "north,east,south",
+          "5,3": "north,south,west"
         }
     },
     "bottom,right,top,left,crooked,crossroad5": {
@@ -910,6 +981,10 @@ tileSource = {
           "3,4": "north,east,west",
           "2,5": "east,south,west",
           "3,5": "north,east,west",
+          "4,2": "north,east,south",
+          "4,3": "north,south,west",
+          "5,2": "north,east,south",
+          "5,3": "north,south,west"
         }
     },
     "bottom,right,left,passage1": {
@@ -1038,7 +1113,25 @@ tileSource = {
         "west": true,
         "others": "stairs",
         "map": {
-
+          "0,2": "east",
+          "0,3": "east,west",
+          "0,4": "south,west",
+          "1,4": "north,south",
+          "2,0": "east,south,west",
+          "2,1": "east,west",
+          "2,2": "east,west",
+          "2,3": "east,west",
+          "2,4": "north,east,south,west",
+          "2,5": "east,south,west",
+          "3,0": "north,east,west",
+          "3,1": "north,west",
+          "3,4": "north,east,south",
+          "3,5": "north,east,west",
+          "4,2": "east,south",
+          "4,3": "east,south,west",
+          "4,4": "north,west",
+          "5,2": "north,east,south",
+          "5,3": "north,south,west"
         }
     },
     "bottom,top,pipes": {
