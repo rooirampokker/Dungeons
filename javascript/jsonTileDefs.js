@@ -898,7 +898,18 @@ tileSource = {
         "west": true,
         "others": "passage",
         "map": {
-
+          "2,0": "east,south,west",
+          "3,0": "north,east,west",
+          "2,1": "east,south,west",
+          "3,1": "north,east,west",
+          "2,2": "east,south,west",
+          "3,2": "north,east,west",
+          "2,3": "east,south,west",
+          "3,3": "north,east,west",
+          "2,4": "east,south,west",
+          "3,4": "north,east,west",
+          "2,5": "east,south,west",
+          "3,5": "north,east,west",
         }
     },
     "bottom,right,left,passage1": {
@@ -1152,7 +1163,18 @@ tileSource = {
         "west": false,
         "others": "trophies",
         "map": {
-
+          "0,2": "north,east,south",
+          "0,3": "north,south,west",
+          "1,2": "north,east,south",
+          "1,3": "north,south,west",
+          "2,2": "north,east,south",
+          "2,3": "north,south,west",
+          "3,2": "north,east,south",
+          "3,3": "north,south,west",
+          "4,2": "north,east,south",
+          "4,3": "north,south,west",
+          "5,2": "north,east,south",
+          "5,3": "north,south,west",
         }
     },
     "bottom,top,empty": {
@@ -1436,7 +1458,18 @@ tileSource = {
         "west": true,
         "others": "passage",
         "map": {
-
+          "2,0": "east,south,west",
+          "3,0": "north,east,west",
+          "2,1": "east,south,west",
+          "3,1": "north,east,west",
+          "2,2": "east,south,west",
+          "3,2": "north,east,west",
+          "2,3": "east,south,west",
+          "3,3": "north,east,west",
+          "2,4": "east,south,west",
+          "3,4": "north,east,west",
+          "2,5": "east,south,west",
+          "3,5": "north,east,west",
         }
     },
     "right,left,passage2": {
@@ -1469,7 +1502,18 @@ tileSource = {
         "west": true,
         "others": "trophies",
         "map": {
-
+          "2,0": "east,south,west",
+          "3,0": "north,east,west",
+          "2,1": "east,south,west",
+          "3,1": "north,east,west",
+          "2,2": "east,south,west",
+          "3,2": "north,east,west",
+          "2,3": "east,south,west",
+          "3,3": "north,east,west",
+          "2,4": "east,south,west",
+          "3,4": "north,east,west",
+          "2,5": "east,south,west",
+          "3,5": "north,east,west",
         }
     },
     "right,left,crooked,passage3": {
