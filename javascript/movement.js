@@ -13,21 +13,17 @@ function activateMove(charID) {
 *
 */
 function moveCharacter(charID) {
-  var locked = false;
   $(charID).on('keydown', function(event) {
       var legalMoves = getCurrentLocation(charID)
-      if (locked) {
-        return false;
-      }
-      locked = true;
-      console.log(legalMoves)
       switch(event.which) {
           case 37:
             if (legalMoves.indexOf("west") > -1) {
               $('#hero').stop().animate({
                   left: '-=23.5'
-              },250); //left/west arrow key
+              },150); //left/west arrow key
               x--;
+            } else {
+              bounce('west');
             }
             event.preventDefault();
             break;
@@ -35,8 +31,10 @@ function moveCharacter(charID) {
             if (legalMoves.indexOf("north") > -1) {
               $('#hero').stop().animate({
                           top: '-=23.5'
-              },250); //up/north arrow key
+              },150); //up/north arrow key
               y--;
+            } else {
+              bounce('north');
             }
             event.preventDefault();
             break;
@@ -44,8 +42,10 @@ function moveCharacter(charID) {
             if (legalMoves.indexOf("east") > -1) {
               $('#hero').stop().animate({
                   left: '+=23.5'
-              },250); //right/east arrow key
+              },150); //right/east arrow key
               x++;
+            } else {
+              bounce('east');
             }
             event.preventDefault();
             break;
@@ -53,14 +53,33 @@ function moveCharacter(charID) {
             if (legalMoves.indexOf("south") > -1) {
               $('#hero').stop().animate({
                   top: '+=23.5'
-              },250); //bottom/south arrow key
+              },150); //bottom/south arrow key
               y++;
+            } else {
+              bounce('south');
             }
             event.preventDefault();
             break;
       }
-      setTimeout(function(){locked = false;},200);
   });
+}
+/*
+*
+*/
+function bounce(direction) {
+  if (direction == 'west') {
+      $('#hero').animate({left: '-=6'},100)
+                .animate({left: '+=6'},100);
+  } else if (direction == 'east') {
+    $('#hero').animate({left: '+=6'},100)
+              .animate({left: '-=6'},100);
+  } else if (direction == 'north') {
+    $('#hero').animate({top: '-=6'},100)
+              .animate({top: '+=6'},100);
+  } else if (direction == 'south') {
+    $('#hero').animate({top: '+=6'},100)
+              .animate({top: '-=6'},100);
+  }
 }
 /*
 *
