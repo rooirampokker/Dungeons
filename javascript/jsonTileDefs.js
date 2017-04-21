@@ -9,7 +9,7 @@ tileSource = {
         "map": {
             "5,3": "south,west", //exit - right
             "5,2": "north,east,south", //Exit - left
-            "4,4": "north,west,nw", //rigth corner
+            "4,4": "north,west,nw", //right corner
             "3,4": "south,west,sw", //right wall
             "2,3": "south", //jetty - tip
             "3,3": "north,east,south,sw", //jetty - middle

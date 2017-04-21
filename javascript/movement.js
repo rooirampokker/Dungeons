@@ -72,6 +72,19 @@ function moveCharacter(charID) {
             event.preventDefault();
             break;
 
+            case 81: //diagonal left-up
+            if (legalMoves.indexOf("nw") > -1) {
+              $('#hero').stop().animate({
+                  left: '-=23.5',
+                  top: '-=23.5'
+              },150); //bottom/south arrow key
+              y--;
+              x--;
+            } else {
+              bounce('nw');
+            }
+            event.preventDefault();
+            break;
           case 69: //diagonal right-up
           if (legalMoves.indexOf("ne") > -1) {
             $('#hero').stop().animate({
@@ -100,16 +113,16 @@ function moveCharacter(charID) {
           event.preventDefault();
           break;
 
-          case 81: //diagonal left-up
-          if (legalMoves.indexOf("nw") > -1) {
+          case 67: //diagonal right-down
+          if (legalMoves.indexOf("se") > -1) {
             $('#hero').stop().animate({
-                left: '-=23.5',
-                top: '-=23.5'
+                left: '+=23.5',
+                top: '+=23.5'
             },150); //bottom/south arrow key
-            y--;
-            x--;
+            y++;
+            x++;
           } else {
-            bounce('nw');
+            bounce('se');
           }
           event.preventDefault();
           break;
@@ -136,12 +149,15 @@ function bounce(direction) {
   } else if (direction == 'ne') {
     $('#hero').animate({top: '-=6', left: '+=6'},100)
               .animate({top: '+=6', left: '-=6'},100);
-  } else if (direction == 'sw') {
-    $('#hero').animate({top: '+=6', left: '-=6'},100)
-              .animate({top: '-=6', left: '+=6'},100);
   } else if (direction == 'nw') {
     $('#hero').animate({top: '-=6', left: '-=6'},100)
               .animate({top: '+=6', left: '+=6'},100);
+  } else if (direction == 'sw') {
+    $('#hero').animate({top: '+=6', left: '-=6'},100)
+              .animate({top: '-=6', left: '+=6'},100);
+  } else if (direction == 'se') {
+    $('#hero').animate({top: '+=6', left: '+=6'},100)
+              .animate({top: '-=6', left: '-=6'},100);
   }
 }
 /*
@@ -194,6 +210,8 @@ function flipTile(inverted, tileName) {
       if (value == 'south') { tileMap[key] = 'north';}
       if (value == 'ne') { tileMap[key] = 'se';}
       if (value == 'se') { tileMap[key] = 'ne';}
+      if (value == 'nw') { tileMap[key] = 'sw';}
+      if (value == 'sw') { tileMap[key] = 'nw';}
     })
     tileMap = tileMap.join()
   } else if (inverted == 'flip-hor') {
@@ -204,6 +222,8 @@ function flipTile(inverted, tileName) {
       if (value == 'west') { tileMap[key] = 'east';}
       if (value == 'ne') { tileMap[key] = 'nw';}
       if (value == 'nw') { tileMap[key] = 'ne';}
+      if (value == 'se') { tileMap[key] = 'sw';}
+      if (value == 'sw') { tileMap[key] = 'se';}
     })
     tileMap = tileMap.join()
   } else if (inverted == 'flip-hor-vert') {
@@ -215,8 +235,10 @@ function flipTile(inverted, tileName) {
       if (value == 'west') { tileMap[key] = 'east';}
       if (value == 'north') { tileMap[key] = 'south';}
       if (value == 'south') { tileMap[key] = 'north';}
-      if (value == 'ne') { tileMap[key] = 'nw';}
-      if (value == 'nw') { tileMap[key] = 'ne';}
+      if (value == 'ne') { tileMap[key] = 'sw';}
+      if (value == 'sw') { tileMap[key] = 'ne';}
+      if (value == 'nw') { tileMap[key] = 'se';}
+      if (value == 'se') { tileMap[key] = 'nw';}
     })
     tileMap = tileMap.join()
   } else tileMap = tileSource[tileName].map[y+','+x]
