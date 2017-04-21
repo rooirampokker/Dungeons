@@ -9,12 +9,12 @@ tileSource = {
         "map": {
             "5,3": "south,west", //exit - right
             "5,2": "north,east,south", //Exit - left
-            "4,4": "north,west", //rigth corner
-            "3,4": "south,west", //right wall
+            "4,4": "north,west,nw", //rigth corner
+            "3,4": "south,west,sw", //right wall
             "2,3": "south", //jetty - tip
-            "3,3": "north,east,south", //jetty - middle
-            "4,3": "north,east,west", //jetty - bottom
-            "4,2": "east,south,west", //doorway
+            "3,3": "north,east,south,sw", //jetty - middle
+            "4,3": "north,east,west,ne", //jetty - bottom
+            "4,2": "east,south,west,ne", //doorway
             "4,1": "east",//corner
         }
     },
@@ -226,7 +226,26 @@ tileSource = {
         "west": false,
         "others": "tower,stairs",
         "map": {
-
+          "1,2": "east,south",
+          "1,3": "south,west",
+          "2,1": "east,south",
+          "2,2": "north,east,west,south",
+          "2,3": "north,east,west",
+          "2,4": "west",
+          "2,5": "east,south",
+          "3,1": "north,east",
+          "3,2": "north,east,south,west",
+          "3,3": "east,south,west",
+          "3,4": "east,south,west",
+          "3,5": "north,east,south,west",
+          "4,2": "north,east",
+          "4,3": "north,east,south,west",
+          "4,4": "north,east,south,west",
+          "4,5": "north,south,west",
+          "5,2": "east,south",
+          "5,3": "north,east,south,west",
+          "5,4": "north,east,west",
+          "5,5": "north,west"
         }
     },
     "bottom,right,pool": {
@@ -1364,7 +1383,20 @@ tileSource = {
         "west": false,
         "others": "pit",
         "map": {
-
+          "0,2": "north,east,south",
+          "0,3": "north,south,west",
+          "1,1": "east,south",
+          "1,4": "south,west",
+          "2,1": "north,south",
+          "2,4": "north,south",
+          "3,1": "north,south",
+          "3,4": "north,south",
+          "4,1": "north,east",
+          "4,2": "east,south,west",
+          "4,3": "east,south,west",
+          "4,4": "north,west",
+          "5,2": "north,east,south",
+          "5,3": "north,south,west"
         }
     },
     "bottom,top,pit1": {

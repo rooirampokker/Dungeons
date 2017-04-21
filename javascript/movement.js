@@ -18,7 +18,9 @@ function moveCharacter(charID) {
     if (locked) {return false;}
       locked = true;
       var legalMoves = getCurrentLocation(charID)
+        console.log(event.which)
       switch(event.which) {
+          case 65:
           case 37:
             if (legalMoves.indexOf("west") > -1) {
               $('#hero').stop().animate({
@@ -30,8 +32,10 @@ function moveCharacter(charID) {
             }
             event.preventDefault();
             break;
+
+          case 87:
           case 38:
-            if (legalMoves.indexOf("north") > -1) {
+            if (legalMoves.indexOf("north,") > -1) {
               $('#hero').stop().animate({
                           top: '-=23.5'
               },150); //up/north arrow key
@@ -41,6 +45,8 @@ function moveCharacter(charID) {
             }
             event.preventDefault();
             break;
+
+          case 68:
           case 39:
             if (legalMoves.indexOf("east") > -1) {
               $('#hero').stop().animate({
@@ -52,6 +58,8 @@ function moveCharacter(charID) {
             }
             event.preventDefault();
             break;
+
+          case 83:
           case 40:
             if (legalMoves.indexOf("south") > -1) {
               $('#hero').stop().animate({
@@ -63,6 +71,48 @@ function moveCharacter(charID) {
             }
             event.preventDefault();
             break;
+
+          case 69: //diagonal right-up
+          if (legalMoves.indexOf("ne") > -1) {
+            $('#hero').stop().animate({
+                left: '+=23.5',
+                top: '-=23.5'
+            },150); //bottom/south arrow key
+            y--;
+            x++;
+          } else {
+            bounce('ne');
+          }
+          event.preventDefault();
+          break;
+
+          case 192: //diagonal left-down
+          if (legalMoves.indexOf("sw") > -1) {
+            $('#hero').stop().animate({
+                left: '-=23.5',
+                top: '+=23.5'
+            },150); //bottom/south arrow key
+            y++;
+            x--;
+          } else {
+            bounce('sw');
+          }
+          event.preventDefault();
+          break;
+
+          case 81: //diagonal left-up
+          if (legalMoves.indexOf("nw") > -1) {
+            $('#hero').stop().animate({
+                left: '-=23.5',
+                top: '-=23.5'
+            },150); //bottom/south arrow key
+            y--;
+            x--;
+          } else {
+            bounce('nw');
+          }
+          event.preventDefault();
+          break;
       }
       setTimeout(function(){locked = false;},150);
   });
@@ -83,6 +133,15 @@ function bounce(direction) {
   } else if (direction == 'south') {
     $('#hero').animate({top: '+=6'},100)
               .animate({top: '-=6'},100);
+  } else if (direction == 'ne') {
+    $('#hero').animate({top: '-=6', left: '+=6'},100)
+              .animate({top: '+=6', left: '-=6'},100);
+  } else if (direction == 'sw') {
+    $('#hero').animate({top: '+=6', left: '-=6'},100)
+              .animate({top: '-=6', left: '+=6'},100);
+  } else if (direction == 'nw') {
+    $('#hero').animate({top: '-=6', left: '-=6'},100)
+              .animate({top: '+=6', left: '+=6'},100);
   }
 }
 /*
@@ -133,6 +192,8 @@ function flipTile(inverted, tileName) {
     $.each(tileMap, function(key, value) {
       if (value == 'north') { tileMap[key] = 'south';}
       if (value == 'south') { tileMap[key] = 'north';}
+      if (value == 'ne') { tileMap[key] = 'se';}
+      if (value == 'se') { tileMap[key] = 'ne';}
     })
     tileMap = tileMap.join()
   } else if (inverted == 'flip-hor') {
@@ -141,6 +202,8 @@ function flipTile(inverted, tileName) {
     $.each(tileMap, function(key, value) {
       if (value == 'east') { tileMap[key] = 'west';}
       if (value == 'west') { tileMap[key] = 'east';}
+      if (value == 'ne') { tileMap[key] = 'nw';}
+      if (value == 'nw') { tileMap[key] = 'ne';}
     })
     tileMap = tileMap.join()
   } else if (inverted == 'flip-hor-vert') {
@@ -152,6 +215,8 @@ function flipTile(inverted, tileName) {
       if (value == 'west') { tileMap[key] = 'east';}
       if (value == 'north') { tileMap[key] = 'south';}
       if (value == 'south') { tileMap[key] = 'north';}
+      if (value == 'ne') { tileMap[key] = 'nw';}
+      if (value == 'nw') { tileMap[key] = 'ne';}
     })
     tileMap = tileMap.join()
   } else tileMap = tileSource[tileName].map[y+','+x]
