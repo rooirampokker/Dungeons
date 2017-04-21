@@ -10,8 +10,8 @@ tileSource = {
             "5,3": "south,west", //exit - right
             "5,2": "north,east,south", //Exit - left
             "4,4": "north,west,nw", //right corner
-            "3,4": "south,west,sw", //right wall
-            "2,3": "south", //jetty - tip
+            "3,4": "south,west,sw,nw", //right wall
+            "2,3": "south,se", //jetty - tip
             "3,3": "north,east,south,sw", //jetty - middle
             "4,3": "north,east,west,ne", //jetty - bottom
             "4,2": "east,south,west,ne", //doorway
@@ -98,7 +98,31 @@ tileSource = {
         "west": false,
         "others": "room",
         "map": {
-
+          "0,1": "east",
+          "0,2": "east,west,se",
+          "0,3": "east,south,west",
+          "0,4": "east,west,se,sw",
+          "0,5": "south,west",
+          "1,3": "north,south,ne,nw,se,sw",
+          "1,5": "north,south,nw,sw",
+          "2,2": "east,ne,se,sw",
+          "2,3": "north,east,south,west",
+          "2,4": "east,west,ne,se,sw,nw",
+          "2,5": "north,south,west",
+          "3,0": "east,south,se",
+          "3,1": "south,west,ne,se,sw",
+          "3,3": "north,south,ne,se,sw,nw",
+          "3,5": "north,south,sw,nw",
+          "4,0": "north,east,ne",
+          "4,1": "north,east,west,se,nw",
+          "4,2": "east,south,west,ne,se,nw",
+          "4,3": "north,east,south,west,sw,se",
+          "4,4": "east,south,west,ne,se,sw,nw",
+          "4,5": "north,south,west,sw",
+          "5,2": "north,east,south,ne,se,sw,nw",
+          "5,3": "north,south,west,ne,se,sw,nw",
+          "5,4": "north,east,ne,nw",
+          "5,5": "north,west,nw",
         }
     },
     "bottom,altar": {
@@ -750,7 +774,22 @@ tileSource = {
         "west": true,
         "others": "crooked,crossroad",
         "map": {
-
+          "0,2": "north,east,south,ne",
+          "0,3": "north,south,west,nw,se",
+          "2,0": "east,south,west,se,sw",
+          "2,1": "south,west,se,sw",
+          "1,4": "se,nw",
+          "2,5": "east,south,se,nw",
+          "3,0": "north,east,west,ne,nw",
+          "3,1": "north,east,west,se,nw",
+          "3,2": "south,west,se,nw",
+          "3,5": "north,east,south,ne,sw",
+          "4,2": "north,east,south,se,nw",
+          "4,3": "east,south,west,se,sw,nw",
+          "4,4": "east,south,west,ne,se,sw",
+          "4,5": "north,south,west,ne,sw",
+          "5,2": "north,east,south,ne,se",
+          "5,3": "north,south,west,ne,sw,nw"
         }
     },
     "bottom,right,top,passage": {
