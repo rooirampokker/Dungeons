@@ -13,7 +13,10 @@ function activateMove(charID) {
 *
 */
 function moveCharacter(charID) {
+  var locked = false;
   $(charID).on('keydown', function(event) {
+    if (locked) {return false;}
+      locked = true;
       var legalMoves = getCurrentLocation(charID)
       switch(event.which) {
           case 37:
@@ -61,6 +64,7 @@ function moveCharacter(charID) {
             event.preventDefault();
             break;
       }
+      setTimeout(function(){locked = false;},150);
   });
 }
 /*
