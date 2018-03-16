@@ -10,6 +10,7 @@ $(function() {
 		totRows = $("#dungeonHeight").val();
 		totCols = $("#dungeonWidth").val();
 		tileSize = $("#tileSize").val();
+    debugGrid = $("#debugGrid:checked").val();
 
 		var dungeonGrid = $("#dungeonGrid");
 		var newDungeonCol = $("<span class='col'>");
@@ -45,14 +46,23 @@ $(function() {
 					flip = applyFlip(image, tilePref, row, col);
 					tileHistory.push(image);
 					if (tileSize == 2) {
+            var tileHeight = "140px";
+            var tileWidth = "140px";
 						imagePath = "tiles\\140\\";
 						overlayImage = applyOverlay(image, imagePath, row, col);
-					} else imagePath = "tiles\\";
-					var baseImage = $("<img />").attr({"src":imagePath+image.fileName+".png", "class":image.fileName+flip+" base", "id":"coord_"+row+"_"+col});
-					newCol.html(baseImage).append(overlayImage);
+					} else {
+            var tileHeight = "140px";
+            var tileWidth = "140px";
+            imagePath = "tiles\\";
+          }
+
+					var baseImage = $("<img />").attr({"src":imagePath+image.fileName+".png", "class":image.fileName+flip+" base ", "id":"coord_"+row+"_"+col});
+          newCol.html(baseImage).append(overlayImage);
+          showUnmappedTiles(newCol, baseImage, image, tileHeight, tileWidth);
 					newRow.append(newCol);
 					col++;
 				}
+
 				$(dungeonGrid).append(newRow);
 				col = 0;
 				row++;

@@ -119,7 +119,7 @@ function getSelectedTiles(tilePref, row, col) {
 function shuffleTiles(arr, row, col) {
 	var keys = Object.keys(arr);
   	if (keys.length === 0) {
-  		console.log("ADD FILLER");
+  		//console.log("ADD FILLER");
 	 	arr = ["filler"];
   	} else {
   		arr = arr[keys[Math.floor(keys.length*Math.random())]];
@@ -184,7 +184,7 @@ function applyOverlay(image, imagePath, row, col) {
 		if (image.west === true && image.east === true && image.south === false && image.north === false) {
 			var randomKey = "overlay,passage";
 		} else if (image.north === false && image.east === false && image.south === true && image.west === false) {
-			console.log("inserting overlay: "+row+","+col);
+			//console.log("inserting overlay: "+row+","+col);
 			var randomKey = "overlay,corner,statue";
 		} else {
 			var randomKey = overlayKeys[Math.floor(Math.random()*overlayKeys.length)];
@@ -202,4 +202,12 @@ function applyOverlay(image, imagePath, row, col) {
 */
 function cleanArray(thisArray) {
 	return $.grep(thisArray,function(n){ return n == " " || n })
+}
+
+function showUnmappedTiles(newCol, baseImage, image, tileHeight, tileWidth) {
+	if (debugGrid && Object.keys(image.map).length === 0) {
+		var debugCol = $("<span class='not_mapped'>");
+		$(debugCol).css({height: tileHeight, width: tileWidth});
+		newCol.html(baseImage).append(debugCol);
+	}
 }

@@ -93,3 +93,12 @@
     margin-left: 69px;
     margin-top: 24px;
 }
+
+.not_mapped {
+  position: absolute;
+  left: 0;
+  background-color: red;
+  z-index: 3;
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* For IE8 and earlier */
+}

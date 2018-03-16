@@ -18,7 +18,6 @@ function moveCharacter(charID) {
     if (locked) {return false;}
       locked = true;
       var legalMoves = getCurrentLocation(charID)
-        console.log(event.which)
       switch(event.which) {
           case 65:
           case 37:
@@ -193,8 +192,8 @@ function getCurrentLocation(charID) {
    var inverted = tileAttr[1]
   }
   tileMap = flipTile(inverted, tileName);
-  console.log(youAreHere)
-  console.log(y+','+x)
+  //console.log(youAreHere)
+  //console.log(y+','+x)
   return tileMap
 }
 /*
@@ -206,13 +205,14 @@ function flipTile(inverted, tileName) {
     var tile_y = 5-y;
     tileMap = tileSource[tileName].map[tile_y+','+x].split(',')
     $.each(tileMap, function(key, value) {
-      if (value == 'north') { tileMap[key] = 'south';}
-      if (value == 'south') { tileMap[key] = 'north';}
-      if (value == 'ne') { tileMap[key] = 'se';}
-      if (value == 'se') { tileMap[key] = 'ne';}
-      if (value == 'nw') { tileMap[key] = 'sw';}
-      if (value == 'sw') { tileMap[key] = 'nw';}
+      if (value == 'south') { tileMap[key] = 'north'; console.log('flipping '+value+' to '+tileMap[key]+'--'+value)}
+      if (value == 'north') { tileMap[key] = 'south'; console.log('flipping '+value+' to '+tileMap[key]+'--'+value)}
+      // else if (value == 'ne') { tileMap[key] = 'se'; console.log('flipping '+value+' to '+tileMap[key]+'--'+tile)}
+      // else if (value == 'se') { tileMap[key] = 'ne'; console.log('flipping '+value+' to '+tileMap[key]+'--'+tile)}
+      // else if (value == 'nw') { tileMap[key] = 'sw'; console.log('flipping '+value+' to '+tileMap[key]+'--'+tile)}
+      // else if (value == 'sw') { tileMap[key] = 'nw'; console.log('flipping '+value+' to '+tileMap[key]+'--'+tile)}
     })
+    //console.log(tileSource[tileName])
     tileMap = tileMap.join()
   } else if (inverted == 'flip-hor') {
     var tile_x = 5-x;
@@ -220,10 +220,10 @@ function flipTile(inverted, tileName) {
     $.each(tileMap, function(key, value) {
       if (value == 'east') { tileMap[key] = 'west';}
       if (value == 'west') { tileMap[key] = 'east';}
-      if (value == 'ne') { tileMap[key] = 'nw';}
-      if (value == 'nw') { tileMap[key] = 'ne';}
-      if (value == 'se') { tileMap[key] = 'sw';}
-      if (value == 'sw') { tileMap[key] = 'se';}
+      // if (value == 'ne') { tileMap[key] = 'nw';}
+      // if (value == 'nw') { tileMap[key] = 'ne';}
+      // if (value == 'se') { tileMap[key] = 'sw';}
+      // if (value == 'sw') { tileMap[key] = 'se';}
     })
     tileMap = tileMap.join()
   } else if (inverted == 'flip-hor-vert') {

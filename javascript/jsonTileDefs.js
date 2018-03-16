@@ -98,7 +98,7 @@ tileSource = {
         "west": false,
         "others": "room",
         "map": {
-          "0,1": "east",
+          "0,1": ",east",
           "0,2": "east,west,se",
           "0,3": "east,south,west",
           "0,4": "east,west,se,sw",
@@ -146,7 +146,7 @@ tileSource = {
         "map": {
           "1,1": "east,south",
           "1,2": "south,west",
-          "1,4": "south",
+          "1,4": ",south",
           "2,1": "north,east",
           "2,2": "north,south,west",
           "2,4": "north,east,south",
@@ -154,7 +154,7 @@ tileSource = {
           "3,2": "north,south",
           "3,4": "north,east,south",
           "3,5": "north,east,west",
-          "4,1": "east",
+          "4,1": ",east",
           "4,2": "north,east,south,west",
           "4,3": "east,south,west",
           "4,4": "north,west",
@@ -789,7 +789,9 @@ tileSource = {
           "4,4": "east,south,west,ne,se,sw",
           "4,5": "north,south,west,ne,sw",
           "5,2": "north,east,south,ne,se",
-          "5,3": "north,south,west,ne,sw,nw"
+          "5,3": "north,east,south,west,ne,sw,nw",
+          "5,4": "north,east,west,ne,nw,sw",
+          "5,5": "north,west,nw"
         }
     },
     "bottom,right,top,passage": {
