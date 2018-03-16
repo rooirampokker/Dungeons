@@ -51,8 +51,8 @@ $(function() {
 						imagePath = "tiles\\140\\";
 						overlayImage = applyOverlay(image, imagePath, row, col);
 					} else {
-            var tileHeight = "140px";
-            var tileWidth = "140px";
+            var tileHeight = "90px";
+            var tileWidth = "90px";
             imagePath = "tiles\\";
           }
 
