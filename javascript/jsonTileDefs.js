@@ -1181,7 +1181,7 @@ tileSource = {
           "2,0": "east,south,west",
           "2,1": "north,south,west",
           "2,4": "north,east,south",
-          "2,5": "north,east,west",
+          "2,5": "east,south,west",
           "3,0": "north,east,west",
           "3,1": "north,south,west",
           "3,4": "north,east,south",

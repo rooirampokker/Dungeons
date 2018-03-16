@@ -18,6 +18,7 @@ function moveCharacter(charID) {
     if (locked) {return false;}
       locked = true;
       var legalMoves = getCurrentLocation(charID)
+      console.log(legalMoves)
       switch(event.which) {
           case 65:
           case 37:
@@ -34,7 +35,7 @@ function moveCharacter(charID) {
 
           case 87:
           case 38:
-            if (legalMoves.indexOf("north,") > -1) {
+            if (legalMoves.indexOf("north") > -1) {
               $('#hero').stop().animate({
                           top: '-=23.5'
               },150); //up/north arrow key
@@ -205,8 +206,8 @@ function flipTile(inverted, tileName) {
     var tile_y = 5-y;
     tileMap = tileSource[tileName].map[tile_y+','+x].split(',')
     $.each(tileMap, function(key, value) {
-      if (value == 'south') { tileMap[key] = 'north'; console.log('flipping '+value+' to '+tileMap[key]+'--'+value)}
       if (value == 'north') { tileMap[key] = 'south'; console.log('flipping '+value+' to '+tileMap[key]+'--'+value)}
+      if (value == 'south') { tileMap[key] = 'north'; console.log('flipping '+value+' to '+tileMap[key]+'--'+value)}
       // else if (value == 'ne') { tileMap[key] = 'se'; console.log('flipping '+value+' to '+tileMap[key]+'--'+tile)}
       // else if (value == 'se') { tileMap[key] = 'ne'; console.log('flipping '+value+' to '+tileMap[key]+'--'+tile)}
       // else if (value == 'nw') { tileMap[key] = 'sw'; console.log('flipping '+value+' to '+tileMap[key]+'--'+tile)}
