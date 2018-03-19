@@ -228,20 +228,24 @@ function flipTile(inverted, tileName) {
 
 function flipHor(value, tile) {
   if (value == 'east') { tile = 'west'; }
-  if (value == 'west') { tile = 'east'; }
-   if (value == 'ne') { tile = 'nw'; }
-   if (value == 'se') { tile = 'sw'; }
-   if (value == 'sw') { tile = 'se'; }
-   if (value == 'nw') { tile = 'ne'; }
+  else if (value == 'west') { tile = 'east'; }
+
+  if (value == 'ne') { tile = 'nw'; }
+  else if (value == 'sw') { tile = 'se'; }
+  
+  if (value == 'se') { tile = 'sw'; }
+  else if (value == 'nw') { tile = 'ne'; }
   return tile;
 }
 
 function flipVert(value, tile) {
   if (value == 'north') { tile = 'south'; }
-  if (value == 'south') { tile = 'north'; }
+  else if (value == 'south') { tile = 'north'; }
+
   if (value == 'ne') { tile = 'sw'; }
+  else if (value == 'sw') { tile = 'ne'; }
+
   if (value == 'se') { tile = 'nw'; }
-  if (value == 'sw') { tile = 'ne'; }
-  if (value == 'nw') { tile = 'se'; }
+  else if (value == 'nw') { tile = 'se'; }
   return tile;
 }
