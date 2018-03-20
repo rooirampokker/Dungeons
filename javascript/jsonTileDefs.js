@@ -752,7 +752,22 @@ tileSource = {
         "west": true,
         "others": "deadend",
         "map": {
-
+          "0,2": "north,east,ne",
+          "0,3": "north,west,nw",
+          "2,0": "east,south,west,se,sw",
+          "2,1": "east,south,west,se,sw",
+          "2,2": "east,south,west,se,sw",
+          "2,3": "south,west,sw",
+          "2,5": "east,south,se",
+          "3,0": "north,east,west,ne,nw",
+          "3,1": "north,east,west,ne,se,nw",
+          "3,2": "north,east,south,west,ne,se,nw",
+          "3,3": "north,south,west,sw,nw",
+          "3,5": "north,east,ne",
+          "4,2": "north,east,south,ne,se,nw",
+          "4,3": "north,south,west,sw,nw",
+          "5,2": "north,east,south,ne,se",
+          "5,3": "north,south,west,sw,nw",
         }
     },
     "bottom,right,top,left,stairs": {
@@ -1769,8 +1784,6 @@ tileSource = {
           "3,3": "north,east,west,ne,nw",
           "3,4": "north,east,west,ne,nw",
           "3,5": "north,east,west,ne,nw",
-
-
         }
     },
     "right,altar": {
@@ -1858,7 +1871,10 @@ tileSource = {
         "west": true,
         "others": "pit",
         "map": {
-
+          "2,0": "south,west,sw",
+          "2,5": "east,south,se",
+          "3,0": "north,west,nw",
+          "3,5": "north,east,ne",
         }
     },
     "right,left,pit2": {
