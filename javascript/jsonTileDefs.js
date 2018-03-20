@@ -54,7 +54,42 @@ tileSource = {
         "west": false,
         "others": "hall",
         "map": {
-
+          "0,0": "east,south",
+          "0,1": "east,west",
+          "0,2": "east,west",
+          "0,3": "east,west",
+          "0,4": "east,west",
+          "0,5": "south,west",
+          "1,0": "north,south",
+          "1,1": "east,south,se",
+          "1,2": "east,south,west,se,sw",
+          "1,3": "east,south,west,se,sw",
+          "1,4": "south,west,sw",
+          "1,5": "north,south",
+          "2,0": "north,south",
+          "2,1": "north,east,south,ne,se",
+          "2,2": "north,east,south,west,ne,se,sw,nw",
+          "2,3": "north,east,south,west,ne,se,sw,nw",
+          "2,4": "north,south,west,sw,nw",
+          "2,5": "north,south",
+          "3,0": "north,south",
+          "3,1": "north,east,south,ne",
+          "3,2": "north,east,west,ne,nw",
+          "3,3": "north,east,west,ne,nw",
+          "3,4": "north,south,west,nw",
+          "3,5": "north,south",
+          "4,0": "north,south",
+          "4,1": "north,east",
+          "4,2": "south,west",
+          "4,3": "east,south",
+          "4,4": "north,west",
+          "4,5": "north,south",
+          "5,0": "north,east",
+          "5,1": "east,west",
+          "5,2": "north,east,south,west",
+          "5,3": "north,east,south,west",
+          "5,4": "east,west",
+          "5,5": "north,west",
         }
     },
     "bottom,deadend": {
@@ -65,7 +100,16 @@ tileSource = {
         "west": false,
         "others": "deadend",
         "map": {
-
+          "1,2": "east,south,se",
+          "1,3": "south,west,sw",
+          "2,2": "north,east,south,ne,se",
+          "2,3": "north,south,west,sw,nw",
+          "3,2": "north,east,south,ne,se",
+          "3,3": "north,south,west,sw,nw",
+          "4,2": "north,east,south,ne,se",
+          "4,3": "north,south,west,sw,nw",
+          "5,2": "north,east,south,ne,se",
+          "5,3": "north,south,west,sw,nw",
         }
     },
     "bottom,room": {
@@ -133,7 +177,16 @@ tileSource = {
         "west": false,
         "others": "altar",
         "map": {
-
+          "5,2": "north,east,south,ne,se,sw",
+          "5,3": "north,south,west,se,sw,nw",
+          "4,4": "west,nw,sw",
+          "4,3": "north,east,south,west,sw,nw",
+          "4,2": "north,east,south,west,ne,se",
+          "4,1": "east,ne,se",
+          "3,3": "north,south,west,se,sw,nw",
+          "3,2": "north,east,south,ne,se,sw",
+          "2,2": "east,south,se",
+          "2,3": "south,west,sw",
         }
     },
     "bottom,right,crooked,passage1": {
@@ -2051,7 +2104,19 @@ tileSource = {
         "west": true,
         "others": "crooked,passage",
         "map": {
-
+          "1,1": "south,sw",
+          "1,3": "south,se",
+          "2,0": "east,south,west,ne,se,sw",
+          "2,1": "north,south,west,se,sw",
+          "2,3": "north,east,south,sw",
+          "2,4": "east,west,se,sw,nw",
+          "2,5": "east,south,west,se",
+          "3,0": "north,east,west,ne,se",
+          "3,1": "north,east,south,west,nw",
+          "3,2": "east,west,ne,se,sw,nw",
+          "3,3": "north,south,west,ne",
+          "4,1": "north,ne,nw",
+          "4,3": "north,nw",
         }
     },
     "filler": {
