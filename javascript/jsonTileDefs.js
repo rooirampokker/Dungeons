@@ -1525,7 +1525,10 @@ tileSource = {
         "west": false,
         "others": "pit",
         "map": {
-
+          "0,2": "north,east,ne",
+          "0,3": "north,west,nw",
+          "5,2": "south,east,se",
+          "5,3": "south,west,sw",
         }
     },
     "bottom,top,pit3": {
@@ -1725,7 +1728,16 @@ tileSource = {
         "west": false,
         "others": "room",
         "map": {
-
+          "1,2": "east,sw",
+          "1,3": "west,se",
+          "2,1": "south,ne",
+          "2,4": "east,south,nw",
+          "2,5": "east,south,west,sw,se",
+          "3,1": "north,se",
+          "3,4": "north,east,sw",
+          "3,5": "north,east,west,ne,nw",
+          "4,2": "east,nw",
+          "4,3": "west,ne",
         }
     },
     "right,room2": {
@@ -1747,6 +1759,17 @@ tileSource = {
         "west": false,
         "others": "deadend",
         "map": {
+          "2,1": "east,south,se",
+          "2,2": "east,south,west,se,sw",
+          "2,3": "east,south,west,se,sw",
+          "2,4": "east,south,west,se,sw",
+          "2,5": "east,south,west,se,sw",
+          "3,1": "north,east,ne",
+          "3,2": "north,east,west,ne,nw",
+          "3,3": "north,east,west,ne,nw",
+          "3,4": "north,east,west,ne,nw",
+          "3,5": "north,east,west,ne,nw",
+
 
         }
     },
@@ -1940,7 +1963,23 @@ tileSource = {
         "west": true,
         "others": "passage",
         "map": {
-
+          "1,1": "south,se,sw",
+          "1,3": "east,south,se,sw",
+          "1,4": "south,west,se,sw",
+          "2,0": "east,south,west,ne,se,sw",
+          "2,1": "north,east,south,west,se,sw",
+          "2,2": "east,south,west,ne,se,sw,nw",
+          "2,3": "north,east,south,west,ne,se,sw,nw",
+          "2,4": "north,east,south,west,se,sw,nw",
+          "2,5": "east,south,west,se,sw,nw",
+          "3,0": "north,east,west,ne,nw",
+          "3,1": "north,east,west,ne,se,nw",
+          "3,2": "north,east,south,west,ne,se,nw",
+          "3,3": "north,east,south,west,ne,sw,nw",
+          "3,4": "north,east,west,ne,sw,nw",
+          "3,5": "north,east,west,ne,nw",
+          "4,2": "north,east,ne,nw",
+          "4,3": "north,west,ne,nw",
         }
     },
     "right,left,passage3": {
@@ -2410,6 +2449,7 @@ tileSource = {
         "west": true,
         "others": "corner,bigroom",
         "map": {
+          "0,0": "north,east,south,west,ne,se,sw,nw",
           "0,1": "north,east,south,west,ne,se,sw,nw",
           "0,2": "north,east,south,west,ne,se,sw,nw",
           "0,3": "north,south,west,sw,nw",
