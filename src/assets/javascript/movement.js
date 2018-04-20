@@ -1,4 +1,4 @@
-function activateMove(charID) {
+window.activateMove = function(charID) {
   $(charID).attr("tabindex",-1).focus();
   x = 2;
   y = 4;
@@ -12,7 +12,7 @@ function activateMove(charID) {
 *
 *
 */
-function moveCharacter(charID) {
+window.moveCharacter = function(charID) {
   var locked = false;
   $(charID).on('keydown', function(event) {
     if (locked) {return false;}
@@ -132,7 +132,7 @@ function moveCharacter(charID) {
 /*
 *
 */
-function bounce(direction) {
+window.bounce = function(direction) {
   if (direction == 'west') {
       $('#hero').animate({left: '-=6'},100)
                 .animate({left: '+=6'},100);
@@ -163,7 +163,7 @@ function bounce(direction) {
 *
 *
 */
-function getCurrentLocation(charID) {
+window.getCurrentLocation = function(charID) {
   var currentLocation = $(charID).prev();
   var tile_x = x;
   var tileMap = []
@@ -198,7 +198,7 @@ function getCurrentLocation(charID) {
 *
 *
 */
-function flipTile(inverted, tileName) {
+window.flipTile = function(inverted, tileName) {
   if (inverted == 'flip-vert') {
     var tile_y = 5-y;
     tileMap = tileSource[tileName].map[tile_y+','+x].split(',')
@@ -226,7 +226,7 @@ function flipTile(inverted, tileName) {
   return tileMap
 }
 
-function flipHor(value, tile) {
+window.flipHor = function(value, tile) {
   if (value == 'east') { tile = 'west'; }
   else if (value == 'west') { tile = 'east'; }
 
@@ -238,7 +238,7 @@ function flipHor(value, tile) {
   return tile;
 }
 
-function flipVert(value, tile) {
+window.flipVert = function(value, tile) {
   if (value == 'north') { tile = 'south'; }
   else if (value == 'south') { tile = 'north'; }
 

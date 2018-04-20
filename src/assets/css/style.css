@@ -1,0 +1,104 @@
+/*flips image horizontally and vertically*/
+#hero {
+  height: 22px;
+  width: 22px;
+  top: 94px;
+  left: 47px;
+  outline: none;
+  z-index: 3;
+}
+.flip-hor-vert {
+    -moz-transform: scale(-1, -1);
+    -o-transform: scale(-1, -1);
+    -webkit-transform: scale(-1, -1);
+    transform: scale(-1, -1);
+}
+
+.flip-hor {
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+        border: 0px solid black;
+}
+
+.flip-vert {
+        -moz-transform: scaleY(-1);
+        -o-transform: scaleY(-1);
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+        filter: FlipV;
+        -ms-filter: "FlipV";
+        border: 0px solid black;
+}
+/* table management */
+.table {
+    width: 99%;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+}
+.row {
+    display: block;
+    padding: 0px;
+    margin: 0px;
+    clear:both;
+}
+.col {
+    vertical-align: top;
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.col img {
+}
+
+.base {
+    vertical-align:top;
+       position:relative;
+        top: 0;
+        left: 0;
+        z-index:1;
+}
+
+.overlay {
+       position:absolute;
+       display: block;
+       margin: 0 auto;
+       top: 0;
+       left: 0;
+       z-index:2;
+}
+
+.overlay.chests1 {
+       margin-left: 41px;
+       margin-top: 41px;
+}
+.overlay.snakePit {
+       margin-left: 41px;
+       margin-top: 41px;
+}
+
+.overlay.passage {
+    margin-left: 26px;
+    margin-top: 48px;
+}
+
+.overlay.cornerStatue {
+    margin-left: 69px;
+    margin-top: 24px;
+}
+
+.not_mapped {
+  position: absolute;
+  left: 0;
+  background-color: red;
+  z-index: 3;
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* For IE8 and earlier */
+}
