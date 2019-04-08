@@ -3,11 +3,14 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
+    mode: 'development',
     entry: './src/assets/app.js',
     output: {
         filename: './assets/javascript/bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
+    devtool: 'inline-source-map',
+
     plugins: [
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
