@@ -2,30 +2,29 @@
 *
 *
 */
-    window.checkSurroundingTiles = function(tilePref, tileHistory, previousImage, row, col) {
-        //SPECIFIC ROW-LOCATION-BASED EXCLUSIONS
-        if (row == 0) {
-            tilePref.exclude = "north,filler,bigroom,deadend,overlay,";
-            tilePref.include = ",";
-//EVERYTHING EXCEPT THE north ROW
-        } else {
+    window.checkSurroundingTiles = function(tilePref, tileHistory, row, col) {
+        let tileAbove    = tileHistory[(tileHistory.length - totCols) - 1];
+        let previousTile = tileHistory[tileHistory.length - 1];
+        let goldenThread = JSON.parse(localStorage.getItem('goldenThread') || '{}');
+
+        //EVERYTHING EXCEPT THE TOP ROW
+        if (row > 0) {
             //exclusion of bigroom may be overridden later in the buildBigRoom function
             tilePref.exclude = "start,bigroom,overlay,";
-            tilePref.include = ",";
             //CHECK TILE ABOVE
-            tileAbove = tileHistory[(tileHistory.length - totCols) - 1];
             if (tileAbove["south"]) {
                 tilePref.include += "north,";
             } else {
                 tilePref.exclude += "north,";
             }
-            tilePref.include += ",";
+        } else {
+            tilePref.exclude = "north,filler,bigroom,deadend,overlay,";
         }
 
         //CHECK AGAINST PREVIOUS TILE...
         if (tileHistory.length > 0) {
             //EXIT east -- CONNECT west
-            if (tileHistory[tileHistory.length - 1]['east']) {
+            if (previousTile['east']) {
                 tilePref.include += "west,";
                 //NO east, SO EXCLUDE west
             } else {
@@ -33,20 +32,27 @@
             }
         }
 //SPECIFIC COLUMN-LOCATION-BASED EXCLUSIONS
+        //western border - no exit west
         if (col == 0) {
             tilePref.exclude += "west,";
-        } else tilePref.include += ",";
+        } //else tilePref.include += ",";
+        //eastern border - no exit east
         if (col == totCols) {
             tilePref.exclude += "east,";
         }
+        //southern border - no exit south
         if (row == totRows) {
             tilePref.exclude += "south,";
         }
-        if (row > 0) {
-            tilePref = buildBigRoom(tileHistory, tilePref, row, col);
+        //TODO: ensure we have a golden thread from start location, right through the maze. Currently only traces a straight line down
+        if ((tileAbove && tileAbove["others"] == "start") ||
+            goldenThread[(row)+'_'+col-1] ||
+            goldenThread[(row-1)+'_'+col]) {
+            goldenThread[row+'_'+col] = true;
+            localStorage.setItem('goldenThread', JSON.stringify(goldenThread));
         }
-        return tilePref;
 
+        return tilePref;
     }
 
     /*

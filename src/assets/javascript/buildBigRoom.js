@@ -2,44 +2,47 @@
 *
 *
 */
-window.buildBigRoom = function(tileHistory, tilePref, row, col,startBigroom) {
-	finalResult = getNextBigroomTile(tileHistory, totCols);
-	if (!finalResult) {
-		//console.log("bigroom finished at row: "+row+" col: "+col);
-		return tilePref;
-	}
-	//IF WE DON'T HAVE A BIGROOM YET...?
-	if (finalResult[0] === "south,east,corner,bigroom,") {
-		//ARE CONDITIONS CONDUCIVE FOR A BIG ROOM?
-			//does the tile diagonally above/right (up, plus 1 onwards) end with a downward exit to accept the entrance to the bigchamber (should be incoming following round) 
+window.buildBigRoom = function(tilePref, tileHistory, row, col) {
+	if (row > 0) {
+		finalResult = getNextBigroomTile(tileHistory, totCols);
+		if (!finalResult) {
+			//console.log("bigroom finished at row: "+row+" col: "+col);
+			return tilePref;
+		}
+		//IF WE DON'T HAVE A BIGROOM YET...?
+		if (finalResult[0] === "south,east,corner,bigroom,") {
+			//ARE CONDITIONS CONDUCIVE FOR A BIG ROOM?
+			//does the tile diagonally above/right (up, plus 1 onwards) end with a downward exit to accept the entrance to the bigchamber (should be incoming following round)
 			//the tile after this (up, plus 2 onwards) may not end in a downward exit, due the closing corner with no connecting 'up'
 			//the tile directly above must end with a downward exit either, for similar reasons as above
 			//ensure that we always start at least 3 tiles away from the east edge
 			//ensure that we always start at least 3 tiles away from the west edge
-		if (tileHistory[(tileHistory.length-totCols)]["south"] &&
-		    !tileHistory[(tileHistory.length-totCols)+1]["south"] &&
-		    !tileHistory[(tileHistory.length-totCols)-1]["south"] &&
-		    col < totCols-3 &&
-		    col > 3 &&
-		    row	< totRows-3 &&
-		    tilePref.exclude.includes("west") &&
-		    $("#bigRoomFlag").val() == "false") {
-	    //WE DON'T HAVE A BIGROOM YET AND CONDITIONS ARE CONDUCIVE - ROLL THE DICE...
-			if (Math.random() > 0.1) {
-				console.log('------------------->start bigroom at row: '+row+', col: '+col+"<----------------------");
-				tilePref.include = finalResult[0];
-				tilePref.exclude = tilePref.exclude.replace("bigroom", "");
-				$("#bigRoomFlag").val(true);
-			} else {
-			//CONDITIONS MAY BE CONDUCIVE FOR A BIGROOM, BUT CHANCE DECIDED AGAINST IT
-			}
+			if (tileHistory[(tileHistory.length - totCols)]["south"] &&
+				!tileHistory[(tileHistory.length - totCols) + 1]["south"] &&
+				!tileHistory[(tileHistory.length - totCols) - 1]["south"] &&
+				col < totCols - 3 &&
+				col > 3 &&
+				row < totRows - 3 &&
+				tilePref.exclude.includes("west") &&
+				$("#bigRoomFlag").val() == "false") {
+				//WE DON'T HAVE A BIGROOM YET AND CONDITIONS ARE CONDUCIVE - ROLL THE DICE...
+				if (Math.random() > 0.1) {
+					console.log('------------------->start bigroom at row: ' + row + ', col: ' + col + "<----------------------");
+					tilePref.include = finalResult[0];
+					tilePref.exclude = tilePref.exclude.replace("bigroom", "");
+					$("#bigRoomFlag").val(true);
+				} else {
+					//CONDITIONS MAY BE CONDUCIVE FOR A BIGROOM, BUT CHANCE DECIDED AGAINST IT
+				}
 
-	    }
-	//WE SPOTTED A BIGROOM - LETS BUILD IT
-	} else {
-		tilePref.include = finalResult[0];
-		tilePref.exclude = ",";
+			}
+			//WE SPOTTED A BIGROOM - LETS BUILD IT
+		} else {
+			tilePref.include = finalResult[0];
+			tilePref.exclude = ",";
+		}
 	}
+
 	return tilePref;
 }
 /*
