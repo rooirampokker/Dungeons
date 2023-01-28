@@ -52,7 +52,7 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "hall",
+        "others": "hall,deadend",
         "map": {
           "0,0": "east,south",
           "0,1": "east,west",
