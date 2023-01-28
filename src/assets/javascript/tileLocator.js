@@ -50,6 +50,10 @@
             goldenThread[(row-1)+'_'+col]) {
             goldenThread[row+'_'+col] = true;
             localStorage.setItem('goldenThread', JSON.stringify(goldenThread));
+             if (col < totCols) {
+                 tilePref.exclude +='deadend,'
+             }
+
         }
 
         return tilePref;
