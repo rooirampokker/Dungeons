@@ -118,7 +118,7 @@ tileSource = {
         "east": false,
         "south": true,
         "west": false,
-        "others": "room",
+        "others": "room,deadend",
         "map": {
 
         }
