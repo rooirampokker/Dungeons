@@ -12,6 +12,7 @@ $(function() {
 		totCols = $("#dungeonWidth").val();
 		tileSize = $("#tileSize").val();
         debugGrid = $("#debugGrid:checked").val();
+		enableBigRoom = $("#bigRoomEnabled:checked").val();
 
 		var dungeonGrid = $("#dungeonGrid");
 		var newDungeonCol = $("<span class='col'>");
@@ -22,9 +23,9 @@ $(function() {
 		var col = 0;
 		var startFlag = true;
 		var tileHistory = [];
-		var tilePref = {include:"",
-					    exclude:"",
-						others:""};
+		var tilePref = {include:[],
+					    exclude:[],
+						others:[]};
 		var image = "";
 		var overlayImage = "";
 	//generate dungeon layout
@@ -32,20 +33,23 @@ $(function() {
 				var newRow = $(newDungeonRow).clone();
 				while(col <= totCols) {
 					var newCol = newDungeonCol.clone();
-					tilePref.exclude = "filler,";
-					tilePref.include = ",";
+					tilePref.exclude = ["filler"];
+					tilePref.include = [];
 					tilePref = checkSurroundingTiles (tilePref, tileHistory, row, col);
-					tilePref = buildBigRoom(tilePref, tileHistory, row, col);
+					if (enableBigRoom) {
+						tilePref = buildBigRoom(tilePref, tileHistory, row, col);
+					}
 					//DROP THE STARTER IN - ANYWHERE (JUST ONCE!) ON THE FIRST ROW, AFTER THE FIRST COL, AT THE FIRST SPOT WHERE THERE IS NO JOINING CORRIDOR COMING IN FROM THE WEST
 					if (!(image['east']) && startFlag && (col > 0 && row == 0)) {
-						tilePref.include += "start,";
+						tilePref.include.push("start");
 						startFlag = false;
 					} else {
-						tilePref.exclude += "start,";
+						tilePref.exclude.push("start");
 					}
+
 					var tileOptions = getSelectedTiles(tilePref, row, col);
-					image = shuffleTiles(tileOptions, row, col);
-					flip = applyFlip(image, tilePref, row, col);
+					image = shuffleTiles(tileOptions);
+					flip = applyFlip(image);
 					tileHistory.push(image);
 					if (tileSize == 2) {
 						var tileHeight = "140px";
@@ -70,5 +74,5 @@ $(function() {
 		}
 	$(dungeonGrid).append(newRow);
 	}
- $("#submit").bind("click", function (){generateDungeon(); activateMove("#hero")});
+	$("#submit").bind("click", function (){generateDungeon(); activateMove("#hero")});
 });

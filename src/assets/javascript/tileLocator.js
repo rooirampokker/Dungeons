@@ -10,39 +10,39 @@
         //EVERYTHING EXCEPT THE TOP ROW
         if (row > 0) {
             //exclusion of bigroom may be overridden later in the buildBigRoom function
-            tilePref.exclude = "start,bigroom,overlay,";
+            tilePref.exclude.push("start","bigroom","overlay");
             //CHECK TILE ABOVE
             if (tileAbove["south"]) {
-                tilePref.include += "north,";
+                tilePref.include.push("north");
             } else {
-                tilePref.exclude += "north,";
+                tilePref.exclude.push("north");
             }
         } else {
-            tilePref.exclude = "north,filler,bigroom,deadend,overlay,";
+            tilePref.exclude.push("north","filler","bigroom","deadend","overlay");
         }
 
         //CHECK AGAINST PREVIOUS TILE...
         if (tileHistory.length > 0) {
             //EXIT east -- CONNECT west
             if (previousTile['east']) {
-                tilePref.include += "west,";
+                tilePref.include.push("west");
                 //NO east, SO EXCLUDE west
             } else {
-                tilePref.exclude += "west,";
+                tilePref.exclude.push("west");
             }
         }
 //SPECIFIC COLUMN-LOCATION-BASED EXCLUSIONS
         //western border - no exit west
         if (col == 0) {
-            tilePref.exclude += "west,";
+            tilePref.exclude.push("west");
         } //else tilePref.include += ",";
         //eastern border - no exit east
         if (col == totCols) {
-            tilePref.exclude += "east,";
+        tilePref.exclude.push("east");
         }
         //southern border - no exit south
         if (row == totRows) {
-            tilePref.exclude += "south,";
+            tilePref.exclude.push("south");
         }
         //TODO: ensure we have a golden thread from start location, right through the maze. Currently only traces a straight line down
         if ((tileAbove && tileAbove["others"] == "start") ||
@@ -51,7 +51,7 @@
             goldenThread[row+'_'+col] = true;
             localStorage.setItem('goldenThread', JSON.stringify(goldenThread));
              if (col < totCols) {
-                 tilePref.exclude +='deadend,'
+                 tilePref.exclude.push("deadend");
              }
 
         }
@@ -110,18 +110,17 @@
     */
     window.getSelectedTiles = function(tilePref, row, col) {
         var tileList = $.extend(true, {}, tileSource);
-        includeThis = cleanArray(tilePref.include.substring(0, tilePref.include.length - 1).split(","));
-        excludeThis = cleanArray(tilePref.exclude.substring(0, tilePref.exclude.length - 1).split(","));
 
-        $(includeThis).each(function (searchIndex) {
+        $(tilePref.include).each(function (searchIndex) {
 //exclude everything that IS NOT in this array
-            tileList = refineShortlist(tileList, includeThis[searchIndex], "include", row, col);
+            tileList = refineShortlist(tileList, tilePref.include[searchIndex], "include", row, col);
         });
 
-        $(excludeThis).each(function (searchIndex) {
+        $(tilePref.exclude).each(function (searchIndex) {
 //exclude everything that IS in this array
-            tileList = refineShortlist(tileList, excludeThis[searchIndex], "exclude", row, col);
+            tileList = refineShortlist(tileList, tilePref.exclude[searchIndex], "exclude", row, col);
         });
+
         return tileList;
     }
 
@@ -129,7 +128,7 @@
     *
     *
     */
-    window.shuffleTiles = function(arr, row, col) {
+    window.shuffleTiles = function(arr) {
         var keys = Object.keys(arr);
         if (keys.length === 0) {
             //console.log("ADD FILLER");
@@ -144,7 +143,7 @@
     /*
     *
     */
-    window.applyFlip = function(image, tilePref, row, col) {
+    window.applyFlip = function(image) {
 //IF WE HAVE AN EXPLICIT INSTRUCTION TO FLIP THE TILE - THIS WILL BE USED LATER TO REDUCE THE ISSUE WHERE A SINGLE TILE IS COPIED MULTIPLE TIMES TO CHANGE EXIT DIRECTIONS
         var style = "";
         if (image.flipHor) {
@@ -185,6 +184,7 @@
             Math.random() > 0.5) {
             style += " flip-hor";
         }
+
         return style;
     }
 
@@ -194,39 +194,34 @@
     *
     */
     window.applyOverlay = function(image, imagePath, row, col) {
-        if (image.others.indexOf("empty") > -1 && Math.random() > 0.1) {
-            var overlayKeys = _.without(Object.keys(overlayTiles), "overlay,passage", "overlay,corner,statue");
-            if (image.west === true && image.east === true && image.south === false && image.north === false) {
-                var randomKey = "overlay,passage";
-            } else if (image.north === false && image.east === false && image.south === true && image.west === false) {
-                //console.log("inserting overlay: "+row+","+col);
-                var randomKey = "overlay,corner,statue";
-            } else {
-                var randomKey = overlayKeys[Math.floor(Math.random() * overlayKeys.length)];
+        if (image.others) {
+            if (image.others.indexOf("empty") > -1 &&
+                Math.random() > 0.1) {
+                var overlayKeys = _.without(Object.keys(overlayTiles), "overlay,passage", "overlay,corner,statue");
+                if (image.west === true && image.east === true && image.south === false && image.north === false) {
+                    var randomKey = "overlay,passage";
+                } else if (image.north === false && image.east === false && image.south === true && image.west === false) {
+                    //console.log("inserting overlay: "+row+","+col);
+                    var randomKey = "overlay,corner,statue";
+                } else {
+                    var randomKey = overlayKeys[Math.floor(Math.random() * overlayKeys.length)];
+                }
+                var tileStyle = overlayTiles[randomKey].style;
+                var overlayImage = $("<img />").attr({
+                    "src": imagePath + randomKey + ".png",
+                    "class": "overlay " + overlayTiles[randomKey].class
+                });
+                //START TILE - INCLUDE HERO AS OVERLAY
+            } else if (image.others.indexOf("start") > -1) {
+                var overlayImage = $("<img />").attr({
+                    "src": imagePath + "hero.png",
+                    "class": "overlay hero",
+                    "id": "hero"
+                });
             }
-            var tileStyle = overlayTiles[randomKey].style;
-            var overlayImage = $("<img />").attr({
-                "src": imagePath + randomKey + ".png",
-                "class": "overlay " + overlayTiles[randomKey].class
-            });
-            //START TILE - INCLUDE HERO AS OVERLAY
-        } else if (image.others.indexOf("start") > -1) {
-            var overlayImage = $("<img />").attr({
-                "src": imagePath + "hero.png",
-                "class": "overlay hero",
-                "id": "hero"
-            });
         } else var overlayImage = "";
-        return overlayImage;
-    }
 
-    /*
-    *
-    */
-    window.cleanArray = function(thisArray) {
-        return $.grep(thisArray, function (n) {
-            return n == " " || n
-        })
+        return overlayImage;
     }
 
     window.showUnmappedTiles = function(newCol, baseImage, image, tileHeight, tileWidth) {

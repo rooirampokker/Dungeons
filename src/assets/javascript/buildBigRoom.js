@@ -6,7 +6,7 @@ window.buildBigRoom = function(tilePref, tileHistory, row, col) {
 	if (row > 0) {
 		finalResult = getNextBigroomTile(tileHistory, totCols);
 		if (!finalResult) {
-			//console.log("bigroom finished at row: "+row+" col: "+col);
+
 			return tilePref;
 		}
 		//IF WE DON'T HAVE A BIGROOM YET...?
@@ -28,8 +28,9 @@ window.buildBigRoom = function(tilePref, tileHistory, row, col) {
 				//WE DON'T HAVE A BIGROOM YET AND CONDITIONS ARE CONDUCIVE - ROLL THE DICE...
 				if (Math.random() > 0.1) {
 					console.log('------------------->start bigroom at row: ' + row + ', col: ' + col + "<----------------------");
-					tilePref.include = finalResult[0];
-					tilePref.exclude = tilePref.exclude.replace("bigroom", "");
+					tilePref.include = finalResult[0].split(",");
+					//remove the 'bigroom' exclusion...
+					tilePref.exclude.splice(tilePref.exclude.indexOf("bigroom"), 1);
 					$("#bigRoomFlag").val(true);
 				} else {
 					//CONDITIONS MAY BE CONDUCIVE FOR A BIGROOM, BUT CHANCE DECIDED AGAINST IT
@@ -38,8 +39,8 @@ window.buildBigRoom = function(tilePref, tileHistory, row, col) {
 			}
 			//WE SPOTTED A BIGROOM - LETS BUILD IT
 		} else {
-			tilePref.include = finalResult[0];
-			tilePref.exclude = ",";
+			tilePref.include = finalResult[0].split(",");
+			tilePref.exclude = [];
 		}
 	}
 
@@ -109,5 +110,6 @@ if ((tileHistory[tileHistory.length-3] !== undefined &&
 			finalResult[0] += "open,";
 		}
 	}
+
 	return finalResult;
 }
