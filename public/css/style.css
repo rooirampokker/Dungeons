@@ -1,0 +1,123 @@
+:root {
+    --background: #15130f;
+    --panel: #221f19;
+    --border: #3b362c;
+    --text: #e8e2d4;
+    --muted: #a59d8a;
+    --accent: #c8a86a;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: var(--background);
+    color: var(--text);
+    font: 14px/1.4 system-ui, sans-serif;
+}
+
+.toolbar {
+    padding: 10px 16px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+}
+
+.settings {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 18px;
+}
+
+.settings label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.settings input[type=number] {
+    width: 4.5em;
+}
+
+.settings input,
+.settings select,
+.settings button {
+    font: inherit;
+    color: inherit;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 6px;
+}
+
+.settings input[type=checkbox] {
+    accent-color: var(--accent);
+}
+
+.settings button {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #1b1813;
+    font-weight: 600;
+    padding: 4px 14px;
+    cursor: pointer;
+}
+
+.info,
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    margin: 8px 0 0;
+    color: var(--muted);
+}
+
+.legend[hidden] {
+    display: none;
+}
+
+.swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 2px -1px 10px;
+    border: 1px solid var(--border);
+}
+
+.swatch:first-child {
+    margin-left: 0;
+}
+
+.swatch.unmapped { background: rgba(255, 0, 0, 0.6); }
+.swatch.unreachable { background: rgba(0, 0, 30, 0.8); }
+.swatch.conflict { border: 2px solid #ff9800; }
+.swatch.walkable { background: rgb(120, 255, 120); border-radius: 50%; width: 6px; height: 6px; margin-bottom: 2px; }
+
+/* The renderer puts a map-sized .stage in here, with a canvas that sticks to the visible area. */
+.viewport {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    outline: none;
+    background: #000;
+}
+
+.stage {
+    position: relative;
+}
+
+.stage canvas {
+    position: sticky;
+    top: 0;
+    left: 0;
+    display: block;
+}
