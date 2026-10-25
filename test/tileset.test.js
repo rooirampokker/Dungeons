@@ -3,28 +3,43 @@ import { existsSync } from 'node:fs';
 import { describe, it } from 'node:test';
 import { BIT } from '../src/core/directions.js';
 import { createTileset, slotAt, validateTileset } from '../src/tileset/tileset.js';
-import { PUBLIC_DIR, shippedTilesetData, tinyTilesetData } from './support.js';
+import { DRAWN, PUBLIC_DIR, SHIPPED, shippedTilesetData, tinyTilesetData } from './support.js';
 
-describe('the shipped tileset', () => {
-    const data = shippedTilesetData();
+for (const id of SHIPPED) {
+    describe(`the ${id} tileset`, () => {
+        const data = shippedTilesetData(id);
 
-    it('has no errors', () => {
-        assert.deepEqual(validateTileset(data).errors, []);
+        it('has no errors', () => {
+            assert.deepEqual(validateTileset(data).errors, []);
+        });
+
+        it('has an image for every tile and overlay at every size', () => {
+            const files = [...data.tiles, ...data.overlays].map((entry) => entry.image);
+            const missing = Object.values(data.resolutions).flatMap((folder) => files
+                .filter((file) => !existsSync(new URL(folder + file, PUBLIC_DIR)))
+                .map((file) => folder + file));
+            assert.deepEqual(missing, []);
+        });
+
+        it('can fill a cell whatever exits its neighbours demand', () => {
+            const warnings = validateTileset(data).warnings;
+            assert.ok(!warnings.some((warning) => warning.startsWith('no corridor tile')), warnings.join('\n'));
+        });
+
+        it('has an image for every sprite it brings', () => {
+            const missing = Object.values(data.sprites ?? {}).filter((file) => !existsSync(new URL(file, PUBLIC_DIR)));
+            assert.deepEqual(missing, []);
+        });
     });
+}
 
-    it('has an image for every tile and overlay at every size', () => {
-        const files = [...data.tiles, ...data.overlays].map((entry) => entry.image);
-        const missing = Object.values(data.resolutions).flatMap((folder) => files
-            .filter((file) => !existsSync(new URL(folder + file, PUBLIC_DIR)))
-            .map((file) => folder + file));
-        assert.deepEqual(missing, []);
+for (const id of DRAWN) {
+    describe(`the ${id} tileset`, () => {
+        it('has a complete walk map for every tile, since they are drawn from the same shapes', () => {
+            assert.deepEqual(validateTileset(shippedTilesetData(id)).warnings, []);
+        });
     });
-
-    it('can fill a cell whatever exits its neighbours demand', () => {
-        const warnings = validateTileset(data).warnings;
-        assert.ok(!warnings.some((warning) => warning.startsWith('no corridor tile')), warnings.join('\n'));
-    });
-});
+}
 
 describe('validateTileset', () => {
     const errorsFor = (change) => {
@@ -47,6 +62,10 @@ describe('validateTileset', () => {
 
     it('reports walk cells outside the grid', () => {
         assert.match(errorsFor((data) => { data.tiles[1].walk['2,0'] = ['n']; }).join(), /inside the grid/);
+    });
+
+    it('reports weights that are not positive', () => {
+        assert.match(errorsFor((data) => { data.tiles[1].weight = 0; }).join(), /weight must be a positive number/);
     });
 
     it('reports room pieces without a slot', () => {

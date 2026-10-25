@@ -54,19 +54,25 @@ export function drawTiles(ctx, view, scene) {
 
 /** @type {Layer} */
 export function drawOverlays(ctx, view, scene) {
-    // Overlay offsets and image sizes are measured at the tileset's reference size.
+    // Decoration positions and overlay image sizes are measured at the tileset's reference size.
     const scale = view.tileSize / scene.world.tileset.referenceSize;
     forEachVisibleCell(view, scene.world, (cell) => {
-        const image = cell.overlay && scene.images.get(cell.overlay.image);
-        if (!image) return;
-        const [offsetX, offsetY] = cell.overlay.offset;
-        const box = view.rect(
-            cell.col * view.tileSize + offsetX * scale,
-            cell.row * view.tileSize + offsetY * scale,
-            image.naturalWidth * scale,
-            image.naturalHeight * scale,
-        );
-        ctx.drawImage(image, box.x, box.y, box.width, box.height);
+        for (const decoration of cell.decorations) {
+            const image = scene.images.get(decoration.overlay.image);
+            if (!image) continue;
+            const width = image.naturalWidth * scale;
+            const height = image.naturalHeight * scale;
+            // Spot overlays are centred on their footprint, since the image may be larger (a glow, say).
+            // Fixed overlays are drawn from their offset.
+            const left = decoration.width === null
+                ? decoration.x * scale
+                : (decoration.x + decoration.width / 2) * scale - width / 2;
+            const top = decoration.height === null
+                ? decoration.y * scale
+                : (decoration.y + decoration.height / 2) * scale - height / 2;
+            const box = view.rect(cell.col * view.tileSize + left, cell.row * view.tileSize + top, width, height);
+            drawMirrored(ctx, image, box, decoration.orientation);
+        }
     });
 }
 

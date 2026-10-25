@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { BIT, IDENTITY } from '../src/core/directions.js';
+import { BIT, DIRECTIONS, IDENTITY, STEP } from '../src/core/directions.js';
 import { Dungeon } from '../src/generation/dungeon.js';
 import { generateDungeon } from '../src/generation/generator.js';
 import { createTileset, WALKABLE } from '../src/tileset/tileset.js';
 import { buildWalkGrid } from '../src/world/walkGrid.js';
 import { createWorld, moveEntity } from '../src/world/world.js';
-import { shippedTileset, tinyTilesetData } from './support.js';
+import { DRAWN, SHIPPED, shippedTileset, tinyTilesetData } from './support.js';
 
 const tiny = createTileset(tinyTilesetData());
 const variant = (id, orientation = IDENTITY) => tiny.variants(tiny.tilesById.get(id).role)
@@ -69,13 +69,42 @@ describe('movement', () => {
     });
 
     it('spawns on a walkable cell in generated dungeons', () => {
-        const tileset = shippedTileset();
-        for (let i = 0; i < 20; i++) {
-            const dungeon = generateDungeon(tileset, { cols: 15, rows: 8, seed: `spawn-${i}` });
-            const world = createWorld(dungeon, tileset);
-            assert.ok(world.walk.isWalkable(world.hero.x, world.hero.y));
-            assert.equal(Math.floor(world.hero.y / tileset.subGrid), dungeon.start.row);
-            assert.equal(Math.floor(world.hero.x / tileset.subGrid), dungeon.start.col);
+        for (const id of SHIPPED) {
+            const tileset = shippedTileset(id);
+            for (let i = 0; i < 20; i++) {
+                const dungeon = generateDungeon(tileset, { cols: 15, rows: 8, seed: `spawn-${i}` });
+                const world = createWorld(dungeon, tileset);
+                assert.ok(world.walk.isWalkable(world.hero.x, world.hero.y));
+                assert.equal(Math.floor(world.hero.y / tileset.subGrid), dungeon.start.row);
+                assert.equal(Math.floor(world.hero.x / tileset.subGrid), dungeon.start.col);
+            }
         }
     });
+
+    for (const id of DRAWN) {
+        it(`lets the hero walk from tile to tile through a whole ${id} dungeon`, () => {
+            // Every tile in the drawn sets is fully mapped, so wherever the tiles connect, the walk cells must too.
+            const tileset = shippedTileset(id);
+            const dungeon = generateDungeon(tileset, { cols: 20, rows: 9, seed: 'explore' });
+            const world = createWorld(dungeon, tileset);
+            const size = tileset.subGrid;
+            const seen = new Set([`${world.hero.x},${world.hero.y}`]);
+            const tilesVisited = new Set();
+            const queue = [[world.hero.x, world.hero.y]];
+            while (queue.length) {
+                const [x, y] = queue.shift();
+                tilesVisited.add(`${Math.floor(y / size)},${Math.floor(x / size)}`);
+                for (const direction of DIRECTIONS) {
+                    if (!world.walk.canMove(x, y, direction)) continue;
+                    const next = [x + STEP[direction].dx, y + STEP[direction].dy];
+                    if (seen.has(next.join())) continue;
+                    seen.add(next.join());
+                    queue.push(next);
+                }
+            }
+            // Dead-end corridors (rubble, wreckage) can be entered but not crossed, so walking reaches a few fewer tiles.
+            const reachableTiles = dungeon.reachable.reduce((sum, value) => sum + value, 0);
+            assert.ok(tilesVisited.size >= reachableTiles * 0.9, `walked ${tilesVisited.size} of ${reachableTiles} tiles`);
+        });
+    }
 });

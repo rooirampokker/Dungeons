@@ -1,11 +1,14 @@
 import $ from 'jquery';
 import sprites from './data/sprites.json';
-import tilesetData from './data/tilesets/dundjinni.json';
+import dundjinni from './data/tilesets/dundjinni.json';
+import fairywood from './data/tilesets/fairywood.json';
+import gormenghast from './data/tilesets/gormenghast.json';
+import starbase from './data/tilesets/starbase.json';
 import { generateDungeon } from './generation/generator.js';
 import { loadImages } from './render/images.js';
 import { Renderer } from './render/renderer.js';
 import { createTileset } from './tileset/tileset.js';
-import { readSettings, setUpTileSizes, showDebugLegend, showSummary } from './ui/controls.js';
+import { readSettings, setUpTileSizes, setUpTilesets, showDebugLegend, showSummary } from './ui/controls.js';
 import { onDirectionKey } from './ui/keyboard.js';
 import { createWorld, moveEntity } from './world/world.js';
 
@@ -16,11 +19,17 @@ import { createWorld, moveEntity } from './world/world.js';
  * @typedef {import('./tileset/tileset.js').Tileset} Tileset
  */
 
+/** Tilesets in the order the picker lists them; the first is the default. */
+const TILESET_DATA = [dundjinni, gormenghast, starbase, fairywood];
+
 $(() => {
-    const tileset = createTileset(tilesetData);
-    if (tileset.warnings.length) {
-        console.info(`Tileset "${tileset.name}" has ${tileset.warnings.length} warnings:\n${tileset.warnings.join('\n')}`);
+    const tilesets = TILESET_DATA.map(createTileset);
+    for (const tileset of tilesets) {
+        if (tileset.warnings.length) {
+            console.info(`Tileset "${tileset.name}" has ${tileset.warnings.length} warnings:\n${tileset.warnings.join('\n')}`);
+        }
     }
+    const selectedTileset = () => tilesets.find((tileset) => tileset.id === readSettings().tileset) ?? tilesets[0];
 
     const $viewport = $('#viewport');
     const renderer = new Renderer($viewport[0]);
@@ -30,6 +39,7 @@ $(() => {
 
     async function generate() {
         const settings = readSettings();
+        const tileset = selectedTileset();
         const dungeon = generateDungeon(tileset, {
             cols: settings.cols,
             rows: settings.rows,
@@ -50,7 +60,7 @@ $(() => {
     async function show() {
         const request = ++showRequest;
         const { tileSize } = readSettings();
-        const images = await loadSceneImages(tileset, tileSize, world);
+        const images = await loadSceneImages(world.tileset, tileSize, world);
         if (request !== showRequest) return; // a newer request has started
         const { debug } = readSettings(); // may have been toggled while the images loaded
         renderer.show({ world, images: images.tiles, sprites: images.sprites, tileSize, debug });
@@ -59,6 +69,10 @@ $(() => {
 
     $('#settings').on('submit', (event) => {
         event.preventDefault();
+        generate();
+    });
+    $('#tileset').on('change', () => {
+        setUpTileSizes(selectedTileset());
         generate();
     });
     $('#tileSize').on('change', async () => {
@@ -82,7 +96,8 @@ $(() => {
         }
     });
 
-    setUpTileSizes(tileset);
+    setUpTilesets(tilesets);
+    setUpTileSizes(tilesets[0]);
     generate();
 });
 
@@ -96,9 +111,10 @@ async function loadSceneImages(tileset, tileSize, world) {
     const files = new Set();
     for (const cell of world.dungeon) {
         files.add(cell.tile.image);
-        if (cell.overlay) files.add(cell.overlay.image);
+        for (const decoration of cell.decorations) files.add(decoration.overlay.image);
     }
     const tileUrls = Object.fromEntries([...files].map((file) => [file, folder + file]));
-    const [tiles, spriteImages] = await Promise.all([loadImages(tileUrls), loadImages(sprites)]);
+    // A tileset can bring its own sprites, such as a hero who suits it.
+    const [tiles, spriteImages] = await Promise.all([loadImages(tileUrls), loadImages({ ...sprites, ...tileset.sprites })]);
     return { tiles, sprites: spriteImages };
 }

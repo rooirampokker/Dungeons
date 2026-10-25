@@ -3,7 +3,7 @@
  * browser code, so it can be generated, tested, saved or sent anywhere.
  *
  * @typedef {import('../tileset/tileset.js').TileDef} TileDef
- * @typedef {import('../tileset/tileset.js').OverlayDef} OverlayDef
+ * @typedef {import('./overlays.js').Decoration} Decoration
  * @typedef {import('../tileset/tileset.js').Variant} Variant
  * @typedef {import('../core/directions.js').Orientation} Orientation
  * @typedef {import('./rooms.js').PlacedRoom} PlacedRoom
@@ -15,7 +15,7 @@
  * @property {Orientation} orientation
  * @property {number} exits             Exit bitmask after orientation.
  * @property {PlacedRoom|null} room     The room this tile belongs to, if any.
- * @property {OverlayDef|null} overlay
+ * @property {Decoration[]} decorations   Overlays placed on this tile.
  * @property {boolean} conflict         No tile fitted all neighbours, so the closest match was used.
  *
  * @typedef {object} DungeonStats
@@ -69,7 +69,7 @@ export class Dungeon {
             orientation: variant.orientation,
             exits: variant.exits,
             room,
-            overlay: null,
+            decorations: [],
             conflict,
         };
         this.cells[row * this.cols + col] = cell;
