@@ -51,10 +51,11 @@ export function constraintsAt(dungeon, row, col, mustConnect = () => false) {
  * @param {Constraints} constraints
  * @param {Rng} rng
  * @param {RoomSlot} [slot]
+ * @param {string|null} [theme]  Room pieces: the room's theme.
  * @returns {Variant|null}
  */
-export function chooseVariant(tileset, role, { required, forbidden }, rng, slot) {
-    const byTile = tileset.candidates(role, required, forbidden, slot);
+export function chooseVariant(tileset, role, { required, forbidden }, rng, slot, theme) {
+    const byTile = tileset.candidates(role, required, forbidden, slot, theme);
     return byTile.length ? rng.pick(pickWeighted(byTile, rng)) : null;
 }
 

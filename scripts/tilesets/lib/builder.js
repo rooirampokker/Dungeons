@@ -35,6 +35,9 @@ import { Canvas, union } from './raster.js';
  * @property {[number, number]} size        Footprint.
  * @property {[number, number]} [image]     Image size, centred on the footprint. Default: the footprint.
  * @property {boolean} [blocks]
+ * @property {string[]} [onTags]            Only placed on tiles with all of these tags.
+ * @property {number} [weight]              How often it's picked compared with others that fit (default 1).
+ * @property {number} [perRoom]             At most this many in one big room, counting a wall overlay's turned copy.
  * @property {(p: object) => void} paint
  *
  * @typedef {object} SpriteSpec
@@ -51,6 +54,7 @@ import { Canvas, union } from './raster.js';
  * @param {TileSpec[]} set.tiles
  * @param {OverlaySpec[]} set.overlays
  * @param {object[]} set.rooms              Room templates.
+ * @param {object} [set.generation]         Generator options that suit the set, e.g. { rooms: { packed: true } }.
  * @param {number} set.overlayChance
  * @param {SpriteSpec[]} [set.sprites]      Sprites this tileset uses instead of the defaults.
  */
@@ -88,6 +92,7 @@ export function buildTileset(set) {
             image: `${spec.id}.png`,
             role: spec.role ?? 'corridor',
             ...(spec.roomSlot && { roomSlot: spec.roomSlot }),
+            ...(spec.theme && { theme: spec.theme }),
             exits: spec.exits,
             tags: spec.tags,
             ...(spec.weight && { weight: spec.weight }),
@@ -121,6 +126,10 @@ export function buildTileset(set) {
                 spots: version.spots,
                 size: version.size,
                 ...(spec.blocks && { blocks: true }),
+                ...(spec.onTags && { onTags: spec.onTags }),
+                ...(spec.weight && { weight: spec.weight }),
+                ...(spec.perRoom && { perRoom: spec.perRoom }),
+                ...(spec.perRoom && versions.length > 1 && { group: spec.id }),
             };
         });
     });
@@ -152,6 +161,7 @@ export function buildTileset(set) {
         overlayChance: set.overlayChance,
         ...(set.sprites && { sprites }),
         rooms: set.rooms,
+        ...(set.generation && { generation: set.generation }),
         tiles,
         overlays,
     };
@@ -176,7 +186,8 @@ export function buildTileset(set) {
 /**
  * Works out the walk map from the floor outline and whatever blocks it. A walk cell can be stood on when at least
  * half of it is floor and less than a quarter is blocked. Diagonal moves need both cells beside them to be open, so
- * nobody squeezes between two obstacles. Moves can leave the tile only through its exits.
+ * nobody squeezes between two obstacles. Moves can leave the tile only through its exits, and only where the floor
+ * carries on past the edge, so walls either side of a wide opening still stop you.
  */
 function deriveWalk(floor, obstacles, exits) {
     const blocked = obstacles.length ? union(...obstacles) : null;
@@ -189,7 +200,8 @@ function deriveWalk(floor, obstacles, exits) {
         if (rowInside && colInside) return open[row][col];
         if (!rowInside && !colInside) return false;
         const side = row < 0 ? 'n' : row >= SUB_GRID ? 's' : col < 0 ? 'w' : 'e';
-        return exits.includes(side) && open[Math.min(SUB_GRID - 1, Math.max(0, row))][Math.min(SUB_GRID - 1, Math.max(0, col))];
+        return exits.includes(side) && open[Math.min(SUB_GRID - 1, Math.max(0, row))][Math.min(SUB_GRID - 1, Math.max(0, col))]
+            && coverage(floor, row, col) >= 0.5;
     };
 
     const walk = {};

@@ -10,7 +10,8 @@
     "test": "node --test \"test/**/*.test.js\"",
     "tiles:gormenghast": "node scripts/tilesets/gormenghast/build.js",
     "tiles:starbase": "node scripts/tilesets/starbase/build.js",
-    "tiles:fairywood": "node scripts/tilesets/fairywood/build.js"
+    "tiles:fairywood": "node scripts/tilesets/fairywood/build.js",
+    "tiles:manor": "node scripts/tilesets/manor/build.js"
   },
   "repository": {
     "type": "git",

@@ -41,10 +41,12 @@ const ANCHOR = {
  * @param {Tileset} tileset
  * @param {Cell} cell
  * @param {Rng} rng
+ * @param {Map<string, number>} [roomCounts]  Overlays placed so far in each room, for overlays with `perRoom`.
+ *                                            Share one map across a whole dungeon.
  * @returns {Decoration[]}
  */
-export function decorate(tileset, cell, rng) {
-    return cell.tile.spots ? decorateSpots(tileset, cell, rng) : decorateFixed(tileset, cell, rng);
+export function decorate(tileset, cell, rng, roomCounts = new Map()) {
+    return cell.tile.spots ? decorateSpots(tileset, cell, rng, roomCounts) : decorateFixed(tileset, cell, rng);
 }
 
 /** At most one fixed overlay. Overlays made for the tile's exact exits win over generic ones. */
@@ -58,20 +60,44 @@ function decorateFixed(tileset, cell, rng) {
     return [{ overlay, x: overlay.offset[0], y: overlay.offset[1], width: null, height: null, orientation: IDENTITY }];
 }
 
-/** One roll per spot; a tile avoids repeating an overlay while others fit. */
-function decorateSpots(tileset, cell, rng) {
+/**
+ * One roll per spot; a tile avoids repeating an overlay while others fit, and a room never has more of an overlay
+ * than its `perRoom`.
+ */
+function decorateSpots(tileset, cell, rng, roomCounts) {
     const decorations = [];
     const used = new Set();
     for (const spot of cell.tile.spots) {
-        const fitting = (tileset.overlays ?? []).filter((overlay) => fits(overlay, spot) && hasTags(overlay, cell));
+        const fitting = (tileset.overlays ?? []).filter((overlay) => fits(overlay, spot) && hasTags(overlay, cell)
+            && !(cell.room && overlay.perRoom && (roomCounts.get(roomKey(cell, overlay)) ?? 0) >= overlay.perRoom));
         if (fitting.length === 0 || !rng.chance(spot.chance ?? tileset.overlayChance)) continue;
 
         const fresh = fitting.filter((overlay) => !used.has(overlay.id));
-        const overlay = rng.pick(fresh.length ? fresh : fitting);
+        const overlay = pickWeighted(fresh.length ? fresh : fitting, rng);
         used.add(overlay.id);
+        if (cell.room && overlay.perRoom) roomCounts.set(roomKey(cell, overlay), (roomCounts.get(roomKey(cell, overlay)) ?? 0) + 1);
         decorations.push(place(overlay, spot, cell, tileset.referenceSize));
     }
     return decorations;
+}
+
+/** Overlays in the same group (e.g. one drawn for north walls and its turned copy) share a room's limit. */
+function roomKey(cell, overlay) {
+    return `${cell.room.id}|${overlay.group ?? overlay.id}`;
+}
+
+/**
+ * Picks in proportion to each overlay's weight (default 1). With equal weights this is the same as rng.pick.
+ * @param {OverlayDef[]} overlays
+ * @param {Rng} rng
+ */
+function pickWeighted(overlays, rng) {
+    let roll = rng.next() * overlays.reduce((sum, overlay) => sum + (overlay.weight ?? 1), 0);
+    for (const overlay of overlays) {
+        roll -= overlay.weight ?? 1;
+        if (roll < 0) return overlay;
+    }
+    return overlays[overlays.length - 1];
 }
 
 /**

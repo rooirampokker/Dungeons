@@ -7,7 +7,7 @@ Pick a size and a tile set, and the generator builds a dungeon. Corridors join u
 there's room, and a hero you steer with the keyboard explores it. Each dungeon has a seed, so a seed you like can be
 shared or regenerated.
 
-There are four tile sets:
+There are five tile sets:
 
 * **Dundjinni classic**: about 110 hand-drawn tiles at 90 × 90 and 140 × 140. These images are not mine. They were
   made by Probono, Bogie and the other talented people at the [Dundjinni forums](http://www.dundjinni.com/).
@@ -25,9 +25,17 @@ There are four tile sets:
   sunlit clearings ringed by young trees. Glades hold fairy rings, toadstool houses, a lily pond, a woodcutter's
   cottage, standing stones, a campsite, a crystal grotto, giant mushrooms, a spring and brambles. It has its own
   hero: a cloaked wanderer with a fairy for company.
+* **Manor House**: 160 tiles at 140 × 140 that lay a dungeon out like the floor plan of an inn or a great house:
+  anything from a coaching inn to the Addams family's mansion or a wing of Hogwarts. The map is packed with large
+  rooms. Some share a wall and open straight into each other; the rest are one hallway apart. The hallways are a whole
+  tile wide, with a long runner and thin walls. Each room is one kind, with its own floor and furniture: a taproom
+  with a bar, settles and casks; a kitchen with a range and a chopping block; bedchambers; a marble great hall with
+  banquet tables and suits of armour; a library lined with bookcases; and a parquet ballroom with a grand piano.
+  Small rooms open off the hallways: guest rooms, a study, a bathroom, a privy, a pantry, a chapel, and stairs up and
+  down. Walled courtyards and light wells fill the gaps no door reaches.
 
-Gormenghast, Starbase and Fairy Wood are drawn in code (see [below](#drawn-tile-sets)), so every tile's walk map
-matches its picture exactly.
+Gormenghast, Starbase, Fairy Wood and Manor House are drawn in code (see [below](#drawn-tile-sets)), so every tile's
+walk map matches its picture exactly.
 
 View a demo at https://dungeons.albrecht.uk.com/
 
@@ -52,6 +60,7 @@ complete site, so that's the folder to deploy.
 | `npm run tiles:gormenghast` | Redraws the Gormenghast tile images and their tileset data.     |
 | `npm run tiles:starbase`    | Redraws the Starbase tile images, its hero and its tileset data. |
 | `npm run tiles:fairywood`   | Redraws the Fairy Wood tile images, its hero and its tileset data. |
+| `npm run tiles:manor`       | Redraws the Manor House tile images and their tileset data.     |
 
 The only tools are webpack for bundling and jQuery for the page. Tests use `node:test`, which comes with Node.
 
@@ -85,7 +94,7 @@ src/
   render/               Canvas renderer: drawing layers, animation, image loading
   ui/                   jQuery code for the settings form and the keyboard
   data/                 Tilesets and sprites as JSON
-scripts/tilesets/       Code that draws the Gormenghast, Starbase and Fairy Wood tile sets (Node only, no dependencies)
+scripts/tilesets/       Code that draws the Gormenghast, Starbase, Fairy Wood and Manor House tile sets (Node only, no dependencies)
 test/                   Tests for everything that doesn't need a browser
 ```
 
@@ -99,13 +108,17 @@ which PhpStorm understands.
 
 1. The start tile goes somewhere on the top row.
 2. Large chambers are stamped onto the map from the tileset's room templates. Each piece's doors are chosen at
-   random from the pieces available.
+   random from the pieces available. Usually a few rooms are scattered over the map. A tileset can instead have them
+   **packed**: the map is filled with rooms in reading order, one hallway apart or now and then sharing a wall.
 3. Corridors fill the remaining cells row by row. Each tile must open towards every neighbour that opens towards it
    and be closed towards every neighbour that doesn't, including the map edge and room walls. Tiles can be mirrored
    to fit, so one drawing covers up to four exit layouts.
-4. Overlays (chests, cats, banners, cobwebs...) decorate the tiles: one per spot on tiles that mark spots, or at
+4. If the tileset asks to **connect** its maps, closed sides between parts that can be reached and parts that can't
+   are opened until every room can be reached. Each opening swaps the two tiles for variants with that side open: a
+   corridor with one more exit, or a room's wall piece for its door piece.
+5. Overlays (chests, cats, banners, cobwebs...) decorate the tiles: one per spot on tiles that mark spots, or at
    most one fixed overlay on tiles that don't. Overlays that block the way close the walk cells under them.
-5. If less than half the map can be reached from the start, the layout is thrown away and another is tried.
+6. If less than half the map can be reached from the start, the layout is thrown away and another is tried.
 
 Everything random goes through one seeded generator, so the same seed and settings always produce the same dungeon.
 
@@ -154,6 +167,17 @@ A tileset is a JSON file in `src/data/tilesets/`. Images live in `public/`, one 
   1). Dead-end rooms in a set with lots of them need a low weight, or the map breaks into small pockets.
 * **Sprites.** `"sprites": { "hero": "images/sprites/spacer.png" }` replaces the game's default sprites while the
   tileset is in use. Starbase uses this for its hooded hero.
+* **Themes.** A room template can list `themes`, the kinds of room it can be, e.g.
+  `{ "id": "hall", "width": 4, "height": 3, "themes": ["taproom", "great-hall"] }`. Each room gets whichever of its
+  template's themes the fewest rooms have so far. It's built only from room pieces with that `theme`, so a kitchen's
+  floor and furniture stay together. Templates without themes use pieces without one.
+* **Generation.** `generation` holds the generator options that suit the tileset. They're the same options
+  `generateDungeon()` takes, and options passed to it win. Manor House uses
+  `{ "connect": true, "rooms": { "packed": true, "margin": 0, "spacing": 1, "adjoin": 0.3, "minDoors": 1 } }`:
+  * rooms packed against the map edge, one tile apart;
+  * a 30% chance that a room shares a wall with the room before it instead;
+  * every room has at least one door;
+  * every room can be reached.
 
 ### Overlays
 
@@ -186,6 +210,9 @@ footprint `size`, so the generator only puts things where they fit. One tile can
 * **Images** are centred on the footprint and can be larger than it, so a candle's glow can spill around it.
 * **Chance.** Each spot rolls its own `chance` (default `overlayChance`), and a tile avoids repeating an overlay while
   others fit.
+* **Weight and limits.** An overlay with a `weight` is picked more or less often than the others that fit (default
+  1). One with `perRoom` appears at most that many times in a single large room, so a hall gets one fireplace. An
+  overlay and its turned copy share a `group` and count together.
 
 The tileset is checked when the page loads and when the tests run. Errors stop it loading; warnings, such as tiles
 without walk maps or moves that only work one way, are printed to the browser console.
@@ -193,7 +220,7 @@ without walk maps or moves that only work one way, are printed to the browser co
 Drawn tile sets
 ---------------
 
-Gormenghast, Starbase and Fairy Wood are drawn in code, using only Node. Their shared tools are in
+Gormenghast, Starbase, Fairy Wood and Manor House are drawn in code, using only Node. Their shared tools are in
 `scripts/tilesets/lib/`:
 
 * `raster.js` is a small software rasteriser: shapes, noise, soft shadows, glows and supersampled smoothing.
@@ -202,22 +229,30 @@ Gormenghast, Starbase and Fairy Wood are drawn in code, using only Node. Their s
   the overlay spot helpers, and `roomPiece()` for building great halls and hangars.
 * `builder.js` turns a tileset's catalogue into images and JSON, works out and checks the walk maps, and writes the
   preview images.
+* `transpose.js` turns a tile across its diagonal. A passage running north-south becomes one running east-west, and
+  a room with its door to the south gets its door to the east, so one drawing covers both.
 
-Each set has its own folder: `scripts/tilesets/gormenghast/`, `starbase/` or `fairywood/`.
+Each set has its own folder: `scripts/tilesets/gormenghast/`, `starbase/`, `fairywood/` or `manor/`.
 
 * `style.js` holds the palette and paints the parts every tile shares:
   * Gormenghast: castle masonry, stone walls and flagstones.
   * Starbase: hull machinery, bulkheads with strip lights, deck plates and the hangar floor.
   * Fairy Wood: canopy and treetops, a ragged edge of ferns, earth paths and meadow grass.
+  * Manor House: thin walls along the tile edges, and a floor for each kind of room. That's oak boards, flagstones,
+    marble, a fitted carpet, parquet, glazed tiles, and limestone with a runner. Board and tile patterns repeat every
+    tile, so a room's floor looks laid in one piece.
 * `decor.js` holds the furnishings:
   * Gormenghast: pillars, hearths, bookshelves, carvings and candles.
   * Starbase: consoles, holo-tables, a reactor core, crates, droids, a shuttle and force fields.
   * Fairy Wood: toadstools, fairy rings, logs, boulders, brooks, bridges, ponds, lanterns and a cottage.
+  * Manor House: tables, chairs, beds, barrels, bookcases, fireplaces, stairs, rugs, plants and a black cat.
 * `tiles.js` lists every tile, with its floor outline, what to put on it, and its overlay spots. Fairy Wood's
-  `tiles.js` also has its own path shapes: winding paths, curved bends, round junctions and glades.
-* `overlays.js` holds the decorations for the generator to scatter: 44 each for Gormenghast and Fairy Wood, and 37
-  for Starbase. Wall overlays are drawn once, and the build makes the turned copy for east and west walls.
-  Starbase's and Fairy Wood's `overlays.js` also draw their hero sprites.
+  `tiles.js` also has its own path shapes: winding paths, curved bends, round junctions and glades. Manor House's
+  builds a full set of room pieces for each kind of room, with a door on every outer wall a piece can have one.
+  Every opening is the middle four walk cells of a side, with a stub of wall either side as a door post.
+* `overlays.js` holds the decorations for the generator to scatter: 44 each for Gormenghast and Fairy Wood, 37 for
+  Starbase and 49 for Manor House. Wall overlays are drawn once, and the build makes the turned copy for east and
+  west walls. Starbase's and Fairy Wood's `overlays.js` also draw their hero sprites.
 * `build.js` calls `buildTileset()` with all of the above.
 
 A tile's walk map is worked out from its floor outline and from anything its decorations block, so it can't disagree
@@ -247,7 +282,8 @@ Extending it
 * **More chamber shapes.** Add a template to `rooms`, e.g. `{ "id": "long-hall", "width": 4, "height": 3 }`. Slots are
   worked out from position (corners, edges, centre), so any size works with the existing pieces. Add `slots` to the
   template to control each cell yourself. `generateDungeon(tileset, { rooms: { max, templates } })` controls how many
-  are placed and which templates are used.
+  are placed and which templates are used. Give the template `themes`, and draw a set of pieces for each, to keep a
+  room's furnishings together.
 * **Another tile set.** Add a JSON file next to the others, with its images in `public/images/tiles/<id>/`. To draw
   one in code, copy `scripts/tilesets/starbase/` as a starting point and give it a `tiles:<id>` script. Then import
   the JSON in `main.js`, add it to `TILESET_DATA`, and add its id to `SHIPPED` in `test/support.js` so the tests check

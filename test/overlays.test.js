@@ -74,6 +74,36 @@ describe('decorating tile spots', () => {
     });
 });
 
+describe('limits and weights', () => {
+    const spots = [0, 2, 4, 6].map((x) => ({ kind: 'floor', rect: [x, 0, 2, 2], chance: 1 }));
+    const hearth = { id: 'hearth', image: 'hearth.png', spots: ['floor'], size: [1, 1], perRoom: 1, group: 'fire' };
+    const hearthTurned = { ...hearth, id: 'hearth-v', image: 'hearth-v.png' };
+
+    it('keeps an overlay to its perRoom limit across the room, counting its group together', () => {
+        const tileset = spotTileset({ spots, overlays: [hearth, hearthTurned, rat] });
+        const tile = tileset.tilesById.get('cross');
+        for (let i = 0; i < 20; i++) {
+            const rng = createRng(`limit-${i}`);
+            const counts = new Map();
+            const room = { id: 'hall#1' };
+            const placed = [0, 1, 2].flatMap(() => decorate(tileset, { tile, orientation: IDENTITY, exits: 0, room }, rng, counts));
+            assert.ok(placed.filter((d) => d.overlay.id.startsWith('hearth')).length <= 1);
+        }
+    });
+
+    it('doesn\'t limit overlays outside rooms', () => {
+        const tileset = spotTileset({ spots, overlays: [hearth] });
+        assert.equal(decorated(tileset).length, 4);
+    });
+
+    it('picks overlays in proportion to their weight', () => {
+        const tileset = spotTileset({ spots: [spots[0]], overlays: [{ ...rat, weight: 9 }, { ...rat, id: 'mouse', image: 'mouse.png' }] });
+        let rats = 0;
+        for (let i = 0; i < 400; i++) if (decorated(tileset, IDENTITY, `weight-${i}`)[0].overlay.id === 'rat') rats++;
+        assert.ok(rats > 320 && rats < 390, `${rats} rats`);
+    });
+});
+
 describe('blocking decorations', () => {
     it('close the walk cells they cover', () => {
         const tileset = spotTileset({ spots: [{ kind: 'floor', rect: [0, 0, 5, 5], chance: 1, canBlock: true }], overlays: [crate] });
@@ -102,6 +132,11 @@ describe('validating spots', () => {
 
     it('needs a known facing', () => {
         assert.match(errorsFor((data) => { data.tiles[1].spots = [{ kind: 'wall', rect: [0, 0, 4, 2], facing: 'up' }]; }), /facing/);
+    });
+
+    it('needs weights to be positive and perRoom a whole number', () => {
+        assert.match(errorsFor((data) => data.overlays.push({ ...rat, weight: 0 })), /weight must be a positive/);
+        assert.match(errorsFor((data) => data.overlays.push({ ...rat, perRoom: 1.5 })), /perRoom must be a whole number/);
     });
 
     it('needs spot overlays to have a size, and other overlays an offset', () => {
