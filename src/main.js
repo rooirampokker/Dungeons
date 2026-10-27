@@ -47,7 +47,7 @@ $(() => {
             seed: settings.seed,
             rooms: { enabled: settings.rooms },
         });
-        world = createWorld(dungeon, tileset);
+        world = createWorld(dungeon, tileset, { sight: settings.sight * tileset.subGrid });
         if (process.env.NODE_ENV !== 'production') {
             window.game = { world, renderer, tileset }; // for poking around in the browser console
         }
@@ -63,8 +63,8 @@ $(() => {
         const { tileSize } = readSettings();
         const images = await loadSceneImages(world.tileset, tileSize, world);
         if (request !== showRequest) return; // a newer request has started
-        const { debug } = readSettings(); // may have been toggled while the images loaded
-        renderer.show({ world, images: images.tiles, sprites: images.sprites, tileSize, debug });
+        const { debug, fog } = readSettings(); // may have been toggled while the images loaded
+        renderer.show({ world, images: images.tiles, sprites: images.sprites, tileSize, debug, fog });
         showDebugLegend(debug);
     }
 
@@ -84,6 +84,13 @@ $(() => {
         const { debug } = readSettings();
         renderer.setDebug(debug);
         showDebugLegend(debug);
+    });
+    $('#fog').on('change', () => renderer.setFog(readSettings().fog));
+    $('#sight').on('change', () => {
+        if (!world) return;
+        world.fog.setRadius(readSettings().sight * world.tileset.subGrid);
+        renderer.requestRender();
+        $viewport.trigger('focus'); // so the arrow keys move the hero rather than change the setting
     });
 
     onDirectionKey((direction) => {

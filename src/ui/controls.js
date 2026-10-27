@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import { DEFAULT_OPTIONS } from '../generation/generator.js';
+import { DEFAULT_SIGHT } from '../world/world.js';
 
 /**
  * The settings form and the summary line. Everything that reads or writes the page's controls lives here.
@@ -14,6 +15,8 @@ import { DEFAULT_OPTIONS } from '../generation/generator.js';
  * @property {string|null} seed
  * @property {boolean} rooms
  * @property {number} tileSize
+ * @property {boolean} fog
+ * @property {number} sight     How far the hero sees, in tiles.
  * @property {boolean} debug
  */
 
@@ -56,6 +59,8 @@ export function readSettings() {
         seed: String($('#seed').val()).trim() || null,
         rooms: $('#rooms').is(':checked'),
         tileSize: Number($('#tileSize').val()),
+        fog: $('#fog').is(':checked'),
+        sight: Number($('#sight').val()) || DEFAULT_SIGHT,
         debug: $('#debug').is(':checked'),
     };
 }

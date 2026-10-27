@@ -1,5 +1,6 @@
 import { STEP } from '../core/directions.js';
 import { parseCellKey } from '../tileset/tileset.js';
+import { Fog } from './fog.js';
 import { buildWalkGrid } from './walkGrid.js';
 
 /**
@@ -24,21 +25,28 @@ import { buildWalkGrid } from './walkGrid.js';
  * @property {WalkGrid} walk
  * @property {Entity[]} entities
  * @property {Entity} hero
+ * @property {Fog} fog          What the hero sees now and has seen so far.
  */
+
+/** How far the hero sees unless told otherwise, in tiles. */
+export const DEFAULT_SIGHT = 2;
 
 /**
  * @param {Dungeon} dungeon
  * @param {Tileset} tileset
+ * @param {{sight?: number}} [options]  sight: how far the hero sees, in walk cells. Default DEFAULT_SIGHT tiles.
  * @returns {World}
  */
-export function createWorld(dungeon, tileset) {
+export function createWorld(dungeon, tileset, { sight = DEFAULT_SIGHT * tileset.subGrid } = {}) {
     const walk = buildWalkGrid(dungeon, tileset);
     const hero = { id: 'hero', kind: 'hero', sprite: 'hero', ...spawnPoint(dungeon, tileset, walk) };
-    return { dungeon, tileset, walk, entities: [hero], hero };
+    const fog = new Fog(walk.width, walk.height, sight);
+    fog.look(hero.x, hero.y);
+    return { dungeon, tileset, walk, entities: [hero], hero, fog };
 }
 
 /**
- * Moves an entity one walk cell if the walk grid allows it.
+ * Moves an entity one walk cell if the walk grid allows it. The hero looks around from wherever they end up.
  * @param {World} world
  * @param {Entity} entity
  * @param {Direction} direction
@@ -48,6 +56,7 @@ export function moveEntity(world, entity, direction) {
     if (!world.walk.canMove(entity.x, entity.y, direction)) return false;
     entity.x += STEP[direction].dx;
     entity.y += STEP[direction].dy;
+    if (entity === world.hero) world.fog.look(entity.x, entity.y);
     return true;
 }
 

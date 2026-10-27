@@ -70,6 +70,20 @@ Move with **WASD** or the **arrow keys**; **Q**, **E**, **Z** and **C** move dia
 random dungeon, or type any word or number to get the same dungeon every time. **Tiles** switches tile set and
 builds a new dungeon with it.
 
+**Fog of war** comes in two layers, and both use the same circle around the hero:
+
+* The lower layer dims everything outside the hero's sight, so what they can see from where they stand is clear.
+* The upper layer starts black over the whole map and lifts for good wherever the hero has seen.
+
+So the map shows three things:
+
+* what the hero can see now;
+* where they've been, dimmed;
+* what they haven't found yet, black.
+
+**Sight** sets the circle's radius, from 1 to 4 tiles; the default is 2. Untick **Fog of war** to see the whole map.
+Sight isn't blocked by walls yet (see [Extending it](#extending-it)).
+
 **Debug grid** shows what still needs work:
 
 * red: tiles without a walk map yet, which the hero can't enter;
@@ -90,7 +104,7 @@ src/
   core/                 Directions and mirroring, and the seeded random number generator
   tileset/              Loads and checks tileset data, and indexes tiles for fast lookup
   generation/           Builds a Dungeon: start tile, rooms, corridors, overlays, reachability
-  world/                Game state: the walk grid, entities (the hero) and movement
+  world/                Game state: the walk grid, entities (the hero), movement and the fog of war
   render/               Canvas renderer: drawing layers, animation, image loading
   ui/                   jQuery code for the settings form and the keyboard
   data/                 Tilesets and sprites as JSON
@@ -128,6 +142,20 @@ Each tile is split into a 6 × 6 grid of walk cells. A tile's `walk` map lists, 
 move from it. When the dungeon is built, every tile's walk map is mirrored to match how the tile is drawn and copied
 into one `WalkGrid` for the whole dungeon. A move is allowed when the current cell permits it and the target cell can
 be stood on.
+
+### Fog of war
+
+`world/fog.js` keeps the fog at the same walk-cell resolution: for each cell, how clearly the hero has seen it, from
+0 (never) to 255. The hero looks around from where they spawn and after every move. That marks every cell within
+the sight radius, fading out over the last two cells so the fog's edges can be drawn soft. Nothing is ever unmarked.
+
+The renderer draws the fog as the top two layers in `render/layers.js`:
+
+* `drawSight` lays a dark radial gradient over the screen, clear around the hero and dim from the sight radius out.
+* `drawShroud` draws the visible part of the fog's map one pixel per walk cell, black where nothing has been seen,
+  and scales it up smoothly over the map.
+
+Both use the fog's own radius and fade, so the sight circle and the edge of what has been uncovered always line up.
 
 Tileset data
 ------------
@@ -288,9 +316,12 @@ Extending it
   one in code, copy `scripts/tilesets/starbase/` as a starting point and give it a `tiles:<id>` script. Then import
   the JSON in `main.js`, add it to `TILESET_DATA`, and add its id to `SHIPPED` in `test/support.js` so the tests check
   it too. Nothing else is tied to particular art.
-* **Fog of war.** Add drawing layers in `render/renderer.js` (`DEFAULT_LAYERS`), one for unexplored tiles and one for
-  explored tiles out of sight. Track what has been seen in the world, computed from the `WalkGrid`. A walk map
-  records movement, not sight, so line of sight will need walls marked in the tile data.
+* **Line of sight.** The fog of war is a plain circle, so the hero sees through walls into the next room. To stop
+  that, make `Fog.look()` cast rays from the hero and stop each ray at a wall. A walk map records movement, not
+  sight, so the walls will need marking in the tile data. The drawn tile sets can work them out from their floor
+  outlines, as they do the walk maps.
+* **Hidden creatures.** `world.fog.isVisible(x, y)` says whether the hero can see a cell now, so the renderer can
+  skip creatures out of sight.
 * **Creatures.** The world already keeps a list of `entities`; the hero is just the first. Creatures can use
   `moveEntity` and the same `WalkGrid` for pathfinding. Their sprites go in `src/data/sprites.json`, and the renderer
   animates any entity.

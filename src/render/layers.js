@@ -1,6 +1,8 @@
+import { EDGE } from '../world/fog.js';
+
 /**
  * Drawing layers, painted bottom to top every frame. Each layer only draws what's visible. New layers, such as
- * the two fog-of-war layers or creature health bars, slot into the list in renderer.js.
+ * creature health bars, slot into the list in renderer.js.
  *
  * @typedef {import('../world/world.js').World} World
  * @typedef {import('../world/world.js').Entity} Entity
@@ -13,6 +15,7 @@
  * @property {Map<string, HTMLImageElement|null>} sprites  Sprite images by sprite id.
  * @property {number} tileSize                             Tile size on screen, in CSS pixels.
  * @property {boolean} debug
+ * @property {boolean} fog                                 Draw the fog of war.
  *
  * @typedef {{x: number, y: number, width: number, height: number}} Box
  *
@@ -37,6 +40,9 @@ const DEBUG_UNREACHABLE = 'rgba(0, 0, 30, 0.55)';
 const DEBUG_CONFLICT = '#ff9800';
 const DEBUG_GRID = 'rgba(255, 255, 255, 0.15)';
 const DEBUG_WALKABLE = 'rgba(120, 255, 120, 0.8)';
+/** Over places the hero has seen but can't see now. */
+const FOG_DIM = 'rgba(6, 8, 18, 0.62)';
+const FOG_CLEAR = 'rgba(6, 8, 18, 0)';
 
 /** @type {Layer} */
 export function drawTiles(ctx, view, scene) {
@@ -131,6 +137,68 @@ export function drawEntities(ctx, view, scene) {
         const box = view.rect(x * cell + (cell - width) / 2, y * cell + (cell - height) / 2, width, height);
         ctx.drawImage(sprite, box.x, box.y, box.width, box.height);
     }
+}
+
+/**
+ * The lower fog layer: dims everything outside the hero's sight, so what they can see from where they stand stands
+ * out. Places they have never seen are covered by the shroud on top.
+ * @type {Layer}
+ */
+export function drawSight(ctx, view, scene) {
+    if (!scene.fog) return;
+    const { fog, hero } = scene.world;
+    const { x, y } = view.entityPosition(hero);
+    const centre = view.rect((x + 0.5) * view.cellSize, (y + 0.5) * view.cellSize, 0, 0);
+    const toCanvas = view.cellSize * view.pixelRatio;
+    // Clear inside the radius less EDGE, fading to dim at the radius: the same fade as the shroud's edge.
+    const gradient = ctx.createRadialGradient(centre.x, centre.y, (fog.radius - EDGE) * toCanvas, centre.x, centre.y, fog.radius * toCanvas);
+    gradient.addColorStop(0, FOG_CLEAR);
+    gradient.addColorStop(1, FOG_DIM);
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+}
+
+/** One pixel per walk cell, reused from frame to frame. */
+let shroudCanvas = null;
+
+/**
+ * The upper fog layer: black over everything the hero has never seen, lifting for good as they explore. The fog's
+ * walk-cell map is drawn one pixel per cell and scaled up smoothly, so the shroud's edge is soft.
+ * @type {Layer}
+ */
+export function drawShroud(ctx, view, scene) {
+    if (!scene.fog) return;
+    const { fog, tileset } = scene.world;
+    const size = tileset.subGrid;
+    // The visible tiles plus a cell all round, so the smoothing at the edges matches the cells beyond.
+    const left = view.firstCol * size - 1;
+    const top = view.firstRow * size - 1;
+    const width = (view.lastCol - view.firstCol + 1) * size + 2;
+    const height = (view.lastRow - view.firstRow + 1) * size + 2;
+
+    shroudCanvas ??= document.createElement('canvas');
+    if (shroudCanvas.width !== width || shroudCanvas.height !== height) {
+        shroudCanvas.width = width;
+        shroudCanvas.height = height;
+    }
+    const shroud = shroudCanvas.getContext('2d');
+    const image = shroud.createImageData(width, height);
+    for (let y = 0; y < height; y++) {
+        // Beyond the map, repeat the edge cells so the map's own edge isn't darkened.
+        const row = Math.min(fog.height - 1, Math.max(0, top + y)) * fog.width;
+        for (let x = 0; x < width; x++) {
+            const col = Math.min(fog.width - 1, Math.max(0, left + x));
+            image.data[(y * width + x) * 4 + 3] = 255 - fog.seen[row + col];
+        }
+    }
+    shroud.putImageData(image, 0, 0);
+
+    const box = view.rect(left * view.cellSize, top * view.cellSize, width * view.cellSize, height * view.cellSize);
+    ctx.save();
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(shroudCanvas, box.x, box.y, box.width, box.height);
+    ctx.restore();
 }
 
 /**
