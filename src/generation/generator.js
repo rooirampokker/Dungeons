@@ -1,5 +1,5 @@
 import { createRng, randomSeed } from '../core/rng.js';
-import { findReachable } from './connectivity.js';
+import { connectAll, findReachable } from './connectivity.js';
 import { Dungeon } from './dungeon.js';
 import { decorate } from './overlays.js';
 import { placeRooms } from './rooms.js';
@@ -10,7 +10,8 @@ import { chooseVariant, closestVariant, constraintsAt } from './selection.js';
  *   1. the start tile, somewhere on the top row;
  *   2. big rooms, stamped from the tileset's room templates;
  *   3. corridors, filled in row by row so every tile fits the neighbours already placed;
- *   4. overlays (decorations).
+ *   4. if `connect` is on, doors and openings wherever they join up parts of the map that can't be reached;
+ *   5. overlays (decorations).
  * A layout where too little of the map can be reached from the start is thrown away and another is tried.
  *
  * @typedef {import('../tileset/tileset.js').Tileset} Tileset
@@ -22,6 +23,7 @@ import { chooseVariant, closestVariant, constraintsAt } from './selection.js';
  * @property {number} rows
  * @property {string|number|null} seed  The same seed always gives the same dungeon. Random when null.
  * @property {RoomOptions} rooms
+ * @property {boolean} connect          Open up the way into every part of the map that can be reached no other way.
  * @property {number} minReachable      Share of tiles (0-1) that must be reachable from the start tile.
  * @property {number} maxAttempts       Layouts to try before settling for the best one.
  */
@@ -31,18 +33,29 @@ export const DEFAULT_OPTIONS = Object.freeze({
     cols: 20,
     rows: 9,
     seed: null,
-    rooms: Object.freeze({ enabled: true, max: null, templates: null, margin: 1, spacing: 1, attempts: null }),
+    rooms: Object.freeze({
+        enabled: true, max: null, templates: null, margin: 1, spacing: 1, attempts: null,
+        packed: false, adjoin: 0, minDoors: 0,
+    }),
+    connect: false,
     minReachable: 0.5,
     maxAttempts: 30,
 });
 
 /**
  * @param {Tileset} tileset
- * @param {Partial<Omit<GeneratorOptions, 'rooms'>> & {rooms?: Partial<RoomOptions>}} [options]
+ * @param {Partial<Omit<GeneratorOptions, 'rooms'>> & {rooms?: Partial<RoomOptions>}} [options]  These win over the
+ *        tileset's own `generation` options, which win over DEFAULT_OPTIONS.
  * @returns {Dungeon}
  */
 export function generateDungeon(tileset, options = {}) {
-    const settings = { ...DEFAULT_OPTIONS, ...options, rooms: { ...DEFAULT_OPTIONS.rooms, ...options.rooms } };
+    const own = tileset.generation ?? {};
+    const settings = {
+        ...DEFAULT_OPTIONS,
+        ...own,
+        ...options,
+        rooms: { ...DEFAULT_OPTIONS.rooms, ...own.rooms, ...options.rooms },
+    };
     for (const key of ['cols', 'rows']) {
         if (!Number.isInteger(settings[key]) || settings[key] < 2) {
             throw new RangeError(`${key} must be a whole number of at least 2`);
@@ -75,8 +88,10 @@ function buildLayout(tileset, settings, rng) {
     placeStart(dungeon, tileset, rng);
     placeRooms(dungeon, tileset, settings.rooms, rng);
     fillCorridors(dungeon, tileset, rng);
+    if (settings.connect) connectAll(dungeon, tileset, rng);
 
-    for (const cell of dungeon) cell.decorations = decorate(tileset, cell, rng);
+    const roomCounts = new Map();
+    for (const cell of dungeon) cell.decorations = decorate(tileset, cell, rng, roomCounts);
 
     dungeon.reachable = findReachable(dungeon, dungeon.start);
     const reachableCount = dungeon.reachable.reduce((sum, value) => sum + value, 0);

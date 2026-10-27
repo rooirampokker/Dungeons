@@ -78,6 +78,17 @@ describe('validateTileset', () => {
         }).join(), /no room piece for slot "c"/);
     });
 
+    it('reports room themes that are missing pieces, or given to tiles that aren\'t room pieces', () => {
+        assert.match(errorsFor((data) => { data.rooms[0].themes = ['kitchen']; }).join(), /no "kitchen" room piece for slot "nw"/);
+        assert.match(errorsFor((data) => { data.rooms[0].themes = []; }).join(), /themes must be a non-empty list/);
+        assert.match(errorsFor((data) => { data.tiles[1].theme = 'kitchen'; }).join(), /only room pieces have a theme/);
+    });
+
+    it('reports generation options that aren\'t objects', () => {
+        assert.match(errorsFor((data) => { data.generation = { rooms: 'packed' }; }).join(), /generation must be an object/);
+        assert.deepEqual(errorsFor((data) => { data.generation = { connect: true, rooms: { packed: true } }; }), []);
+    });
+
     it('reports a missing start tile', () => {
         assert.match(errorsFor((data) => { data.tiles = data.tiles.filter((t) => t.role !== 'start'); }).join(), /role "start"/);
     });

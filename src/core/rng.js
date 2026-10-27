@@ -7,6 +7,7 @@
  * @property {(min: number, max: number) => number} int   Integer in [min, max], both inclusive.
  * @property {(probability: number) => boolean} chance
  * @property {<T>(items: T[]) => T} pick      Undefined when `items` is empty.
+ * @property {<T>(items: T[]) => T[]} shuffle  A shuffled copy.
  */
 
 /**
@@ -29,6 +30,14 @@ export function createRng(seed) {
         int: (min, max) => min + Math.floor(next() * (max - min + 1)),
         chance: (probability) => next() < probability,
         pick: (items) => items[Math.floor(next() * items.length)],
+        shuffle: (items) => {
+            const copy = [...items];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(next() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        },
     };
 }
 

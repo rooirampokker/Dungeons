@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import { BIT, CARDINALS, OPPOSITE, STEP } from '../src/core/directions.js';
 import { createRng } from '../src/core/rng.js';
-import { generateDungeon } from '../src/generation/generator.js';
+import { DEFAULT_OPTIONS, generateDungeon } from '../src/generation/generator.js';
 import { chooseVariant } from '../src/generation/selection.js';
 import { createTileset, slotAt } from '../src/tileset/tileset.js';
 import { DRAWN, SHIPPED, shippedTileset, tinyTilesetData } from './support.js';
@@ -12,13 +12,37 @@ const allTilesets = SHIPPED.map((id) => shippedTileset(id));
 const SIZES = [[2, 2], [5, 3], [20, 9], [37, 23]];
 const SEEDS = Array.from({ length: 15 }, (_, i) => `test-${i}`);
 
-/** Dungeons of every test size and seed, from every shipped tileset. */
-function* dungeons() {
-    for (const set of allTilesets) {
+/** Dungeons of every test size and seed, from every shipped tileset (or just the ones given). */
+function* dungeons(sets = allTilesets) {
+    for (const set of sets) {
         for (const [cols, rows] of SIZES) {
             for (const seed of SEEDS) yield generateDungeon(set, { cols, rows, seed });
         }
     }
+}
+
+/** The tiny tileset with every room piece in two themes, 'red' and 'blue', and the hall able to be either. */
+function themedTinyTileset() {
+    const data = tinyTilesetData();
+    const pieces = data.tiles.filter((tile) => tile.role === 'room');
+    data.tiles = [
+        ...data.tiles.filter((tile) => tile.role !== 'room'),
+        ...['red', 'blue'].flatMap((theme) => pieces.map((piece) => ({ ...piece, id: `${theme}-${piece.id}`, theme }))),
+    ];
+    data.rooms = [{ id: 'hall', width: 2, height: 2, themes: ['red', 'blue'] }, { id: 'long', width: 3, height: 2, themes: ['red'] }];
+    return createTileset(data);
+}
+
+/** Exits from a room's pieces to outside it. */
+function doorsOf(dungeon, room) {
+    let doors = 0;
+    for (const cell of dungeon.cells.filter((c) => c.room === room)) {
+        for (const side of CARDINALS) {
+            const neighbour = dungeon.get(cell.row + STEP[side].dy, cell.col + STEP[side].dx);
+            if ((cell.exits & BIT[side]) && neighbour?.room !== room) doors++;
+        }
+    }
+    return doors;
 }
 
 const fingerprint = (dungeon) => dungeon.cells
@@ -61,24 +85,28 @@ describe('generateDungeon', () => {
         }
     });
 
-    it('builds rooms from the right pieces, away from the edge', () => {
+    it('builds rooms from the right pieces, keeping the margin from the edge', () => {
         let roomCount = 0;
-        for (const dungeon of dungeons()) {
-            for (const room of dungeon.rooms) {
-                roomCount++;
-                const { template } = room;
-                assert.ok(room.row >= 1 && room.col >= 1);
-                assert.ok(room.row + template.height < dungeon.rows && room.col + template.width < dungeon.cols);
-                for (let r = 0; r < template.height; r++) {
-                    for (let c = 0; c < template.width; c++) {
-                        const cell = dungeon.get(room.row + r, room.col + c);
-                        assert.equal(cell.room, room);
-                        assert.equal(cell.tile.roomSlot, slotAt(template, r, c));
+        for (const set of allTilesets) {
+            const margin = set.generation?.rooms?.margin ?? DEFAULT_OPTIONS.rooms.margin;
+            for (const dungeon of dungeons([set])) {
+                for (const room of dungeon.rooms) {
+                    roomCount++;
+                    const { template } = room;
+                    assert.ok(room.row >= margin && room.col >= margin);
+                    assert.ok(room.row + template.height <= dungeon.rows - margin && room.col + template.width <= dungeon.cols - margin);
+                    for (let r = 0; r < template.height; r++) {
+                        for (let c = 0; c < template.width; c++) {
+                            const cell = dungeon.get(room.row + r, room.col + c);
+                            assert.equal(cell.room, room);
+                            assert.equal(cell.tile.roomSlot, slotAt(template, r, c));
+                            assert.equal(cell.tile.theme, room.theme ?? undefined);
+                        }
                     }
                 }
+                const roomCells = dungeon.cells.filter((cell) => cell.room).length;
+                assert.equal(roomCells, dungeon.rooms.reduce((sum, room) => sum + room.template.width * room.template.height, 0));
             }
-            const roomCells = dungeon.cells.filter((cell) => cell.room).length;
-            assert.equal(roomCells, dungeon.rooms.reduce((sum, room) => sum + room.template.width * room.template.height, 0));
         }
         assert.ok(roomCount > 0, 'expected some rooms across all test dungeons');
     });
@@ -156,6 +184,81 @@ describe('generateDungeon', () => {
             assert.ok(cell.tile.tags.includes('empty'));
             const expected = cell.exits === (BIT.n | BIT.w) ? 'statue' : 'rug';
             assert.equal(cell.decorations[0].overlay.id, expected);
+        }
+    });
+
+    it('packs the map with rooms, each at least `spacing` from the next', () => {
+        const tiny = createTileset(tinyTilesetData());
+        for (const seed of SEEDS) {
+            const dungeon = generateDungeon(tiny, { cols: 20, rows: 14, seed, rooms: { packed: true, margin: 0, spacing: 1 } });
+            assert.ok(dungeon.rooms.length >= 6, `${seed}: only ${dungeon.rooms.length} rooms`);
+            for (const a of dungeon.rooms) {
+                for (const b of dungeon.rooms.filter((room) => room !== a)) {
+                    const apart = Math.max(
+                        b.row - (a.row + a.template.height), a.row - (b.row + b.template.height),
+                        b.col - (a.col + a.template.width), a.col - (b.col + b.template.width),
+                    );
+                    assert.ok(apart >= 1, `${seed}: ${a.id} and ${b.id} are too close`);
+                }
+            }
+        }
+    });
+
+    it('lets packed rooms adjoin, with doors that meet', () => {
+        const tiny = createTileset(tinyTilesetData());
+        let touching = 0;
+        for (const seed of SEEDS) {
+            const dungeon = generateDungeon(tiny, { cols: 20, rows: 14, seed, rooms: { packed: true, margin: 0, adjoin: 1 } });
+            assert.equal(dungeon.stats.conflicts, 0);
+            touching += dungeon.cells.filter((cell) => cell.room && CARDINALS.some((side) => {
+                const next = dungeon.get(cell.row + STEP[side].dy, cell.col + STEP[side].dx);
+                return next?.room && next.room !== cell.room;
+            })).length;
+        }
+        assert.ok(touching > 0, 'expected some rooms side by side');
+    });
+
+    it('builds each room from one theme, and tries every theme before repeating one', () => {
+        const themed = themedTinyTileset();
+        for (const seed of SEEDS) {
+            const dungeon = generateDungeon(themed, { cols: 16, rows: 12, seed, rooms: { packed: true, templates: ['hall'], margin: 0 } });
+            assert.ok(dungeon.rooms.length >= 2);
+            assert.notEqual(dungeon.rooms[0].theme, dungeon.rooms[1].theme);
+            for (const cell of dungeon.cells.filter((c) => c.room)) assert.equal(cell.tile.theme, cell.room.theme);
+        }
+    });
+
+    it('leaves out rooms that can\'t have enough doors', () => {
+        // The tiny tileset's corner pieces have no doors, so its 2 × 2 halls never do; the 3 × 2 halls always do.
+        const themed = themedTinyTileset();
+        for (const seed of SEEDS) {
+            const dungeon = generateDungeon(themed, { cols: 16, rows: 12, seed, rooms: { packed: true, margin: 0, minDoors: 1 } });
+            assert.ok(dungeon.rooms.length > 0);
+            for (const room of dungeon.rooms) {
+                assert.equal(room.template.id, 'long');
+                assert.ok(doorsOf(dungeon, room) >= 1);
+            }
+        }
+    });
+
+    it('opens the way into every part of the map when asked to connect it', () => {
+        const tiny = createTileset(tinyTilesetData());
+        for (const seed of SEEDS) {
+            const dungeon = generateDungeon(tiny, { cols: 20, rows: 12, seed, connect: true });
+            const stranded = dungeon.cells.filter((cell) => cell.tile.role !== 'filler' && !dungeon.isReachable(cell.row, cell.col));
+            assert.deepEqual(stranded.map((cell) => `${cell.row},${cell.col}`), [], seed);
+            assert.equal(dungeon.stats.conflicts, 0);
+        }
+    });
+
+    it('lays the manor out as rooms, nearly all reachable', () => {
+        const manor = shippedTileset('manor');
+        for (const seed of SEEDS) {
+            const dungeon = generateDungeon(manor, { cols: 20, rows: 9, seed });
+            const roomTiles = dungeon.cells.filter((cell) => cell.room).length;
+            assert.ok(roomTiles >= dungeon.cells.length / 2, `${seed}: only ${roomTiles} room tiles`);
+            assert.ok(dungeon.rooms.every((room) => dungeon.isReachable(room.row, room.col)), `${seed}: a room can't be reached`);
+            assert.ok(dungeon.rooms.every((room) => doorsOf(dungeon, room) >= 1));
         }
     });
 

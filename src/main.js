@@ -3,6 +3,7 @@ import sprites from './data/sprites.json';
 import dundjinni from './data/tilesets/dundjinni.json';
 import fairywood from './data/tilesets/fairywood.json';
 import gormenghast from './data/tilesets/gormenghast.json';
+import manor from './data/tilesets/manor.json';
 import starbase from './data/tilesets/starbase.json';
 import { generateDungeon } from './generation/generator.js';
 import { loadImages } from './render/images.js';
@@ -20,7 +21,7 @@ import { createWorld, moveEntity } from './world/world.js';
  */
 
 /** Tilesets in the order the picker lists them; the first is the default. */
-const TILESET_DATA = [dundjinni, gormenghast, starbase, fairywood];
+const TILESET_DATA = [dundjinni, gormenghast, starbase, fairywood, manor];
 
 $(() => {
     const tilesets = TILESET_DATA.map(createTileset);

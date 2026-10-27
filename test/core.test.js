@@ -67,4 +67,12 @@ describe('rng', () => {
         assert.ok(['a', 'b'].includes(rng.pick(['a', 'b'])));
         assert.equal(rng.pick([]), undefined);
     });
+
+    it('shuffles a copy, the same way for the same seed', () => {
+        const items = ['a', 'b', 'c', 'd', 'e', 'f'];
+        const shuffled = createRng(3).shuffle(items);
+        assert.deepEqual([...shuffled].sort(), items);
+        assert.deepEqual(createRng(3).shuffle(items), shuffled);
+        assert.deepEqual(items, ['a', 'b', 'c', 'd', 'e', 'f']);
+    });
 });
