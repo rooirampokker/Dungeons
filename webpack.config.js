@@ -1,38 +1,14 @@
-const path = require('path');
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-module.exports = {
-    mode: 'development',
-    entry: './src/assets/app.js',
+const root = path.dirname(fileURLToPath(import.meta.url));
+
+// Bundles src/ into public/js/bundle.js. public/ is the whole site: open public/index.html or deploy the folder.
+export default (env, argv) => ({
+    entry: './src/main.js',
     output: {
-        filename: './assets/javascript/bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(root, 'public/js'),
+        filename: 'bundle.js',
     },
-    devtool: 'inline-source-map',
-
-    plugins: [
-        new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
-            filename: "./assets/css/bundle.css",
-            chunkFilename: "./assets/css/[id].css"
-        }),
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery",
-            "window.jQuery": "jquery"
-        })
-    ],
-    module: {
-        rules: [
-            {
-                test: /\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    "css-loader"
-                ]
-            },
-        ]
-    }
-};
+    devtool: argv.mode === 'production' ? false : 'source-map',
+});

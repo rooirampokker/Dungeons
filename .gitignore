@@ -39,6 +39,7 @@ Thumbs.db
 # Webpack and generated files
 ######################
 dist/
+public/js/
 node_modules/
 package-lock.json
 

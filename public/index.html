@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Browser Dungeons</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/bundle.js" defer></script>
+</head>
+<body>
+    <header class="toolbar">
+        <form id="settings" class="settings">
+            <label>Width <input type="number" id="cols" min="2" max="200" value="20"></label>
+            <label>Height <input type="number" id="rows" min="2" max="200" value="9"></label>
+            <label>Tile size <select id="tileSize"></select></label>
+            <label>Seed <input type="text" id="seed" placeholder="random" size="10" autocomplete="off"></label>
+            <label><input type="checkbox" id="rooms" checked> Large chambers</label>
+            <label><input type="checkbox" id="debug"> Debug grid</label>
+            <button type="submit">Generate</button>
+        </form>
+        <p class="info">
+            <span id="summary"></span>
+            <span class="help">Move with WASD or the arrow keys. Q, E, Z and C move diagonally.</span>
+        </p>
+        <p id="debugLegend" class="legend" hidden>
+            <span class="swatch unmapped"></span> No walk map yet
+            <span class="swatch unreachable"></span> Not reachable from the start
+            <span class="swatch conflict"></span> Doesn't fit its neighbours
+            <span class="swatch walkable"></span> Walkable cell
+        </p>
+    </header>
+    <main id="viewport" class="viewport" tabindex="0" aria-label="Dungeon map"></main>
+    <noscript>Browser Dungeons needs JavaScript. If you're running it from source, build it first with npm run build.</noscript>
+</body>
+</html>
