@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { Animator } from './animator.js';
-import { drawDebug, drawEntities, drawOverlays, drawTiles } from './layers.js';
+import { drawDebug, drawEntities, drawOverlays, drawShroud, drawSight, drawTiles } from './layers.js';
 
 /**
  * Draws a scene on a canvas the size of the visible area, so map size doesn't affect memory or drawing time.
@@ -14,8 +14,11 @@ import { drawDebug, drawEntities, drawOverlays, drawTiles } from './layers.js';
  * @typedef {import('../core/directions.js').Direction} Direction
  */
 
-/** @type {Layer[]} */
-export const DEFAULT_LAYERS = [drawTiles, drawOverlays, drawDebug, drawEntities];
+/**
+ * Bottom to top. The two fog layers go over everything: what's out of sight is dimmed, what's never been seen hidden.
+ * @type {Layer[]}
+ */
+export const DEFAULT_LAYERS = [drawTiles, drawOverlays, drawDebug, drawEntities, drawSight, drawShroud];
 
 export class Renderer {
     /**
@@ -52,6 +55,13 @@ export class Renderer {
     setDebug(debug) {
         if (!this.scene) return;
         this.scene.debug = debug;
+        this.requestRender();
+    }
+
+    /** @param {boolean} fog */
+    setFog(fog) {
+        if (!this.scene) return;
+        this.scene.fog = fog;
         this.requestRender();
     }
 
