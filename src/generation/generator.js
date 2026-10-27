@@ -1,7 +1,7 @@
 import { createRng, randomSeed } from '../core/rng.js';
 import { findReachable } from './connectivity.js';
 import { Dungeon } from './dungeon.js';
-import { chooseOverlay } from './overlays.js';
+import { decorate } from './overlays.js';
 import { placeRooms } from './rooms.js';
 import { chooseVariant, closestVariant, constraintsAt } from './selection.js';
 
@@ -76,7 +76,7 @@ function buildLayout(tileset, settings, rng) {
     placeRooms(dungeon, tileset, settings.rooms, rng);
     fillCorridors(dungeon, tileset, rng);
 
-    for (const cell of dungeon) cell.overlay = chooseOverlay(tileset, cell, rng);
+    for (const cell of dungeon) cell.decorations = decorate(tileset, cell, rng);
 
     dungeon.reachable = findReachable(dungeon, dungeon.start);
     const reachableCount = dungeon.reachable.reduce((sum, value) => sum + value, 0);

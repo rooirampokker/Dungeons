@@ -44,8 +44,8 @@ export function constraintsAt(dungeon, row, col, mustConnect = () => false) {
 }
 
 /**
- * A random variant that satisfies the constraints, or null if none does. Each matching tile is equally likely,
- * however many of its orientations match.
+ * A random variant that satisfies the constraints, or null if none does. Matching tiles are picked in proportion
+ * to their weight (1 unless the tileset says otherwise), however many of their orientations match.
  * @param {Tileset} tileset
  * @param {TileRole} role
  * @param {Constraints} constraints
@@ -55,7 +55,22 @@ export function constraintsAt(dungeon, row, col, mustConnect = () => false) {
  */
 export function chooseVariant(tileset, role, { required, forbidden }, rng, slot) {
     const byTile = tileset.candidates(role, required, forbidden, slot);
-    return byTile.length ? rng.pick(rng.pick(byTile)) : null;
+    return byTile.length ? rng.pick(pickWeighted(byTile, rng)) : null;
+}
+
+/**
+ * @param {Variant[][]} byTile  Variants grouped by tile.
+ * @param {Rng} rng
+ * @returns {Variant[]}
+ */
+function pickWeighted(byTile, rng) {
+    const weightOf = (group) => group[0].tile.weight ?? 1;
+    let roll = rng.next() * byTile.reduce((sum, group) => sum + weightOf(group), 0);
+    for (const group of byTile) {
+        roll -= weightOf(group);
+        if (roll < 0) return group;
+    }
+    return byTile[byTile.length - 1];
 }
 
 /**

@@ -8,6 +8,7 @@ import { DEFAULT_OPTIONS } from '../generation/generator.js';
  * @typedef {import('../generation/dungeon.js').Dungeon} Dungeon
  *
  * @typedef {object} Settings
+ * @property {string} tileset   Tileset id.
  * @property {number} cols
  * @property {number} rows
  * @property {string|null} seed
@@ -19,21 +20,37 @@ import { DEFAULT_OPTIONS } from '../generation/generator.js';
 const MAX_SIZE = 200;
 
 /**
- * Fills the tile size picker from the tileset, largest selected.
+ * Fills the tileset picker, first one selected.
+ * @param {Tileset[]} tilesets
+ */
+export function setUpTilesets(tilesets) {
+    const $select = $('#tileset').empty();
+    for (const tileset of tilesets) {
+        $('<option>').val(tileset.id).text(tileset.name).appendTo($select);
+    }
+    $select.val(tilesets[0].id);
+}
+
+/**
+ * Fills the tile size picker from the tileset, keeping the current size if the tileset has it and otherwise
+ * selecting the largest.
  * @param {Tileset} tileset
  */
 export function setUpTileSizes(tileset) {
     const sizes = Object.keys(tileset.resolutions).map(Number).sort((a, b) => a - b);
-    const $select = $('#tileSize').empty();
+    const $select = $('#tileSize');
+    const current = Number($select.val());
+    $select.empty();
     for (const size of sizes) {
         $('<option>').val(size).text(`${size} × ${size}`).appendTo($select);
     }
-    $select.val(String(sizes[sizes.length - 1]));
+    $select.val(String(sizes.includes(current) ? current : sizes[sizes.length - 1]));
 }
 
 /** @returns {Settings} */
 export function readSettings() {
     return {
+        tileset: String($('#tileset').val()),
         cols: readSize('#cols', DEFAULT_OPTIONS.cols),
         rows: readSize('#rows', DEFAULT_OPTIONS.rows),
         seed: String($('#seed').val()).trim() || null,

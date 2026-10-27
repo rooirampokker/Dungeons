@@ -1,16 +1,21 @@
 import { readFileSync } from 'node:fs';
 import { createTileset } from '../src/tileset/tileset.js';
 
-export const TILESET_PATH = new URL('../src/data/tilesets/dundjinni.json', import.meta.url);
 export const PUBLIC_DIR = new URL('../public/', import.meta.url);
 
-/** The tileset data the game ships with, as plain JSON. */
-export function shippedTilesetData() {
-    return JSON.parse(readFileSync(TILESET_PATH, 'utf8'));
+/** Ids of the tilesets the game ships with. */
+export const SHIPPED = ['dundjinni', 'gormenghast', 'starbase', 'fairywood'];
+
+/** The shipped tilesets that are drawn in code, so every tile is fully mapped. */
+export const DRAWN = ['gormenghast', 'starbase', 'fairywood'];
+
+/** A shipped tileset's data, as plain JSON. */
+export function shippedTilesetData(id = 'dundjinni') {
+    return JSON.parse(readFileSync(new URL(`../src/data/tilesets/${id}.json`, import.meta.url), 'utf8'));
 }
 
-export function shippedTileset() {
-    return createTileset(shippedTilesetData());
+export function shippedTileset(id = 'dundjinni') {
+    return createTileset(shippedTilesetData(id));
 }
 
 /**

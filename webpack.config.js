@@ -11,4 +11,7 @@ export default (env, argv) => ({
         filename: 'bundle.js',
     },
     devtool: argv.mode === 'production' ? false : 'source-map',
+    // The tilesets' data is bundled rather than fetched, so the page still works opened straight from disk. That puts
+    // the bundle over webpack's default 244 KiB advice; it compresses to well under 100 KiB when served.
+    performance: { maxAssetSize: 512 * 1024, maxEntrypointSize: 512 * 1024 },
 });

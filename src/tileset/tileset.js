@@ -22,9 +22,24 @@ import {
  * @property {string[]} tags                Free-form descriptors, e.g. 'passage', 'empty', 'deadend'.
  * @property {RoomSlot} [roomSlot]          Room pieces: which part of a room the piece forms.
  * @property {boolean} [fixedOrientation]   Never mirror this tile. Room pieces are never mirrored.
+ * @property {number} [weight]              How often the generator picks this tile compared with others that fit
+ *                                          (default 1). Below 1 makes it rarer.
  * @property {string} [spawn]               Start tile: "row,col" sub-cell where the hero appears.
  * @property {Object<string, Direction[]>} [walk]  "row,col" sub-cell → directions you can move from it.
  *                                          Tiles without a walk map can't be entered yet.
+ * @property {SpotDef[]} [spots]            Places on the tile where overlays can go. Tiles without spots take at
+ *                                          most one overlay, at the overlay's own offset.
+ *
+ * @typedef {'n'|'e'|'s'|'w'|'nw'|'ne'|'sw'|'se'} Facing
+ *
+ * @typedef {object} SpotDef                A place on a tile where a decoration can go.
+ * @property {string} kind                  Free-form, matched against OverlayDef.spots, e.g. 'floor', 'corner'.
+ * @property {[number, number, number, number]} rect  [x, y, width, height] in pixels at referenceSize, as drawn.
+ * @property {Facing} [facing]              The wall or corner the spot is against. Overlays are drawn against the
+ *                                          north wall (or the west wall, or the north-west corner); facing says
+ *                                          how to mirror them to suit this spot, and which edge to keep them to.
+ * @property {boolean} [canBlock]           Blocking overlays may go here without cutting the tile in two.
+ * @property {number} [chance]              Chance (0-1) the spot gets a decoration. Default: overlayChance.
  *
  * @typedef {object} RoomTemplate
  * @property {string} id
@@ -33,13 +48,20 @@ import {
  * @property {RoomSlot[][]} [slots]         Slot for each cell, row by row. Inferred from position when omitted:
  *                                          corners, edges ('n', 'e', 's', 'w') and centre ('c').
  *
- * @typedef {object} OverlayDef             A decoration drawn on top of a tile, unmirrored.
+ * @typedef {object} OverlayDef             A decoration drawn on top of a tile. Either fixed in place (`offset`) or
+ *                                          placed on tile spots (`spots`).
  * @property {string} id
  * @property {string} image
- * @property {[number, number]} offset      [x, y] in pixels at the tileset's referenceSize.
- * @property {string[]} onTags              Only placed on tiles that have every one of these tags.
- * @property {Cardinal[]} [onExits]         Only placed on tiles with exactly these exits. Preferred over overlays
- *                                          without onExits whenever one fits.
+ * @property {[number, number]} [offset]    Fixed overlays: [x, y] in pixels at referenceSize. Drawn unmirrored.
+ * @property {string[]} [spots]             Spot overlays: the spot kinds this overlay suits.
+ * @property {[number, number]} [size]      Spot overlays: footprint [width, height] in pixels at referenceSize.
+ *                                          It must fit inside the spot. The image is centred on the footprint and
+ *                                          may be larger, e.g. to include a glow.
+ * @property {boolean} [blocks]             Spot overlays: the hero can't walk through it. Only placed on spots
+ *                                          marked canBlock.
+ * @property {string[]} [onTags]            Only placed on tiles that have every one of these tags.
+ * @property {Cardinal[]} [onExits]         Fixed overlays: only placed on tiles with exactly these exits. Preferred
+ *                                          over overlays without onExits whenever one fits.
  *
  * @typedef {object} TilesetData            The JSON file's shape.
  * @property {string} id
@@ -48,7 +70,9 @@ import {
  * @property {number} referenceSize         Pixel size that overlay offsets and sprite sizes are measured in.
  * @property {number} subGrid               Walk cells per tile side.
  * @property {Object<string, string>} resolutions  Tile pixel size → image folder, relative to index.html.
- * @property {number} overlayChance         Chance (0-1) that a tile with matching overlays gets one.
+ * @property {number} overlayChance         Chance (0-1) that a tile, or a spot, with matching overlays gets one.
+ * @property {Object<string, string>} [sprites]  Sprite id → image, relative to index.html, replacing the game's
+ *                                          default sprite while this tileset is in use (e.g. a different hero).
  * @property {RoomTemplate[]} rooms
  * @property {TileDef[]} tiles
  * @property {OverlayDef[]} overlays
@@ -137,6 +161,9 @@ export function validateTileset(data) {
     if (!data.resolutions || Object.keys(data.resolutions).length === 0) {
         errors.push('resolutions must list at least one tile size');
     }
+    if (data.sprites !== undefined && (typeof data.sprites !== 'object' || !Object.values(data.sprites).every((url) => typeof url === 'string'))) {
+        errors.push('sprites must map sprite ids to image paths');
+    }
     if (!Array.isArray(data.tiles) || data.tiles.length === 0) {
         errors.push('tiles must be a non-empty list');
         return { errors, warnings };
@@ -158,11 +185,15 @@ export function validateTileset(data) {
             errors.push(`${where}: exits must be a list of n, e, s, w`);
         }
         if (!Array.isArray(tile.tags)) errors.push(`${where}: tags must be a list`);
+        if (tile.weight !== undefined && !(tile.weight > 0)) errors.push(`${where}: weight must be a positive number`);
         if (tile.role === 'room' && !ROOM_SLOTS.includes(tile.roomSlot)) {
             errors.push(`${where}: room pieces need a roomSlot (${ROOM_SLOTS.join(', ')})`);
         }
         if (tile.spawn !== undefined && !tile.walk?.[tile.spawn]) {
             errors.push(`${where}: spawn "${tile.spawn}" is not a walkable cell`);
+        }
+        for (const [index, spot] of (tile.spots ?? []).entries()) {
+            errors.push(...spotErrors(spot, data.referenceSize).map((problem) => `${where}: spot ${index + 1} ${problem}`));
         }
         if (!tile.walk) {
             warnings.push(`${where}: no walk map yet, so it can't be entered`);
@@ -201,13 +232,21 @@ export function validateTileset(data) {
         }
     }
 
+    const spotKinds = new Set(data.tiles.flatMap((tile) => (tile.spots ?? []).map((spot) => spot.kind)));
     for (const overlay of data.overlays ?? []) {
         const where = `overlay "${overlay.id}"`;
         if (!overlay.id || !overlay.image) errors.push(`${where}: needs an id and an image`);
-        if (!Array.isArray(overlay.offset) || overlay.offset.length !== 2) errors.push(`${where}: offset must be [x, y]`);
-        if (!Array.isArray(overlay.onTags)) errors.push(`${where}: onTags must be a list`);
+        if (overlay.onTags !== undefined && !Array.isArray(overlay.onTags)) errors.push(`${where}: onTags must be a list`);
         if (overlay.onExits && !overlay.onExits.every((side) => CARDINALS.includes(side))) {
             errors.push(`${where}: onExits must be a list of n, e, s, w`);
+        }
+        if (Array.isArray(overlay.spots)) {
+            if (!isPair(overlay.size)) errors.push(`${where}: spot overlays need a size [width, height]`);
+            if (!overlay.spots.some((kind) => spotKinds.has(kind))) {
+                warnings.push(`${where}: no tile has a spot of kind ${overlay.spots.join(' or ')}`);
+            }
+        } else if (!isPair(overlay.offset)) {
+            errors.push(`${where}: needs either an offset [x, y] or a list of spots`);
         }
     }
 
@@ -246,6 +285,27 @@ export function parseCellKey(key, size) {
     const row = Number(match[1]);
     const col = Number(match[2]);
     return row < size && col < size ? { row, col } : null;
+}
+
+const FACINGS = ['n', 'e', 's', 'w', 'nw', 'ne', 'sw', 'se'];
+
+/** @param {SpotDef} spot */
+function spotErrors(spot, size) {
+    const problems = [];
+    if (typeof spot.kind !== 'string' || !spot.kind) problems.push('needs a kind');
+    const [x, y, width, height] = Array.isArray(spot.rect) ? spot.rect : [];
+    if (![x, y, width, height].every(Number.isFinite) || width <= 0 || height <= 0) {
+        problems.push('rect must be [x, y, width, height]');
+    } else if (x < -0.01 || y < -0.01 || x + width > size + 0.01 || y + height > size + 0.01) {
+        problems.push('rect must lie inside the tile');
+    }
+    if (spot.facing !== undefined && !FACINGS.includes(spot.facing)) problems.push(`facing must be one of ${FACINGS.join(', ')}`);
+    if (spot.chance !== undefined && !(spot.chance >= 0 && spot.chance <= 1)) problems.push('chance must be between 0 and 1');
+    return problems;
+}
+
+function isPair(value) {
+    return Array.isArray(value) && value.length === 2 && value.every(Number.isFinite);
 }
 
 function variantKey(role, slot) {

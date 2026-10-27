@@ -42,6 +42,9 @@ export class WalkGrid {
     }
 }
 
+/** A blocking decoration closes every walk cell it covers at least this much of. */
+export const BLOCKING_COVERAGE = 0.35;
+
 /**
  * @param {Dungeon} dungeon
  * @param {Tileset} tileset
@@ -63,6 +66,32 @@ export function buildWalkGrid(dungeon, tileset) {
                 grid.cells[y * grid.width + x] = WALKABLE | orientMask(value & 0xff, cell.orientation);
             }
         }
+
+        for (const decoration of cell.decorations) {
+            if (!decoration.overlay.blocks) continue;
+            for (const { row, col } of coveredCells(decoration, tileset.referenceSize / size, size)) {
+                grid.cells[(cell.row * size + row) * grid.width + cell.col * size + col] = 0;
+            }
+        }
     }
     return grid;
+}
+
+/**
+ * Walk cells (row, col within the tile) that a footprint covers enough of to block.
+ * @param {{x: number, y: number, width: number, height: number}} footprint  In pixels at referenceSize.
+ * @param {number} cellSize  Walk cell size in the same pixels.
+ * @param {number} size      Walk cells per tile side.
+ */
+export function coveredCells({ x, y, width, height }, cellSize, size) {
+    const overlap = (a0, a1, b0, b1) => Math.max(0, Math.min(a1, b1) - Math.max(a0, b0));
+    const covered = [];
+    for (let row = 0; row < size; row++) {
+        for (let col = 0; col < size; col++) {
+            const area = overlap(x, x + width, col * cellSize, (col + 1) * cellSize)
+                * overlap(y, y + height, row * cellSize, (row + 1) * cellSize);
+            if (area >= BLOCKING_COVERAGE * cellSize * cellSize) covered.push({ row, col });
+        }
+    }
+    return covered;
 }

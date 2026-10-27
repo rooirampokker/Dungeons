@@ -1,22 +1,28 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import { BIT, CARDINALS, OPPOSITE, STEP } from '../src/core/directions.js';
+import { createRng } from '../src/core/rng.js';
 import { generateDungeon } from '../src/generation/generator.js';
+import { chooseVariant } from '../src/generation/selection.js';
 import { createTileset, slotAt } from '../src/tileset/tileset.js';
-import { shippedTileset, tinyTilesetData } from './support.js';
+import { DRAWN, SHIPPED, shippedTileset, tinyTilesetData } from './support.js';
 
 const tileset = shippedTileset();
+const allTilesets = SHIPPED.map((id) => shippedTileset(id));
 const SIZES = [[2, 2], [5, 3], [20, 9], [37, 23]];
 const SEEDS = Array.from({ length: 15 }, (_, i) => `test-${i}`);
 
+/** Dungeons of every test size and seed, from every shipped tileset. */
 function* dungeons() {
-    for (const [cols, rows] of SIZES) {
-        for (const seed of SEEDS) yield generateDungeon(tileset, { cols, rows, seed });
+    for (const set of allTilesets) {
+        for (const [cols, rows] of SIZES) {
+            for (const seed of SEEDS) yield generateDungeon(set, { cols, rows, seed });
+        }
     }
 }
 
 const fingerprint = (dungeon) => dungeon.cells
-    .map((cell) => `${cell.tile.id}:${+cell.orientation.flipH}${+cell.orientation.flipV}:${cell.overlay?.id ?? ''}`)
+    .map((cell) => `${cell.tile.id}:${+cell.orientation.flipH}${+cell.orientation.flipV}:${cell.decorations.map((d) => d.overlay.id)}`)
     .join('|');
 
 describe('generateDungeon', () => {
@@ -98,11 +104,30 @@ describe('generateDungeon', () => {
     });
 
     it('retries until enough of the map is reachable', () => {
-        for (const seed of SEEDS) {
-            const dungeon = generateDungeon(tileset, { cols: 20, rows: 9, seed, minReachable: 0.6, maxAttempts: 50 });
-            assert.ok(dungeon.stats.reachableRatio >= 0.6, `seed ${seed}: ${dungeon.stats.reachableRatio}`);
-            assert.ok(dungeon.isReachable(dungeon.start.row, dungeon.start.col));
+        for (const set of allTilesets) {
+            for (const seed of SEEDS) {
+                const dungeon = generateDungeon(set, { cols: 20, rows: 9, seed, minReachable: 0.6, maxAttempts: 50 });
+                assert.ok(dungeon.stats.reachableRatio >= 0.6, `${set.id} seed ${seed}: ${dungeon.stats.reachableRatio}`);
+                assert.ok(dungeon.isReachable(dungeon.start.row, dungeon.start.col));
+            }
         }
+    });
+
+    it('picks tiles in proportion to their weight', () => {
+        const pickStraight = (weight) => {
+            const data = tinyTilesetData();
+            data.tiles.find((tile) => tile.id === 'straight').weight = weight;
+            const tiny = createTileset(data);
+            const rng = createRng('weights');
+            let count = 0;
+            for (let i = 0; i < 1000; i++) {
+                // Six corridor tiles can open north with the other sides free.
+                if (chooseVariant(tiny, 'corridor', { required: BIT.n, forbidden: 0 }, rng).tile.id === 'straight') count++;
+            }
+            return count;
+        };
+        assert.ok(pickStraight(1) < 250, 'one in six with equal weights');
+        assert.ok(pickStraight(50) > 850, 'fifty in fifty-five when weighted up');
     });
 
     it('rejects sizes below 2 × 2', () => {
@@ -121,15 +146,28 @@ describe('generateDungeon', () => {
         }
     });
 
-    it('puts exit-specific overlays only on tiles with exactly those exits', () => {
+    it('puts exit-specific fixed overlays only on tiles with exactly those exits', () => {
         const tiny = createTileset(tinyTilesetData());
         const dungeon = generateDungeon(tiny, { cols: 15, rows: 12, seed: 'overlays', rooms: { max: 4 } });
-        const decorated = dungeon.cells.filter((cell) => cell.overlay);
+        const decorated = dungeon.cells.filter((cell) => cell.decorations.length);
         assert.ok(decorated.length > 0);
         for (const cell of decorated) {
+            assert.equal(cell.decorations.length, 1);
             assert.ok(cell.tile.tags.includes('empty'));
             const expected = cell.exits === (BIT.n | BIT.w) ? 'statue' : 'rug';
-            assert.equal(cell.overlay.id, expected);
+            assert.equal(cell.decorations[0].overlay.id, expected);
         }
     });
+
+    for (const id of DRAWN) {
+        it(`decorates ${id} tiles through their spots`, () => {
+            const dungeon = generateDungeon(shippedTileset(id), { cols: 20, rows: 9, seed: 'spots' });
+            const decorations = dungeon.cells.flatMap((cell) => cell.decorations.map((decoration) => ({ cell, decoration })));
+            assert.ok(decorations.length > dungeon.cells.length / 2);
+            for (const { cell, decoration } of decorations) {
+                const { x, y, width, height } = decoration;
+                assert.ok(x >= -0.01 && y >= -0.01 && x + width <= 140.01 && y + height <= 140.01, `${cell.tile.id}: ${decoration.overlay.id} leaves the tile`);
+            }
+        });
+    }
 });
