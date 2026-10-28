@@ -6,7 +6,7 @@ import { generateDungeon } from '../src/generation/generator.js';
 import { createTileset, WALKABLE } from '../src/tileset/tileset.js';
 import { buildWalkGrid } from '../src/world/walkGrid.js';
 import { createWorld, moveEntity } from '../src/world/world.js';
-import { DRAWN, SHIPPED, shippedTileset, tinyTilesetData } from './support.js';
+import { SHIPPED, shippedTileset, tinyTilesetData } from './support.js';
 
 const tiny = createTileset(tinyTilesetData());
 const variant = (id, orientation = IDENTITY) => tiny.variants(tiny.tilesById.get(id).role)
@@ -81,9 +81,9 @@ describe('movement', () => {
         }
     });
 
-    for (const id of DRAWN) {
+    for (const id of SHIPPED) {
         it(`lets the hero walk from tile to tile through a whole ${id} dungeon`, () => {
-            // Every tile in the drawn sets is fully mapped, so wherever the tiles connect, the walk cells must too.
+            // Every shipped tile is fully mapped, so wherever the tiles connect, the walk cells must too.
             const tileset = shippedTileset(id);
             const dungeon = generateDungeon(tileset, { cols: 20, rows: 9, seed: 'explore' });
             const world = createWorld(dungeon, tileset);

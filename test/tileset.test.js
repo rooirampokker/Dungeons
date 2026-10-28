@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 import { describe, it } from 'node:test';
 import { BIT } from '../src/core/directions.js';
 import { createTileset, slotAt, validateTileset } from '../src/tileset/tileset.js';
-import { DRAWN, PUBLIC_DIR, SHIPPED, shippedTilesetData, tinyTilesetData } from './support.js';
+import { PUBLIC_DIR, SHIPPED, shippedTilesetData, tinyTilesetData } from './support.js';
 
 for (const id of SHIPPED) {
     describe(`the ${id} tileset`, () => {
@@ -26,17 +26,13 @@ for (const id of SHIPPED) {
             assert.ok(!warnings.some((warning) => warning.startsWith('no corridor tile')), warnings.join('\n'));
         });
 
+        it('has a complete walk map for every tile, with no one-way moves', () => {
+            assert.deepEqual(validateTileset(data).warnings, []);
+        });
+
         it('has an image for every sprite it brings', () => {
             const missing = Object.values(data.sprites ?? {}).filter((file) => !existsSync(new URL(file, PUBLIC_DIR)));
             assert.deepEqual(missing, []);
-        });
-    });
-}
-
-for (const id of DRAWN) {
-    describe(`the ${id} tileset`, () => {
-        it('has a complete walk map for every tile, since they are drawn from the same shapes', () => {
-            assert.deepEqual(validateTileset(shippedTilesetData(id)).warnings, []);
         });
     });
 }

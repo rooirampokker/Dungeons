@@ -6,7 +6,7 @@ export const PUBLIC_DIR = new URL('../public/', import.meta.url);
 /** Ids of the tilesets the game ships with. */
 export const SHIPPED = ['dundjinni', 'gormenghast', 'starbase', 'fairywood', 'manor'];
 
-/** The shipped tilesets that are drawn in code, so every tile is fully mapped. */
+/** The shipped tilesets that are drawn in code, so their overlays go on tile spots. */
 export const DRAWN = ['gormenghast', 'starbase', 'fairywood', 'manor'];
 
 /** A shipped tileset's data, as plain JSON. */
