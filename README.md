@@ -84,6 +84,20 @@ So the map shows three things:
 **Sight** sets the circle's radius, from 1 to 4 tiles; the default is 2. Untick **Fog of war** to see the whole map.
 Sight isn't blocked by walls yet (see [Extending it](#extending-it)).
 
+The **Hero** tab on the right-hand edge of the map, or the **I** key, slides out the hero's sidebar. On narrow
+screens it slides over the map; otherwise the map shrinks to make room. The sidebar shows:
+
+* health and mana as red and blue bars, with the numbers underneath;
+* a paper doll, with a slot for each thing the hero can wear: head, neck, body, hands, feet, two rings, a main hand
+  and an off hand;
+* the hero's stats (strength, dexterity, intelligence, speed and armour), and what their worn items add;
+* the inventory.
+
+Drag an item from the inventory onto a slot that takes it to wear it; every place it could go lights up while you
+drag. Drag it back to take it off. Double-clicking also puts things on and takes them off. The hero keeps everything
+when a new dungeon is generated. The sidebar is a framework for now: the stats don't affect play yet, and the starting
+kit in `src/data/character.json` is there to try things out. The browser remembers whether the sidebar was open.
+
 **Debug grid** shows what still needs work:
 
 * red: tiles without a walk map yet, which the hero can't enter;
@@ -91,8 +105,8 @@ Sight isn't blocked by walls yet (see [Extending it](#extending-it)).
 * orange outline: tiles that don't fit their neighbours (this shouldn't happen);
 * green dots: every cell the hero can stand on.
 
-In a development build (`npm run watch`), `window.game` holds the current world, renderer and tileset for poking
-around in the browser console.
+In a development build (`npm run watch`), `window.game` holds the current world, renderer, tileset, character and
+sidebar for poking around in the browser console.
 
 How it's organised
 ------------------
@@ -105,15 +119,16 @@ src/
   tileset/              Loads and checks tileset data, and indexes tiles for fast lookup
   generation/           Builds a Dungeon: start tile, rooms, corridors, overlays, reachability
   world/                Game state: the walk grid, entities (the hero), movement and the fog of war
+  character/            The hero as a character: stats, health and mana, equipment slots, items and the inventory
   render/               Canvas renderer: drawing layers, animation, image loading
-  ui/                   jQuery code for the settings form and the keyboard
-  data/                 Tilesets and sprites as JSON
+  ui/                   jQuery code for the settings form, the keyboard and the hero sidebar
+  data/                 Tilesets, sprites, items and the hero's starting character as JSON
 scripts/tilesets/       Code that draws the Gormenghast, Starbase, Fairy Wood and Manor House tile sets (Node only, no dependencies)
 test/                   Tests for everything that doesn't need a browser
 ```
 
-`core/`, `tileset/`, `generation/` and `world/` don't touch the page, so they run and are tested in Node. Only
-`render/`, `ui/` and `main.js` use the browser.
+`core/`, `tileset/`, `generation/`, `world/` and `character/` don't touch the page, so they run and are tested in Node.
+Only `render/`, `ui/` and `main.js` use the browser.
 
 Each module starts with a comment saying what it's for, and its data shapes are documented as JSDoc `@typedef`s,
 which PhpStorm understands.
@@ -327,3 +342,22 @@ Extending it
   animates any entity.
 * **Combat and other rules.** Keep them in plain modules alongside `world/`, with no page code, so they can be tested
   like the rest. Use the seeded random number generator for dice rolls so results stay reproducible.
+* **Items.** Add them to `src/data/items.json`:
+
+  ```jsonc
+  { "id": "oak-staff", "name": "Oak staff", "type": "weapon", "icon": "staff", "colour": "#b07a45",
+    "bonuses": { "intelligence": 2, "mana": 15 }, "description": "..." }
+  ```
+
+  * `type` decides which slots take it.
+  * `bonuses` can raise any stat, or the maximum of a pool, while the item is worn.
+  * Without an `image`, it's shown as one of the icons in `ui/glyphs.js`, tinted with its `colour`.
+  * A type no slot takes, like `potion`, can only be carried.
+* **Slots and stats.** Slots are listed in `character/items.js`, with the item types each takes. Each also needs a
+  place on the paper doll, a grid area of the same name in `.doll` in `style.css`. Stats and pools are listed in
+  `character/stats.js`, and the sidebar shows whatever is there.
+* **Using the stats.** `statTotals(character)` gives every stat with its bonuses. The character is created once in
+  `main.js` and outlives each dungeon, so combat, speed or carrying limits can read it from there, and drinking a
+  potion can change `character.pools`. Call `sidebar.render()` after changing the character outside the sidebar.
+  All moves of items go through `moveItem()` in `character/character.js`, so rules such as two-handed weapons belong
+  there.

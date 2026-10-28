@@ -31,7 +31,7 @@
         </form>
         <p class="info">
             <span id="summary"></span>
-            <span class="help">Move with WASD or the arrow keys. Q, E, Z and C move diagonally.</span>
+            <span class="help">Move with WASD or the arrow keys. Q, E, Z and C move diagonally. I shows the hero.</span>
         </p>
         <p id="debugLegend" class="legend" hidden>
             <span class="swatch unmapped"></span> No walk map yet
@@ -40,7 +40,10 @@
             <span class="swatch walkable"></span> Walkable cell
         </p>
     </header>
-    <main id="viewport" class="viewport" tabindex="0" aria-label="Dungeon map"></main>
+    <div class="play">
+        <main id="viewport" class="viewport" tabindex="0" aria-label="Dungeon map"></main>
+        <aside id="sidebar" class="sidebar" aria-label="Hero"></aside>
+    </div>
     <noscript>Browser Dungeons needs JavaScript. If you're running it from source, build it first with npm run build.</noscript>
 </body>
 </html>

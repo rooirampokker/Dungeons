@@ -35,3 +35,17 @@ export function onDirectionKey(handler) {
         handler(direction);
     });
 }
+
+/**
+ * Calls `handler` when a key (an event.code such as 'KeyI') is pressed, except while the user is typing in a field.
+ * @param {string} code
+ * @param {() => void} handler
+ */
+export function onKey(code, handler) {
+    $(document).on('keydown', (event) => {
+        if (event.ctrlKey || event.metaKey || event.altKey || event.originalEvent.repeat || $(event.target).is(TYPING_TARGETS)) return;
+        if (event.originalEvent.code !== code) return;
+        event.preventDefault();
+        handler();
+    });
+}

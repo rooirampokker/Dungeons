@@ -1,4 +1,8 @@
 import $ from 'jquery';
+import { createCharacter } from './character/character.js';
+import { createItemCatalogue } from './character/items.js';
+import characterData from './data/character.json';
+import itemData from './data/items.json';
 import sprites from './data/sprites.json';
 import dundjinni from './data/tilesets/dundjinni.json';
 import fairywood from './data/tilesets/fairywood.json';
@@ -10,7 +14,8 @@ import { loadImages } from './render/images.js';
 import { Renderer } from './render/renderer.js';
 import { createTileset } from './tileset/tileset.js';
 import { readSettings, setUpTileSizes, setUpTilesets, showDebugLegend, showSummary } from './ui/controls.js';
-import { onDirectionKey } from './ui/keyboard.js';
+import { onDirectionKey, onKey } from './ui/keyboard.js';
+import { setUpSidebar } from './ui/sidebar.js';
 import { createWorld, moveEntity } from './world/world.js';
 
 /**
@@ -38,6 +43,14 @@ $(() => {
     let world = null;
     let showRequest = 0;
 
+    // The hero's character lives outside any one dungeon, so they keep their things when a new one is generated.
+    const character = createCharacter(characterData, createItemCatalogue(itemData));
+    const sidebar = setUpSidebar($('#sidebar')[0], character, {
+        // The map has just got narrower or wider; keep the hero in view.
+        onToggle: () => world && renderer.follow(world.hero),
+    });
+    onKey('KeyI', () => sidebar.toggle());
+
     async function generate() {
         const settings = readSettings();
         const tileset = selectedTileset();
@@ -49,7 +62,7 @@ $(() => {
         });
         world = createWorld(dungeon, tileset, { sight: settings.sight * tileset.subGrid });
         if (process.env.NODE_ENV !== 'production') {
-            window.game = { world, renderer, tileset }; // for poking around in the browser console
+            window.game = { world, renderer, tileset, character, sidebar }; // for poking around in the browser console
         }
         showSummary(dungeon);
         await show();
