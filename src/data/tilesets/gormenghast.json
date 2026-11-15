@@ -1,0 +1,3303 @@
+{
+  "id": "gormenghast",
+  "name": "Gormenghast",
+  "credits": "Drawn in code by scripts/tilesets/gormenghast, after the castle in Mervyn Peake's Gormenghast novels",
+  "referenceSize": 140,
+  "subGrid": 6,
+  "resolutions": {
+    "140": "images/tiles/gormenghast/140/"
+  },
+  "overlayChance": 0.6,
+  "rooms": [
+    {
+      "id": "great-hall",
+      "width": 3,
+      "height": 3
+    },
+    {
+      "id": "long-gallery",
+      "width": 4,
+      "height": 3
+    }
+  ],
+  "tiles": [
+    {
+      "id": "gatehouse",
+      "image": "gatehouse.png",
+      "role": "start",
+      "exits": ["s"],
+      "tags": ["stairs"],
+      "spawn": "3,2",
+      "spots": [
+        {
+          "kind": "corner",
+          "facing": "sw",
+          "rect": [18.7, 100.7, 16, 16],
+          "chance": 0.35
+        },
+        {
+          "kind": "corner",
+          "facing": "se",
+          "rect": [105.3, 100.7, 16, 16],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "1,1": ["e", "se", "s"],
+        "1,2": ["e", "se", "s", "sw", "w"],
+        "1,3": ["e", "se", "s", "sw", "w"],
+        "1,4": ["s", "sw", "w"],
+        "2,1": ["n", "ne", "e"],
+        "2,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "2,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "2,4": ["n", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s"],
+        "3,3": ["n", "s", "sw", "w", "nw"],
+        "4,1": ["e"],
+        "4,2": ["n", "ne", "e", "se", "s", "w"],
+        "4,3": ["n", "e", "s", "sw", "w", "nw"],
+        "4,4": ["w"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "stairhead",
+      "image": "stairhead.png",
+      "role": "start",
+      "exits": ["s"],
+      "tags": ["stairs", "tower"],
+      "spawn": "3,3",
+      "spots": [
+        {
+          "kind": "corner",
+          "facing": "sw",
+          "rect": [21, 100.7, 16, 16],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-v",
+          "facing": "e",
+          "rect": [111, 63, 15, 42],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "1,3": ["s"],
+        "2,3": ["n", "e", "se", "s"],
+        "2,4": ["s", "sw", "w"],
+        "3,1": ["e", "se", "s"],
+        "3,2": ["e", "se", "s", "sw", "w"],
+        "3,3": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "3,4": ["n", "s", "sw", "w", "nw"],
+        "4,1": ["n", "ne", "e"],
+        "4,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "4,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "4,4": ["n", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-ns",
+      "image": "passage-ns.png",
+      "role": "corridor",
+      "exits": ["n", "s"],
+      "tags": ["passage"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [53, 12, 34, 36],
+          "chance": 0.4
+        },
+        {
+          "kind": "floor",
+          "rect": [53, 92, 34, 36],
+          "chance": 0.4
+        },
+        {
+          "kind": "wall-v",
+          "facing": "e",
+          "rect": [85.3, 20, 15, 100],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s"],
+        "1,3": ["n", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s"],
+        "2,3": ["n", "s", "sw", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s"],
+        "3,3": ["n", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-ns-damp",
+      "image": "passage-ns-damp.png",
+      "role": "corridor",
+      "exits": ["n", "s"],
+      "tags": ["passage", "damp"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [53, 55, 34, 30],
+          "chance": 0.4
+        },
+        {
+          "kind": "wall-v",
+          "facing": "w",
+          "rect": [39.7, 15, 15, 110],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-v",
+          "facing": "e",
+          "rect": [85.3, 15, 15, 110],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s"],
+        "1,3": ["n", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s"],
+        "2,3": ["n", "s", "sw", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s"],
+        "3,3": ["n", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-ns-stairs",
+      "image": "passage-ns-stairs.png",
+      "role": "corridor",
+      "exits": ["n", "s"],
+      "tags": ["passage", "stairs"],
+      "spots": [
+        {
+          "kind": "wall-v",
+          "facing": "e",
+          "rect": [85.3, 4, 15, 28],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-v",
+          "facing": "w",
+          "rect": [39.7, 108, 15, 28],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s"],
+        "1,3": ["n", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s"],
+        "2,3": ["n", "s", "sw", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s"],
+        "3,3": ["n", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-ns-carvings",
+      "image": "passage-ns-carvings.png",
+      "role": "corridor",
+      "exits": ["n", "s"],
+      "tags": ["passage", "carvings"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [53, 55, 34, 30],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s"],
+        "1,3": ["n", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s"],
+        "2,3": ["n", "s", "sw", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s"],
+        "3,3": ["n", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-ns-crooked",
+      "image": "passage-ns-crooked.png",
+      "role": "corridor",
+      "exits": ["n", "s"],
+      "tags": ["passage", "crooked"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [31.7, 58, 30, 24],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "s"],
+        "1,3": ["n", "w", "nw"],
+        "2,1": ["e", "se", "s"],
+        "2,2": ["n", "s", "sw", "w"],
+        "3,1": ["n", "ne", "e"],
+        "3,2": ["n", "s", "w", "nw"],
+        "4,2": ["n", "e", "se", "s"],
+        "4,3": ["s", "sw", "w"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-ns-collapsed",
+      "image": "passage-ns-collapsed.png",
+      "role": "corridor",
+      "exits": ["n", "s"],
+      "tags": ["passage", "deadend", "ruin"],
+      "weight": 0.3,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [53, 5, 34, 22],
+          "chance": 0.4
+        },
+        {
+          "kind": "floor",
+          "rect": [53, 113, 34, 22],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e"],
+        "1,3": ["n", "w", "nw"],
+        "4,2": ["e", "se", "s"],
+        "4,3": ["s", "sw", "w"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-ew",
+      "image": "passage-ew.png",
+      "role": "corridor",
+      "exits": ["e", "w"],
+      "tags": ["passage"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [12, 53, 36, 34],
+          "chance": 0.4
+        },
+        {
+          "kind": "floor",
+          "rect": [92, 53, 36, 34],
+          "chance": 0.4
+        },
+        {
+          "kind": "wall-h",
+          "facing": "s",
+          "rect": [20, 85.3, 100, 15],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "2,0": ["e", "se", "s", "sw", "w"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["e", "se", "s", "sw", "w"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "w", "nw"],
+        "3,3": ["n", "ne", "e", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-ew-banners",
+      "image": "passage-ew-banners.png",
+      "role": "corridor",
+      "exits": ["e", "w"],
+      "tags": ["passage"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [52, 53, 36, 34],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "2,0": ["e", "se", "s", "sw", "w"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["e", "se", "s", "sw", "w"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "w", "nw"],
+        "3,3": ["n", "ne", "e", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-ew-damp",
+      "image": "passage-ew-damp.png",
+      "role": "corridor",
+      "exits": ["e", "w"],
+      "tags": ["passage", "damp"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [55, 53, 30, 34],
+          "chance": 0.4
+        },
+        {
+          "kind": "wall-h",
+          "facing": "n",
+          "rect": [15, 39.7, 110, 15],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-h",
+          "facing": "s",
+          "rect": [15, 85.3, 110, 15],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "2,0": ["e", "se", "s", "sw", "w"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["e", "se", "s", "sw", "w"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "w", "nw"],
+        "3,3": ["n", "ne", "e", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-ew-stairs",
+      "image": "passage-ew-stairs.png",
+      "role": "corridor",
+      "exits": ["e", "w"],
+      "tags": ["passage", "stairs"],
+      "spots": [
+        {
+          "kind": "wall-h",
+          "facing": "s",
+          "rect": [4, 85.3, 28, 15],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-h",
+          "facing": "n",
+          "rect": [108, 39.7, 28, 15],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "2,0": ["e", "se", "s", "sw", "w"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["e", "se", "s", "sw", "w"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "w", "nw"],
+        "3,3": ["n", "ne", "e", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-ew-carvings",
+      "image": "passage-ew-carvings.png",
+      "role": "corridor",
+      "exits": ["e", "w"],
+      "tags": ["passage", "carvings"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [55, 53, 30, 34],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "2,0": ["e", "se", "s", "sw", "w"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["e", "se", "s", "sw", "w"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "w", "nw"],
+        "3,3": ["n", "ne", "e", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"]
+      }
+    },
+    {
+      "id": "gallery-ew",
+      "image": "gallery-ew.png",
+      "role": "corridor",
+      "exits": ["e", "w"],
+      "tags": ["passage"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [18, 58, 104, 24],
+          "chance": 0.6
+        },
+        {
+          "kind": "wall-h",
+          "facing": "n",
+          "rect": [45, 18.7, 50, 15],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-h",
+          "facing": "s",
+          "rect": [45, 106.3, 50, 15],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "1,2": ["e", "se", "s"],
+        "1,3": ["s", "sw", "w"],
+        "2,0": ["e", "se", "s", "sw", "w"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "2,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,2": ["n", "ne", "e"],
+        "4,3": ["n", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-es",
+      "image": "passage-es.png",
+      "role": "corridor",
+      "exits": ["e", "s"],
+      "tags": ["passage"],
+      "spots": [
+        {
+          "kind": "corner",
+          "facing": "nw",
+          "rect": [46.7, 46.7, 18, 18],
+          "chance": 0.35
+        },
+        {
+          "kind": "floor",
+          "rect": [98, 53, 34, 34],
+          "chance": 0.4
+        },
+        {
+          "kind": "floor",
+          "rect": [53, 98, 34, 34],
+          "chance": 0.4
+        },
+        {
+          "kind": "wall-h",
+          "facing": "n",
+          "rect": [75, 39.7, 60, 15],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-v",
+          "facing": "w",
+          "rect": [39.7, 75, 15, 60],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "2,2": ["e", "se", "s"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,2": ["n", "ne", "e", "se", "s"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-es-crooked",
+      "image": "passage-es-crooked.png",
+      "role": "corridor",
+      "exits": ["e", "s"],
+      "tags": ["passage", "crooked"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [100, 53, 30, 34],
+          "chance": 0.4
+        },
+        {
+          "kind": "floor",
+          "rect": [53, 100, 34, 30],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "2,3": ["e", "se", "s"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,2": ["e", "se", "s"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-es-vault",
+      "image": "passage-es-vault.png",
+      "role": "corridor",
+      "exits": ["e", "s"],
+      "tags": ["passage"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [98, 53, 34, 34],
+          "chance": 0.4
+        },
+        {
+          "kind": "floor",
+          "rect": [53, 98, 34, 34],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "2,3": ["e", "se", "s"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,2": ["e", "se", "s"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-es-damp",
+      "image": "passage-es-damp.png",
+      "role": "corridor",
+      "exits": ["e", "s"],
+      "tags": ["passage", "damp"],
+      "spots": [
+        {
+          "kind": "corner",
+          "facing": "nw",
+          "rect": [46.7, 46.7, 18, 18],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-h",
+          "facing": "n",
+          "rect": [75, 39.7, 60, 15],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-v",
+          "facing": "w",
+          "rect": [39.7, 75, 15, 60],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "2,2": ["e", "se", "s"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,2": ["n", "ne", "e", "se", "s"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-esw",
+      "image": "passage-esw.png",
+      "role": "corridor",
+      "exits": ["e", "s", "w"],
+      "tags": ["passage"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [52, 60, 36, 30],
+          "chance": 0.4
+        },
+        {
+          "kind": "wall-h",
+          "facing": "n",
+          "rect": [5, 39.7, 130, 15],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-h",
+          "facing": "s",
+          "rect": [5, 85.3, 36, 15],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-h",
+          "facing": "s",
+          "rect": [99, 85.3, 36, 15],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "2,0": ["e", "se", "s", "sw", "w"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["e", "se", "s", "sw", "w"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-esw-statue",
+      "image": "passage-esw-statue.png",
+      "role": "corridor",
+      "exits": ["e", "s", "w"],
+      "tags": ["passage"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [10, 53, 30, 34],
+          "chance": 0.4
+        },
+        {
+          "kind": "floor",
+          "rect": [100, 53, 30, 34],
+          "chance": 0.4
+        },
+        {
+          "kind": "wall-h",
+          "facing": "s",
+          "rect": [5, 85.3, 36, 15],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-h",
+          "facing": "s",
+          "rect": [99, 85.3, 36, 15],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "2,0": ["e", "se", "s", "sw", "w"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["e", "se", "s", "sw", "w"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-esw-landing",
+      "image": "passage-esw-landing.png",
+      "role": "corridor",
+      "exits": ["e", "s", "w"],
+      "tags": ["passage"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [55, 50.7, 30, 20],
+          "chance": 0.4
+        },
+        {
+          "kind": "wall-h",
+          "facing": "s",
+          "rect": [5, 85.3, 36, 15],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-h",
+          "facing": "s",
+          "rect": [99, 85.3, 36, 15],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "2,0": ["e", "se", "s", "sw", "w"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["e", "se", "s", "sw", "w"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-nes",
+      "image": "passage-nes.png",
+      "role": "corridor",
+      "exits": ["n", "e", "s"],
+      "tags": ["passage"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [100, 53, 30, 34],
+          "chance": 0.4
+        },
+        {
+          "kind": "wall-v",
+          "facing": "w",
+          "rect": [39.7, 5, 15, 130],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-v",
+          "facing": "e",
+          "rect": [85.3, 5, 15, 36],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-v",
+          "facing": "e",
+          "rect": [85.3, 99, 15, 36],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s"],
+        "1,3": ["n", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s"],
+        "2,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,2": ["n", "ne", "e", "se", "s"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-nes-damp",
+      "image": "passage-nes-damp.png",
+      "role": "corridor",
+      "exits": ["n", "e", "s"],
+      "tags": ["passage", "damp"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [100, 53, 30, 34],
+          "chance": 0.4
+        },
+        {
+          "kind": "wall-v",
+          "facing": "w",
+          "rect": [39.7, 5, 15, 130],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s"],
+        "1,3": ["n", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s"],
+        "2,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,2": ["n", "ne", "e", "se", "s"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "passage-nes-shrine",
+      "image": "passage-nes-shrine.png",
+      "role": "corridor",
+      "exits": ["n", "e", "s"],
+      "tags": ["passage", "ritual"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [100, 53, 30, 34],
+          "chance": 0.4
+        },
+        {
+          "kind": "wall-v",
+          "facing": "e",
+          "rect": [85.3, 5, 15, 36],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-v",
+          "facing": "e",
+          "rect": [85.3, 99, 15, 36],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s"],
+        "1,3": ["n", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s"],
+        "2,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,2": ["n", "ne", "e", "se", "s"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "crossroad",
+      "image": "crossroad.png",
+      "role": "corridor",
+      "exits": ["n", "e", "s", "w"],
+      "tags": ["crossroad"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [53, 7, 34, 30],
+          "chance": 0.25
+        },
+        {
+          "kind": "floor",
+          "rect": [103, 53, 30, 34],
+          "chance": 0.25
+        },
+        {
+          "kind": "floor",
+          "rect": [53, 103, 34, 30],
+          "chance": 0.25
+        },
+        {
+          "kind": "floor",
+          "rect": [7, 53, 30, 34],
+          "chance": 0.25
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s"],
+        "1,3": ["n", "s", "sw", "w", "nw"],
+        "2,0": ["e", "se", "s", "sw", "w"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "2,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "crossroad-rotunda",
+      "image": "crossroad-rotunda.png",
+      "role": "corridor",
+      "exits": ["n", "e", "s", "w"],
+      "tags": ["crossroad"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [53, 13, 34, 26],
+          "chance": 0.25
+        },
+        {
+          "kind": "floor",
+          "rect": [101, 53, 26, 34],
+          "chance": 0.25
+        },
+        {
+          "kind": "floor",
+          "rect": [53, 101, 34, 26],
+          "chance": 0.25
+        },
+        {
+          "kind": "floor",
+          "rect": [13, 53, 26, 34],
+          "chance": 0.25
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,1": ["e", "s"],
+        "1,2": ["n", "ne", "e", "w"],
+        "1,3": ["n", "e", "w", "nw"],
+        "1,4": ["s", "w"],
+        "2,0": ["e", "se", "s", "sw", "w"],
+        "2,1": ["n", "s", "sw", "w"],
+        "2,4": ["n", "e", "se", "s"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "w", "nw"],
+        "3,1": ["n", "s", "w", "nw"],
+        "3,4": ["n", "ne", "e", "s"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,1": ["n", "e"],
+        "4,2": ["e", "se", "s", "w"],
+        "4,3": ["e", "s", "sw", "w"],
+        "4,4": ["n", "w"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "crossroad-well",
+      "image": "crossroad-well.png",
+      "role": "corridor",
+      "exits": ["n", "e", "s", "w"],
+      "tags": ["crossroad", "water"],
+      "spots": [
+        {
+          "kind": "corner",
+          "facing": "nw",
+          "rect": [28, 28, 18, 18],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "ne",
+          "rect": [94, 28, 18, 18],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "sw",
+          "rect": [28, 94, 18, 18],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "se",
+          "rect": [94, 94, 18, 18],
+          "chance": 0.35,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,1": ["e", "s"],
+        "1,2": ["n", "ne", "e", "w"],
+        "1,3": ["n", "e", "w", "nw"],
+        "1,4": ["s", "w"],
+        "2,0": ["e", "se", "s", "sw", "w"],
+        "2,1": ["n", "s", "sw", "w"],
+        "2,4": ["n", "e", "se", "s"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "w", "nw"],
+        "3,1": ["n", "s", "w", "nw"],
+        "3,4": ["n", "ne", "e", "s"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,1": ["n", "e"],
+        "4,2": ["e", "se", "s", "w"],
+        "4,3": ["e", "s", "sw", "w"],
+        "4,4": ["n", "w"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "crossroad-collapsed",
+      "image": "crossroad-collapsed.png",
+      "role": "corridor",
+      "exits": ["n", "e", "s", "w"],
+      "tags": ["crossroad", "deadend", "ruin"],
+      "weight": 0.3,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [103, 53, 30, 34],
+          "chance": 0.4
+        },
+        {
+          "kind": "floor",
+          "rect": [53, 103, 34, 30],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s"],
+        "1,3": ["n", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s"],
+        "2,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,2": ["n", "ne", "e", "se", "s"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "crossroad-fountain",
+      "image": "crossroad-fountain.png",
+      "role": "corridor",
+      "exits": ["n", "e", "s", "w"],
+      "tags": ["crossroad", "water"],
+      "spots": [
+        {
+          "kind": "corner",
+          "facing": "nw",
+          "rect": [25.7, 25.7, 18, 18],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "ne",
+          "rect": [96.3, 25.7, 18, 18],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "sw",
+          "rect": [25.7, 96.3, 18, 18],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "se",
+          "rect": [96.3, 96.3, 18, 18],
+          "chance": 0.35,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,1": ["e", "s"],
+        "1,2": ["n", "ne", "e", "w"],
+        "1,3": ["n", "e", "w", "nw"],
+        "1,4": ["s", "w"],
+        "2,0": ["e", "se", "s", "sw", "w"],
+        "2,1": ["n", "s", "sw", "w"],
+        "2,4": ["n", "e", "se", "s"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "w", "nw"],
+        "3,1": ["n", "s", "w", "nw"],
+        "3,4": ["n", "ne", "e", "s"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,1": ["n", "e"],
+        "4,2": ["e", "se", "s", "w"],
+        "4,3": ["e", "s", "sw", "w"],
+        "4,4": ["n", "w"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "chamber-s",
+      "image": "chamber-s.png",
+      "role": "corridor",
+      "exits": ["s"],
+      "tags": ["room", "empty"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [38, 42.5, 64, 48],
+          "chance": 0.5
+        },
+        {
+          "kind": "corner",
+          "facing": "nw",
+          "rect": [23.3, 23.3, 20, 20],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "ne",
+          "rect": [96.7, 23.3, 20, 20],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "sw",
+          "rect": [23.3, 96.7, 20, 20],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "se",
+          "rect": [96.7, 96.7, 20, 20],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "wall-h",
+          "facing": "n",
+          "rect": [46.7, 16.3, 46.7, 15],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-v",
+          "facing": "w",
+          "rect": [16.3, 46.7, 15, 46.7],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-v",
+          "facing": "e",
+          "rect": [108.7, 46.7, 15, 46.7],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "1,1": ["e", "se", "s"],
+        "1,2": ["e", "se", "s", "sw", "w"],
+        "1,3": ["e", "se", "s", "sw", "w"],
+        "1,4": ["s", "sw", "w"],
+        "2,1": ["n", "ne", "e", "se", "s"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["n", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "se", "s"],
+        "3,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,4": ["n", "s", "sw", "w", "nw"],
+        "4,1": ["n", "ne", "e"],
+        "4,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "4,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "4,4": ["n", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "chamber-e",
+      "image": "chamber-e.png",
+      "role": "corridor",
+      "exits": ["e"],
+      "tags": ["room", "empty"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [38, 42.5, 64, 48],
+          "chance": 0.5
+        },
+        {
+          "kind": "corner",
+          "facing": "nw",
+          "rect": [23.3, 23.3, 20, 20],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "ne",
+          "rect": [96.7, 23.3, 20, 20],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "sw",
+          "rect": [23.3, 96.7, 20, 20],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "se",
+          "rect": [96.7, 96.7, 20, 20],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "wall-h",
+          "facing": "n",
+          "rect": [46.7, 16.3, 46.7, 15],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-h",
+          "facing": "s",
+          "rect": [46.7, 108.7, 46.7, 15],
+          "chance": 0.35
+        },
+        {
+          "kind": "wall-v",
+          "facing": "w",
+          "rect": [16.3, 46.7, 15, 46.7],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "1,1": ["e", "se", "s"],
+        "1,2": ["e", "se", "s", "sw", "w"],
+        "1,3": ["e", "se", "s", "sw", "w"],
+        "1,4": ["s", "sw", "w"],
+        "2,1": ["n", "ne", "e", "se", "s"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,1": ["n", "ne", "e", "se", "s"],
+        "3,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,1": ["n", "ne", "e"],
+        "4,2": ["n", "ne", "e", "w", "nw"],
+        "4,3": ["n", "ne", "e", "w", "nw"],
+        "4,4": ["n", "w", "nw"]
+      }
+    },
+    {
+      "id": "kitchen-s",
+      "image": "kitchen-s.png",
+      "role": "corridor",
+      "exits": ["s"],
+      "tags": ["room", "kitchen"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [55, 64, 30, 26],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "2,2": ["e", "se", "s"],
+        "2,3": ["s", "sw", "w"],
+        "3,2": ["n", "ne", "e", "se", "s"],
+        "3,3": ["n", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "library-e",
+      "image": "library-e.png",
+      "role": "corridor",
+      "exits": ["e"],
+      "tags": ["room", "library"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [93.8, 34.2, 20, 18],
+          "chance": 0.4
+        },
+        {
+          "kind": "floor",
+          "rect": [93.8, 87.8, 20, 18],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "2,2": ["e", "se", "s"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,2": ["n", "ne", "e"],
+        "3,3": ["n", "ne", "e", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"]
+      }
+    },
+    {
+      "id": "library-burnt-s",
+      "image": "library-burnt-s.png",
+      "role": "corridor",
+      "exits": ["s"],
+      "tags": ["room", "library", "ruin"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [50.3, 52.3, 30, 26],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "2,2": ["e", "se", "s"],
+        "2,3": ["s", "sw", "w"],
+        "3,2": ["n", "ne", "e", "se", "s"],
+        "3,3": ["n", "s", "sw", "w", "nw"],
+        "4,1": ["e"],
+        "4,2": ["n", "ne", "e", "se", "s", "w"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "tower-s",
+      "image": "tower-s.png",
+      "role": "corridor",
+      "exits": ["s"],
+      "tags": ["room", "stairs", "tower"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [53, 111, 34, 22],
+          "chance": 0.3
+        }
+      ],
+      "walk": {
+        "1,1": ["s"],
+        "1,4": ["s"],
+        "2,1": ["n", "s"],
+        "2,4": ["n", "s"],
+        "3,1": ["n", "s"],
+        "3,4": ["n", "s"],
+        "4,1": ["n", "e"],
+        "4,2": ["e", "se", "s", "w"],
+        "4,3": ["e", "s", "sw", "w"],
+        "4,4": ["n", "w"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "chapel-e",
+      "image": "chapel-e.png",
+      "role": "corridor",
+      "exits": ["e"],
+      "tags": ["room", "ritual"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [97.2, 61, 18, 18],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "1,1": ["e"],
+        "1,2": ["s", "w"],
+        "2,2": ["n", "e", "se", "s"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,2": ["n", "ne", "e", "s"],
+        "3,3": ["n", "ne", "e", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,1": ["e"],
+        "4,2": ["n", "w"]
+      }
+    },
+    {
+      "id": "cistern-s",
+      "image": "cistern-s.png",
+      "role": "corridor",
+      "exits": ["s"],
+      "tags": ["room", "water"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "corner",
+          "facing": "sw",
+          "rect": [18.7, 103.3, 18, 18],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "se",
+          "rect": [103.3, 103.3, 18, 18],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [26.3, 91.3, 22, 18],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "4,1": ["e"],
+        "4,2": ["e", "se", "s", "w"],
+        "4,3": ["e", "s", "sw", "w"],
+        "4,4": ["w"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "bedchamber-e",
+      "image": "bedchamber-e.png",
+      "role": "corridor",
+      "exits": ["e"],
+      "tags": ["room"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "corner",
+          "facing": "ne",
+          "rect": [103.3, 18.7, 18, 18],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "se",
+          "rect": [103.3, 103.3, 18, 18],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "wall-h",
+          "facing": "n",
+          "rect": [51.3, 11.7, 56, 15],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "1,1": ["e"],
+        "1,2": ["e", "w"],
+        "1,3": ["e", "se", "s", "w"],
+        "1,4": ["s", "sw", "w"],
+        "2,3": ["n", "ne", "e", "se", "s"],
+        "2,4": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,3": ["n", "ne", "e", "se", "s"],
+        "3,4": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,1": ["e"],
+        "4,2": ["e", "w"],
+        "4,3": ["n", "ne", "e", "w"],
+        "4,4": ["n", "w", "nw"]
+      }
+    },
+    {
+      "id": "attic-s",
+      "image": "attic-s.png",
+      "role": "corridor",
+      "exits": ["s"],
+      "tags": ["room", "carvings"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [57, 56.7, 26, 22],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "2,2": ["e", "se", "s"],
+        "2,3": ["s", "sw", "w"],
+        "3,2": ["n", "ne", "e", "se", "s"],
+        "3,3": ["n", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "storeroom-e",
+      "image": "storeroom-e.png",
+      "role": "corridor",
+      "exits": ["e"],
+      "tags": ["room"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [69.7, 47.3, 24, 22],
+          "chance": 0.4,
+          "canBlock": true
+        },
+        {
+          "kind": "corner",
+          "facing": "se",
+          "rect": [103.3, 103.3, 18, 18],
+          "chance": 0.35,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "1,4": ["s"],
+        "2,2": ["e", "se", "s"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["n", "e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,2": ["n", "ne", "e"],
+        "3,3": ["n", "ne", "e", "w", "nw"],
+        "3,4": ["n", "ne", "e", "s", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,4": ["n"]
+      }
+    },
+    {
+      "id": "collapsed-s",
+      "image": "collapsed-s.png",
+      "role": "corridor",
+      "exits": ["s"],
+      "tags": ["room", "ruin"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [87, 91.3, 22, 18],
+          "chance": 0.4
+        },
+        {
+          "kind": "corner",
+          "facing": "se",
+          "rect": [98.7, 98.7, 18, 18],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "3,1": ["e", "se", "s"],
+        "3,2": ["e", "se", "s", "sw", "w"],
+        "3,3": ["e", "se", "s", "sw", "w"],
+        "3,4": ["s", "sw", "w"],
+        "4,1": ["n", "ne", "e"],
+        "4,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "4,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "4,4": ["n", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "study-e",
+      "image": "study-e.png",
+      "role": "corridor",
+      "exits": ["e"],
+      "tags": ["room", "library", "ritual"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "corner",
+          "facing": "se",
+          "rect": [105.3, 105.3, 16, 16],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [94.8, 36.3, 18, 16],
+          "chance": 0.4
+        }
+      ],
+      "walk": {
+        "1,4": ["s"],
+        "2,3": ["e", "se", "s"],
+        "2,4": ["n", "e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,1": ["s"],
+        "3,3": ["n", "ne", "e", "se", "s"],
+        "3,4": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,1": ["n", "e"],
+        "4,2": ["e", "w"],
+        "4,3": ["n", "ne", "e", "w"],
+        "4,4": ["n", "w", "nw"]
+      }
+    },
+    {
+      "id": "aviary-s",
+      "image": "aviary-s.png",
+      "role": "corridor",
+      "exits": ["s"],
+      "tags": ["room", "birds"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [63.7, 63.3, 22, 18],
+          "chance": 0.4
+        },
+        {
+          "kind": "corner",
+          "facing": "se",
+          "rect": [105.3, 105.3, 16, 16],
+          "chance": 0.35,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "1,1": ["e", "se", "s"],
+        "1,2": ["e", "se", "s", "sw", "w"],
+        "1,3": ["e", "se", "s", "sw", "w"],
+        "1,4": ["s", "sw", "w"],
+        "2,1": ["n", "ne", "e", "se", "s"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "2,4": ["n", "w", "nw"],
+        "3,1": ["n", "ne", "e"],
+        "3,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "3,3": ["n", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "e", "s", "sw", "w", "nw"],
+        "4,4": ["w"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "dispensary-e",
+      "image": "dispensary-e.png",
+      "role": "corridor",
+      "exits": ["e"],
+      "tags": ["room"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [93.7, 36.3, 18, 16],
+          "chance": 0.4
+        },
+        {
+          "kind": "corner",
+          "facing": "ne",
+          "rect": [105.3, 18.7, 16, 16],
+          "chance": 0.35,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "1,2": ["e"],
+        "1,3": ["e", "se", "s", "w"],
+        "1,4": ["s", "sw", "w"],
+        "2,1": ["s"],
+        "2,3": ["n", "ne", "e", "se", "s"],
+        "2,4": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,1": ["n", "s"],
+        "3,3": ["n", "ne", "e", "se", "s"],
+        "3,4": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,1": ["n", "e"],
+        "4,2": ["e", "w"],
+        "4,3": ["n", "ne", "e", "w"],
+        "4,4": ["n", "w", "nw"]
+      }
+    },
+    {
+      "id": "refectory-s",
+      "image": "refectory-s.png",
+      "role": "corridor",
+      "exits": ["s"],
+      "tags": ["room", "kitchen"],
+      "weight": 0.2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [23.7, 94.7, 18, 16],
+          "chance": 0.4
+        },
+        {
+          "kind": "floor",
+          "rect": [98.3, 94.7, 18, 16],
+          "chance": 0.4
+        },
+        {
+          "kind": "corner",
+          "facing": "nw",
+          "rect": [18.7, 18.7, 16, 16],
+          "chance": 0.35
+        }
+      ],
+      "walk": {
+        "1,1": ["s"],
+        "1,4": ["s"],
+        "2,1": ["n", "s"],
+        "2,4": ["n", "s"],
+        "3,1": ["n", "s"],
+        "3,4": ["n", "s"],
+        "4,1": ["n", "e"],
+        "4,2": ["e", "se", "s", "w"],
+        "4,3": ["e", "s", "sw", "w"],
+        "4,4": ["n", "w"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "masonry",
+      "image": "masonry.png",
+      "role": "filler",
+      "exits": [],
+      "tags": [],
+      "spots": [
+        {
+          "kind": "rock",
+          "rect": [10, 12, 50, 46],
+          "chance": 0.45
+        },
+        {
+          "kind": "rock",
+          "rect": [80, 77, 50, 46],
+          "chance": 0.45
+        }
+      ],
+      "walk": {}
+    },
+    {
+      "id": "masonry-ivy",
+      "image": "masonry-ivy.png",
+      "role": "filler",
+      "exits": [],
+      "tags": ["ivy"],
+      "spots": [
+        {
+          "kind": "rock",
+          "rect": [80, 12, 50, 46],
+          "chance": 0.45
+        }
+      ],
+      "walk": {}
+    },
+    {
+      "id": "hall-nw",
+      "image": "hall-nw.png",
+      "role": "room",
+      "roomSlot": "nw",
+      "exits": ["e", "s"],
+      "tags": ["corner"],
+      "spots": [
+        {
+          "kind": "corner",
+          "facing": "nw",
+          "rect": [23.3, 23.3, 20, 20],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [68.7, 68.7, 26, 26],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "1,1": ["e", "se", "s"],
+        "1,2": ["e", "se", "s", "sw", "w"],
+        "1,3": ["s", "sw", "w"],
+        "1,5": ["e", "se", "s"],
+        "2,1": ["n", "ne", "e", "se", "s"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "3,1": ["n", "ne", "e"],
+        "3,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "3,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,1": ["e", "se", "s"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "5,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,5": ["n", "ne", "e", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "hall-ne",
+      "image": "hall-ne.png",
+      "role": "room",
+      "roomSlot": "ne",
+      "exits": ["s", "w"],
+      "tags": ["corner"],
+      "spots": [
+        {
+          "kind": "corner",
+          "facing": "ne",
+          "rect": [96.7, 23.3, 20, 20],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [45.3, 68.7, 26, 26],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "1,0": ["s", "sw", "w"],
+        "1,2": ["e", "se", "s"],
+        "1,3": ["e", "se", "s", "sw", "w"],
+        "1,4": ["s", "sw", "w"],
+        "2,0": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "2,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["n", "s", "sw", "w", "nw"],
+        "3,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "w", "nw"],
+        "4,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,0": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "5,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["s", "sw", "w"]
+      }
+    },
+    {
+      "id": "hall-sw",
+      "image": "hall-sw.png",
+      "role": "room",
+      "roomSlot": "sw",
+      "exits": ["n", "e"],
+      "tags": ["corner"],
+      "spots": [
+        {
+          "kind": "corner",
+          "facing": "sw",
+          "rect": [23.3, 96.7, 20, 20],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [68.7, 45.3, 26, 26],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,1": ["n", "ne", "e"],
+        "0,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "0,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,5": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s"],
+        "1,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["e", "se", "s"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "2,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "se", "s"],
+        "3,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "4,1": ["n", "ne", "e"],
+        "4,2": ["n", "ne", "e", "w", "nw"],
+        "4,3": ["n", "w", "nw"],
+        "4,5": ["n", "ne", "e"]
+      }
+    },
+    {
+      "id": "hall-se",
+      "image": "hall-se.png",
+      "role": "room",
+      "roomSlot": "se",
+      "exits": ["n", "w"],
+      "tags": ["corner"],
+      "spots": [
+        {
+          "kind": "corner",
+          "facing": "se",
+          "rect": [96.7, 96.7, 20, 20],
+          "chance": 0.35,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [45.3, 45.3, 26, 26],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,0": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "0,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "0,4": ["n", "w", "nw"],
+        "1,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,3": ["n", "s", "sw", "w", "nw"],
+        "2,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "3,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,4": ["n", "s", "sw", "w", "nw"],
+        "4,0": ["n", "w", "nw"],
+        "4,2": ["n", "ne", "e"],
+        "4,3": ["n", "ne", "e", "w", "nw"],
+        "4,4": ["n", "w", "nw"]
+      }
+    },
+    {
+      "id": "hall-n-door",
+      "image": "hall-n-door.png",
+      "role": "room",
+      "roomSlot": "n",
+      "exits": ["n", "e", "s", "w"],
+      "tags": ["entrance"],
+      "weight": 2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [23, 69.7, 24, 24],
+          "chance": 0.3,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [93, 69.7, 24, 24],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,2": ["n", "ne", "e", "se", "s"],
+        "0,3": ["n", "s", "sw", "w", "nw"],
+        "1,0": ["s", "sw", "w"],
+        "1,2": ["n", "ne", "e", "se", "s"],
+        "1,3": ["n", "s", "sw", "w", "nw"],
+        "1,5": ["e", "se", "s"],
+        "2,0": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "2,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,0": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "5,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,5": ["n", "ne", "e", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "hall-n",
+      "image": "hall-n.png",
+      "role": "room",
+      "roomSlot": "n",
+      "exits": ["e", "s", "w"],
+      "tags": ["wall"],
+      "spots": [
+        {
+          "kind": "wall-h",
+          "facing": "n",
+          "rect": [39.7, 16.3, 60.7, 15],
+          "chance": 0.5
+        },
+        {
+          "kind": "floor",
+          "rect": [57, 68.7, 26, 26],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "1,0": ["s", "sw", "w"],
+        "1,2": ["e", "se", "s"],
+        "1,3": ["s", "sw", "w"],
+        "1,5": ["e", "se", "s"],
+        "2,0": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "2,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,0": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "5,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,5": ["n", "ne", "e", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "hall-e-door",
+      "image": "hall-e-door.png",
+      "role": "room",
+      "roomSlot": "e",
+      "exits": ["n", "e", "s", "w"],
+      "tags": ["entrance"],
+      "weight": 2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [46.3, 23, 24, 24],
+          "chance": 0.3,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [46.3, 93, 24, 24],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,0": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "0,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "0,4": ["n", "w", "nw"],
+        "1,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,3": ["n", "s", "sw", "w", "nw"],
+        "2,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "w", "nw"],
+        "4,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,0": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "5,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["s", "sw", "w"]
+      }
+    },
+    {
+      "id": "hall-e",
+      "image": "hall-e.png",
+      "role": "room",
+      "roomSlot": "e",
+      "exits": ["n", "s", "w"],
+      "tags": ["wall"],
+      "spots": [
+        {
+          "kind": "wall-v",
+          "facing": "e",
+          "rect": [108.7, 39.7, 15, 60.7],
+          "chance": 0.5
+        },
+        {
+          "kind": "floor",
+          "rect": [45.3, 57, 26, 26],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,0": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "0,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "0,4": ["n", "w", "nw"],
+        "1,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,3": ["n", "s", "sw", "w", "nw"],
+        "2,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "w", "nw"],
+        "4,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "5,0": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "5,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,3": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["s", "sw", "w"]
+      }
+    },
+    {
+      "id": "hall-s-door",
+      "image": "hall-s-door.png",
+      "role": "room",
+      "roomSlot": "s",
+      "exits": ["n", "e", "s", "w"],
+      "tags": ["entrance"],
+      "weight": 2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [23, 46.3, 24, 24],
+          "chance": 0.3,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [93, 46.3, 24, 24],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,0": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "0,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,5": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "1,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,0": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "4,0": ["n", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "s", "sw", "w", "nw"],
+        "4,5": ["n", "ne", "e"],
+        "5,2": ["n", "ne", "e", "se", "s"],
+        "5,3": ["n", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "hall-s",
+      "image": "hall-s.png",
+      "role": "room",
+      "roomSlot": "s",
+      "exits": ["n", "e", "w"],
+      "tags": ["wall"],
+      "spots": [
+        {
+          "kind": "wall-h",
+          "facing": "s",
+          "rect": [39.7, 108.7, 60.7, 15],
+          "chance": 0.5
+        },
+        {
+          "kind": "floor",
+          "rect": [57, 45.3, 26, 26],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,0": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "0,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,5": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "1,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,0": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "4,0": ["n", "w", "nw"],
+        "4,2": ["n", "ne", "e"],
+        "4,3": ["n", "w", "nw"],
+        "4,5": ["n", "ne", "e"]
+      }
+    },
+    {
+      "id": "hall-w-door",
+      "image": "hall-w-door.png",
+      "role": "room",
+      "roomSlot": "w",
+      "exits": ["n", "e", "s", "w"],
+      "tags": ["entrance"],
+      "weight": 2,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [69.7, 23, 24, 24],
+          "chance": 0.3,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [69.7, 93, 24, 24],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,1": ["n", "ne", "e"],
+        "0,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "0,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,5": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s"],
+        "1,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,0": ["e", "se", "s", "sw", "w"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "2,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,0": ["n", "ne", "e", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "3,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,1": ["e", "se", "s"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "5,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,5": ["n", "ne", "e", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "hall-w",
+      "image": "hall-w.png",
+      "role": "room",
+      "roomSlot": "w",
+      "exits": ["n", "e", "s"],
+      "tags": ["wall"],
+      "spots": [
+        {
+          "kind": "wall-v",
+          "facing": "w",
+          "rect": [16.3, 39.7, 15, 60.7],
+          "chance": 0.5
+        },
+        {
+          "kind": "floor",
+          "rect": [68.7, 57, 26, 26],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,1": ["n", "ne", "e"],
+        "0,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "0,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,5": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s"],
+        "1,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["e", "se", "s"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "2,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e"],
+        "3,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "3,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s"],
+        "4,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,1": ["e", "se", "s"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "5,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,5": ["n", "ne", "e", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "hall-n-carvings",
+      "image": "hall-n-carvings.png",
+      "role": "room",
+      "roomSlot": "n",
+      "exits": ["e", "s", "w"],
+      "tags": ["wall", "carvings"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [57, 68.7, 26, 26],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "1,0": ["s", "sw", "w"],
+        "1,5": ["e", "se", "s"],
+        "2,0": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["e", "se", "s", "sw", "w"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,0": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "5,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,5": ["n", "ne", "e", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "hall-s-banners",
+      "image": "hall-s-banners.png",
+      "role": "room",
+      "roomSlot": "s",
+      "exits": ["n", "e", "w"],
+      "tags": ["wall"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [57, 45.3, 26, 26],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,0": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "0,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,5": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "1,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,0": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "3,3": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "4,0": ["n", "w", "nw"],
+        "4,2": ["n", "ne", "e"],
+        "4,3": ["n", "w", "nw"],
+        "4,5": ["n", "ne", "e"]
+      }
+    },
+    {
+      "id": "hall-n-hearth",
+      "image": "hall-n-hearth.png",
+      "role": "room",
+      "roomSlot": "n",
+      "exits": ["e", "s", "w"],
+      "tags": ["wall", "kitchen"],
+      "weight": 0.7,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [57, 68.7, 26, 26],
+          "chance": 0.3,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "1,0": ["s", "sw", "w"],
+        "1,5": ["e", "se", "s"],
+        "2,0": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["e", "se", "s", "sw", "w"],
+        "2,2": ["e", "se", "s", "sw", "w"],
+        "2,3": ["e", "se", "s", "sw", "w"],
+        "2,4": ["e", "se", "s", "sw", "w"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "3,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,0": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "5,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,5": ["n", "ne", "e", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "hall-c",
+      "image": "hall-c.png",
+      "role": "room",
+      "roomSlot": "c",
+      "exits": ["n", "e", "s", "w"],
+      "tags": ["center", "empty"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [38, 46, 64, 48],
+          "chance": 0.45
+        },
+        {
+          "kind": "floor",
+          "rect": [23, 23, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [93, 23, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [23, 93, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [93, 93, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,0": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "0,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,5": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "1,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,0": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "5,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,5": ["n", "ne", "e", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "hall-c-brazier",
+      "image": "hall-c-brazier.png",
+      "role": "room",
+      "roomSlot": "c",
+      "exits": ["n", "e", "s", "w"],
+      "tags": ["center"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [23, 23, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [93, 23, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [23, 93, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [93, 93, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,0": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "0,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,5": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "1,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,0": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "5,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,5": ["n", "ne", "e", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "hall-c-pool",
+      "image": "hall-c-pool.png",
+      "role": "room",
+      "roomSlot": "c",
+      "exits": ["n", "e", "s", "w"],
+      "tags": ["center", "water"],
+      "weight": 0.6,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [23, 23, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [93, 23, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [23, 93, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [93, 93, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,0": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "0,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,5": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "1,0": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "1,1": ["n", "ne", "e", "w", "nw"],
+        "1,2": ["n", "ne", "e", "w", "nw"],
+        "1,3": ["n", "ne", "e", "w", "nw"],
+        "1,4": ["n", "ne", "e", "w", "nw"],
+        "1,5": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "2,0": ["n", "s", "sw", "w", "nw"],
+        "2,5": ["n", "ne", "e", "se", "s"],
+        "3,0": ["n", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s"],
+        "4,0": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "4,1": ["e", "se", "s", "sw", "w"],
+        "4,2": ["e", "se", "s", "sw", "w"],
+        "4,3": ["e", "se", "s", "sw", "w"],
+        "4,4": ["e", "se", "s", "sw", "w"],
+        "4,5": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "5,0": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "5,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,5": ["n", "ne", "e", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "hall-c-table",
+      "image": "hall-c-table.png",
+      "role": "room",
+      "roomSlot": "c",
+      "exits": ["n", "e", "s", "w"],
+      "tags": ["center"],
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [23, 23, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [93, 23, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [23, 93, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [93, 93, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,0": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "0,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,5": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "1,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,1": ["n", "ne", "e", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "w", "nw"],
+        "1,3": ["n", "ne", "e", "w", "nw"],
+        "1,4": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "1,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["n", "s", "sw", "w", "nw"],
+        "2,4": ["n", "ne", "e", "se", "s"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,1": ["n", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "se", "s"],
+        "3,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,1": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "4,2": ["e", "se", "s", "sw", "w"],
+        "4,3": ["e", "se", "s", "sw", "w"],
+        "4,4": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "4,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,0": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "5,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,5": ["n", "ne", "e", "s", "sw", "w", "nw"]
+      }
+    },
+    {
+      "id": "hall-c-dais",
+      "image": "hall-c-dais.png",
+      "role": "room",
+      "roomSlot": "c",
+      "exits": ["n", "e", "s", "w"],
+      "tags": ["center"],
+      "weight": 0.4,
+      "spots": [
+        {
+          "kind": "floor",
+          "rect": [23, 23, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [93, 23, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [23, 93, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        },
+        {
+          "kind": "floor",
+          "rect": [93, 93, 24, 24],
+          "chance": 0.25,
+          "canBlock": true
+        }
+      ],
+      "walk": {
+        "0,0": ["n", "ne", "e", "se", "s", "sw", "w"],
+        "0,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "0,5": ["n", "e", "se", "s", "sw", "w", "nw"],
+        "1,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "1,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "2,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "3,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,0": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "4,5": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,0": ["n", "ne", "e", "se", "s", "w", "nw"],
+        "5,1": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,2": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,3": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,4": ["n", "ne", "e", "se", "s", "sw", "w", "nw"],
+        "5,5": ["n", "ne", "e", "s", "sw", "w", "nw"]
+      }
+    }
+  ],
+  "overlays": [
+    {
+      "id": "cats",
+      "image": "overlay-cats.png",
+      "spots": ["floor"],
+      "size": [64, 44]
+    },
+    {
+      "id": "cat",
+      "image": "overlay-cat.png",
+      "spots": ["floor"],
+      "size": [18, 16]
+    },
+    {
+      "id": "candelabrum",
+      "image": "overlay-candelabrum.png",
+      "spots": ["floor"],
+      "size": [24, 24],
+      "blocks": true
+    },
+    {
+      "id": "ledger",
+      "image": "overlay-ledger.png",
+      "spots": ["floor"],
+      "size": [26, 22],
+      "blocks": true
+    },
+    {
+      "id": "fallen-masonry",
+      "image": "overlay-fallen-masonry.png",
+      "spots": ["floor"],
+      "size": [24, 22],
+      "blocks": true
+    },
+    {
+      "id": "statue",
+      "image": "overlay-statue.png",
+      "spots": ["floor"],
+      "size": [22, 22],
+      "blocks": true
+    },
+    {
+      "id": "papers",
+      "image": "overlay-papers.png",
+      "spots": ["floor"],
+      "size": [26, 20]
+    },
+    {
+      "id": "wine-stain",
+      "image": "overlay-wine-stain.png",
+      "spots": ["floor"],
+      "size": [20, 14]
+    },
+    {
+      "id": "cloak",
+      "image": "overlay-cloak.png",
+      "spots": ["floor"],
+      "size": [24, 18]
+    },
+    {
+      "id": "feathers",
+      "image": "overlay-feathers.png",
+      "spots": ["floor"],
+      "size": [24, 20]
+    },
+    {
+      "id": "leaves",
+      "image": "overlay-leaves.png",
+      "spots": ["floor"],
+      "size": [26, 20]
+    },
+    {
+      "id": "rats",
+      "image": "overlay-rats.png",
+      "spots": ["floor"],
+      "size": [20, 14]
+    },
+    {
+      "id": "chalk-circle",
+      "image": "overlay-chalk-circle.png",
+      "spots": ["floor"],
+      "size": [44, 44]
+    },
+    {
+      "id": "round-rug",
+      "image": "overlay-round-rug.png",
+      "spots": ["floor"],
+      "size": [36, 26]
+    },
+    {
+      "id": "puddle",
+      "image": "overlay-puddle.png",
+      "spots": ["floor"],
+      "size": [24, 16]
+    },
+    {
+      "id": "pebbles",
+      "image": "overlay-pebbles.png",
+      "spots": ["floor"],
+      "size": [20, 16]
+    },
+    {
+      "id": "birdcage",
+      "image": "overlay-birdcage.png",
+      "spots": ["floor"],
+      "size": [18, 18],
+      "blocks": true
+    },
+    {
+      "id": "barrel",
+      "image": "overlay-barrel.png",
+      "spots": ["floor", "corner"],
+      "size": [16, 16],
+      "blocks": true
+    },
+    {
+      "id": "crates",
+      "image": "overlay-crates.png",
+      "spots": ["floor", "corner"],
+      "size": [20, 18],
+      "blocks": true
+    },
+    {
+      "id": "sacks",
+      "image": "overlay-sacks.png",
+      "spots": ["floor", "corner"],
+      "size": [20, 16],
+      "blocks": true
+    },
+    {
+      "id": "urn",
+      "image": "overlay-urn.png",
+      "spots": ["floor", "corner"],
+      "size": [14, 14],
+      "blocks": true
+    },
+    {
+      "id": "brazier",
+      "image": "overlay-brazier.png",
+      "spots": ["floor"],
+      "size": [20, 20],
+      "blocks": true
+    },
+    {
+      "id": "carving",
+      "image": "overlay-carving.png",
+      "spots": ["floor", "corner"],
+      "size": [14, 14],
+      "blocks": true
+    },
+    {
+      "id": "runner",
+      "image": "overlay-runner.png",
+      "spots": ["floor"],
+      "size": [104, 18]
+    },
+    {
+      "id": "candle-stub",
+      "image": "overlay-candle-stub.png",
+      "spots": ["floor", "corner"],
+      "size": [10, 10]
+    },
+    {
+      "id": "books",
+      "image": "overlay-books.png",
+      "spots": ["floor", "corner"],
+      "size": [16, 14]
+    },
+    {
+      "id": "bucket",
+      "image": "overlay-bucket.png",
+      "spots": ["floor", "corner"],
+      "size": [12, 12],
+      "blocks": true
+    },
+    {
+      "id": "bench",
+      "image": "overlay-bench.png",
+      "spots": ["floor"],
+      "size": [24, 10],
+      "blocks": true
+    },
+    {
+      "id": "cobweb",
+      "image": "overlay-cobweb.png",
+      "spots": ["corner"],
+      "size": [18, 18]
+    },
+    {
+      "id": "corner-rubble",
+      "image": "overlay-corner-rubble.png",
+      "spots": ["corner"],
+      "size": [18, 16]
+    },
+    {
+      "id": "corner-cat",
+      "image": "overlay-corner-cat.png",
+      "spots": ["corner"],
+      "size": [16, 14]
+    },
+    {
+      "id": "corner-candles",
+      "image": "overlay-corner-candles.png",
+      "spots": ["corner"],
+      "size": [14, 14]
+    },
+    {
+      "id": "corner-moss",
+      "image": "overlay-corner-moss.png",
+      "spots": ["corner"],
+      "size": [20, 20]
+    },
+    {
+      "id": "rat-hole",
+      "image": "overlay-rat-hole.png",
+      "spots": ["corner"],
+      "size": [10, 10]
+    },
+    {
+      "id": "banner",
+      "image": "overlay-banner.png",
+      "spots": ["wall-h"],
+      "size": [16, 14]
+    },
+    {
+      "id": "banner-v",
+      "image": "overlay-banner-v.png",
+      "spots": ["wall-v"],
+      "size": [14, 16]
+    },
+    {
+      "id": "sconce",
+      "image": "overlay-sconce.png",
+      "spots": ["wall-h"],
+      "size": [8, 10]
+    },
+    {
+      "id": "sconce-v",
+      "image": "overlay-sconce-v.png",
+      "spots": ["wall-v"],
+      "size": [10, 8]
+    },
+    {
+      "id": "shield",
+      "image": "overlay-shield.png",
+      "spots": ["wall-h"],
+      "size": [12, 13]
+    },
+    {
+      "id": "shield-v",
+      "image": "overlay-shield-v.png",
+      "spots": ["wall-v"],
+      "size": [13, 12]
+    },
+    {
+      "id": "tapestry",
+      "image": "overlay-tapestry.png",
+      "spots": ["wall-h"],
+      "size": [36, 12]
+    },
+    {
+      "id": "tapestry-v",
+      "image": "overlay-tapestry-v.png",
+      "spots": ["wall-v"],
+      "size": [12, 36]
+    },
+    {
+      "id": "wall-ivy",
+      "image": "overlay-wall-ivy.png",
+      "spots": ["wall-h"],
+      "size": [34, 12]
+    },
+    {
+      "id": "wall-ivy-v",
+      "image": "overlay-wall-ivy-v.png",
+      "spots": ["wall-v"],
+      "size": [12, 34]
+    },
+    {
+      "id": "ledge-candles",
+      "image": "overlay-ledge-candles.png",
+      "spots": ["wall-h"],
+      "size": [20, 10]
+    },
+    {
+      "id": "ledge-candles-v",
+      "image": "overlay-ledge-candles-v.png",
+      "spots": ["wall-v"],
+      "size": [10, 20]
+    },
+    {
+      "id": "damp-stain",
+      "image": "overlay-damp-stain.png",
+      "spots": ["wall-h"],
+      "size": [24, 13]
+    },
+    {
+      "id": "damp-stain-v",
+      "image": "overlay-damp-stain-v.png",
+      "spots": ["wall-v"],
+      "size": [13, 24]
+    },
+    {
+      "id": "rock-ivy",
+      "image": "overlay-rock-ivy.png",
+      "spots": ["rock"],
+      "size": [44, 40]
+    },
+    {
+      "id": "rock-lichen",
+      "image": "overlay-rock-lichen.png",
+      "spots": ["rock"],
+      "size": [36, 32]
+    },
+    {
+      "id": "rock-crack",
+      "image": "overlay-rock-crack.png",
+      "spots": ["rock"],
+      "size": [44, 30]
+    }
+  ]
+}

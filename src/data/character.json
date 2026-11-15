@@ -1,0 +1,11 @@
+{
+  "name": "The Wanderer",
+  "pools": { "health": 50, "mana": 20 },
+  "stats": { "strength": 5, "dexterity": 5, "intelligence": 5, "speed": 5, "armour": 0 },
+  "inventorySize": 20,
+  "equipment": { "body": "padded-jerkin", "mainHand": "short-sword" },
+  "inventory": [
+    "copper-ring", "moonstone-ring", "amber-amulet", "leather-cap", "silver-crown", "riding-gloves",
+    "boots-of-haste", "oak-staff", "wooden-shield", "lantern", "healing-potion"
+  ]
+}
